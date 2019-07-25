@@ -3,10 +3,10 @@ import { render } from 'react-dom';
 import { Map, TileLayer } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
-const stamenTonerTiles = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png';
+const stamenTonerTiles = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTonerAttr = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-const mapCenter = [39.9528, -75.1638];
-const zoomLevel = 12;
+const mapCenter = [40.1301919, -8.2008354];
+const zoomLevel = 3;
 
 export default class App extends Component {
     constructor(props) {
@@ -69,12 +69,7 @@ export default class App extends Component {
                         url={stamenTonerTiles}
                     />
                     <Control position="topright">
-                        <div
-                            style={{
-                                backgroundColor: 'black',
-                                padding: '5px',
-                            }}
-                        >
+                        <div>
                             <div style={{ marginLeft: '37px' }}>
                                 <button onClick={this.handleUpPanClick}>
                                     Pan up
