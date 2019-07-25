@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 
-import Map from './map/map';
+import Map from './components/map/map';
 
 function App() {
   return (

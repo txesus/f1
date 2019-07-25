@@ -12,21 +12,25 @@ const zoomLevel = 3;
 
 
 export default class App extends Component {
+    
     constructor(props) {
         super(props);
-        this.state = { currentZoomLevel: zoomLevel };
+        this.state = { 
+            currentZoomLevel: zoomLevel
+        };
         this.handleUpPanClick = this.handleUpPanClick.bind(this);
         this.handleRightPanClick = this.handleRightPanClick.bind(this);
         this.handleLeftPanClick = this.handleLeftPanClick.bind(this);
         this.handleDownPanClick = this.handleDownPanClick.bind(this);
     }
 
+
     componentDidMount() {
         const leafletMap = this.leafletMap.leafletElement;
         leafletMap.on('zoomend', () => {
             const updatedZoomLevel = leafletMap.getZoom();
             this.handleZoomLevelChange(updatedZoomLevel);
-        });
+        });    
     }
 
     handleZoomLevelChange(newZoomLevel) {
@@ -58,7 +62,7 @@ export default class App extends Component {
     }
 
     render() {
-        window.console.log('this.state.currentZoomLevel ->', this.state.currentZoomLevel);
+        // window.console.log('this.state.currentZoomLevel ->', this.state.currentZoomLevel);
 
         return (
             <div>

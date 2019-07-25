@@ -5,8 +5,6 @@ var locality = document.getElementById('locality');
 var country = document.getElementById('country');
 
 
-console.log("jflsdjlfdsjl");
-
 /* Circuit Array */
 var listCircuit = [];
 
