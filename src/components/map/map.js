@@ -77,7 +77,7 @@ export default class App extends Component {
                         attribution={stamenTonerAttr}
                         url={stamenTonerTiles}
                     />
-                    <Control position="topright">
+                    {/* <Control position="topright">
                         <div>
                             <div style={{ marginLeft: '37px' }}>
                                 <button onClick={this.handleUpPanClick}>
@@ -98,7 +98,7 @@ export default class App extends Component {
                                 </button>
                             </div>
                         </div>
-                    </Control>
+                    </Control> */}
                 </Map>
             </div>
         );

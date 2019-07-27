@@ -1,0 +1,22 @@
+@import './variables/colors.scss';
+
+
+.header-menu{
+    background: #FFF;
+    left: 0;
+    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    width: calc(100% - 80px);
+    z-index: 1;
+    ul{
+        float: right;
+        list-style: none;
+        padding-left: 0;
+        li{
+            display: inline-block;
+            margin-left: 20px;
+            width: auto;
+        }
+    }
+}
