@@ -18,8 +18,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            currentZoomLevel: zoomLevel,
-            resultados: []
+            currentZoomLevel: zoomLevel
         };
         this.handleUpPanClick = this.handleUpPanClick.bind(this);
         this.handleRightPanClick = this.handleRightPanClick.bind(this);
@@ -33,84 +32,79 @@ export default class App extends Component {
         leafletMap.on('zoomend', () => {
             const updatedZoomLevel = leafletMap.getZoom();
             this.handleZoomLevelChange(updatedZoomLevel);
-        });  
-        fetch('https://ergast.com/api/f1/circuits.json?limit=100')
-            .then(response => response.json())
-            .then(resultadosJson => this.setState({resultados: resultadosJson.MRData.CircuitTable.Circuits}))
-            
-        }
-        
-        handleZoomLevelChange(newZoomLevel) {
-            this.setState({ currentZoomLevel: newZoomLevel });
-        }
-        
-        handleUpPanClick() {
-            const leafletMap = this.leafletMap.leafletElement;
-            leafletMap.panBy([0, -100]);
-            window.console.log('Panning up');
-        }
-        
-        handleRightPanClick() {
-            const leafletMap = this.leafletMap.leafletElement;
-            leafletMap.panBy([100, 0]);
-            window.console.log('Panning right');
-        }
-        
-        handleLeftPanClick() {
-            const leafletMap = this.leafletMap.leafletElement;
-            leafletMap.panBy([-100, 0]);
-            window.console.log('Panning left');
-        }
-        
-        handleDownPanClick() {
-            const leafletMap = this.leafletMap.leafletElement;
-            leafletMap.panBy([0, 100]);
-            window.console.log('Panning down');
-        }
-        
-        render() {
-            // window.console.log('this.state.currentZoomLevel ->', this.state.currentZoomLevel);
-            const { resultados } = this.state
-            
-            return (
-                <div>
-                <Map
-                    ref={m => { this.leafletMap = m; }}
-                    center={mapCenter}
-                    zoom={zoomLevel}
-                >
-                <TileLayer
-                    attribution={stamenTonerAttr}
-                    url={stamenTonerTiles}
-                />
-                <Marker position={circuitsLocation}></Marker>
-
-                    {/* <Control position="topright">
-                        <div>
-                            <div style={{ marginLeft: '37px' }}>
-                                <button onClick={this.handleUpPanClick}>
-                                    Pan up
-                                </button>
-                            </div>
-                            <div>
-                                <button onClick={this.handleLeftPanClick}>
-                                    Pan left
-                                </button>
-                                <button onClick={this.handleRightPanClick}>
-                                    Pan right
-                                </button>
-                            </div>
-                            <div style={{ marginLeft: '30px' }}>
-                                <button onClick={this.handleDownPanClick}>
-                                    Pan down
-                                </button>
-                            </div>
-                        </div>
-                    </Control> */}
-                </Map>
-            </div>
-        );
+        });              
     }
+        
+    handleZoomLevelChange(newZoomLevel) {
+        this.setState({ currentZoomLevel: newZoomLevel });
+    }
+    
+    handleUpPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([0, -100]);
+        window.console.log('Panning up');
+    }
+    
+    handleRightPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([100, 0]);
+        window.console.log('Panning right');
+    }
+    
+    handleLeftPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([-100, 0]);
+        window.console.log('Panning left');
+    }
+    
+    handleDownPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([0, 100]);
+        window.console.log('Panning down');
+    }
+        
+    render() {
+        // window.console.log('this.state.currentZoomLevel ->', this.state.currentZoomLevel);
+        
+        return (
+            <div>
+            <Map
+                ref={m => { this.leafletMap = m; }}
+                center={mapCenter}
+                zoom={zoomLevel}
+            >
+            <TileLayer
+                attribution={stamenTonerAttr}
+                url={stamenTonerTiles}
+            />
+            <Marker position={circuitsLocation}></Marker>
+
+                {/* <Control position="topright">
+                    <div>
+                        <div style={{ marginLeft: '37px' }}>
+                            <button onClick={this.handleUpPanClick}>
+                                Pan up
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={this.handleLeftPanClick}>
+                                Pan left
+                            </button>
+                            <button onClick={this.handleRightPanClick}>
+                                Pan right
+                            </button>
+                        </div>
+                        <div style={{ marginLeft: '30px' }}>
+                            <button onClick={this.handleDownPanClick}>
+                                Pan down
+                            </button>
+                        </div>
+                    </div>
+                </Control> */}
+            </Map>
+        </div>
+    );
+}
 }
 
 render(
