@@ -11,11 +11,11 @@ export default class App extends Component {
         return (
             <div className={'header-menu'}>
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Ciruits</a></li>
-                    <li><a href="">Pilots</a></li>
-                    <li><a href="">Teams</a></li>
-                    <li><a href="">About</a></li>
+                    <li><span>Home</span></li>
+                    <li><span>Ciruits</span></li>
+                    <li><span>Pilots</span></li>
+                    <li><span>Teams</span></li>
+                    <li><span>About</span></li>
                 </ul>
             </div>
         );
