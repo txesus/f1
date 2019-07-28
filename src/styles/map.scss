@@ -5,3 +5,18 @@
     height: 100vh;
     width: 100vw;
 }
+
+
+.list-popup{
+    list-style: none;
+    padding-left: 0;
+    li{
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        &.title{
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}
