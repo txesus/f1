@@ -3,6 +3,7 @@ import './App.scss';
 
 import Map from './components/map/map';
 import Menu from './components/menu/menu';
+import Navigation from './components/navigation/navigation';
 // import ContentData from './components/content-data/content-data';
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Menu />
-        <Map />   
+        <Map /> 
+        <Navigation />  
         {/* <ContentData /> */}
       </header>      
     </div>
