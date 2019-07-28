@@ -58,7 +58,7 @@ export default class App extends Component {
                     zoom={zoomLevel}
                     >
                 <TileLayer
-                    attribution={"Jesus Esteban"}
+                    attribution={"Jesús Esteban"}
                     url={stamenTonerTiles}
                     />
 
@@ -77,6 +77,9 @@ export default class App extends Component {
                                         <span>{resultados.Location.locality} </span>
                                         /
                                         <span> {resultados.Location.country}</span>
+                                    </li>
+                                    <li>
+                                        <a href={resultados.url} target="_blank">Wikipedia</a>
                                     </li>
                                 </ul>
                                 
