@@ -29,18 +29,20 @@ export default class App extends Component {
         const { yearsCircuits } = this.state;
 
         return (
-            <div className={'navigation'}>
-                <ul>
-                {yearsCircuits.map((yearsCircuits) => {
-                    return (
-                        <li>
-                            <span>{ yearsCircuits.raceName }</span>
-                        </li>                        
-                    )
-                    })
-                }
+            <div>
+                <div className={'navigation'}>
+                    <ul>
+                    {yearsCircuits.map((yearsCircuits) => {
+                        return (
+                            <li>
+                                <span>{ yearsCircuits.raceName }</span>
+                            </li>                        
+                        )
+                        })
+                    }
 
-                </ul>
+                    </ul>
+                </div>
             </div>
         );
     }

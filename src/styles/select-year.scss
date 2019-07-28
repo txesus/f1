@@ -1,0 +1,14 @@
+@import './variables/colors.scss';
+
+
+.select-year {    
+    position: absolute;
+    bottom: 60px;
+    z-index: 1000;
+    color: #FFF;
+    font-size: 40px;
+    font-weight: bold;
+    left: 30px;
+}
+
+
