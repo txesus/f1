@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Map, TileLayer, Marker, CircleMarker, Popup } from 'react-leaflet';
+import Control from 'react-leaflet-control';
 
 
 // const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-// Ejemplos de mapas https://leaflet-extras.github.io/leaflet-providers/preview/
 const mapCenter = [39.9837669, -4.2810849];
 const zoomLevel = 3;
 
@@ -17,6 +17,7 @@ export default class App extends Component {
             currentZoomLevel: zoomLevel,
             resultados: []
         };
+        this.handleResetZoom = this.handleResetZoom.bind(this);
     }
 
 
@@ -44,7 +45,12 @@ export default class App extends Component {
     handleZoomLevelChange(newZoomLevel) {
         this.setState({ currentZoomLevel: newZoomLevel });
     }
-    
+
+    handleResetZoom(newZoomLevel) {
+        this.setState({ newZoomLevel: newZoomLevel });
+    }
+
+
         
     render() {
 
@@ -90,6 +96,15 @@ export default class App extends Component {
                     })
                 }
 
+                <Control position="topright">
+                    <div>
+                        <div style={{ marginLeft: '37px' }}>
+                            <button onClick={this.handleResetZoom}>
+                                Reset Zoom
+                            </button>
+                        </div>
+                    </div>
+                </Control>
                 </Map>
             </div>
         );
