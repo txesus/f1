@@ -24,6 +24,10 @@ export default class App extends Component {
             currentZoomLevel: zoomLevel,
             resultados: []
         };
+        this.handleUpPanClick = this.handleUpPanClick.bind(this);
+        this.handleRightPanClick = this.handleRightPanClick.bind(this);
+        this.handleLeftPanClick = this.handleLeftPanClick.bind(this);
+        this.handleDownPanClick = this.handleDownPanClick.bind(this);
     }
 
 
@@ -43,6 +47,29 @@ export default class App extends Component {
         this.setState({ currentZoomLevel: newZoomLevel });
     }
     
+    handleUpPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([0, -100]);
+        window.console.log('Panning up');
+    }
+    
+    handleRightPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([100, 0]);
+        window.console.log('Panning right');
+    }
+    
+    handleLeftPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([-100, 0]);
+        window.console.log('Panning left');
+    }
+    
+    handleDownPanClick() {
+        const leafletMap = this.leafletMap.leafletElement;
+        leafletMap.panBy([0, 100]);
+        window.console.log('Panning down');
+    }
         
     render() {
         
@@ -78,6 +105,31 @@ export default class App extends Component {
                     })
                 }
 
+                {/* <Marker position={[39.9837669, -4.2810849]} /> */}
+                
+
+                {/* <Control position="topright">
+                    <div>
+                        <div style={{ marginLeft: '37px' }}>
+                            <button onClick={this.handleUpPanClick}>
+                                Pan up
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={this.handleLeftPanClick}>
+                                Pan left
+                            </button>
+                            <button onClick={this.handleRightPanClick}>
+                                Pan right
+                            </button>
+                        </div>
+                        <div style={{ marginLeft: '30px' }}>
+                            <button onClick={this.handleDownPanClick}>
+                                Pan down
+                            </button>
+                        </div>
+                    </div>
+                </Control> */}
                 </Map>
             </div>
         );
