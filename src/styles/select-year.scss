@@ -2,13 +2,10 @@
 
 
 .select-year {    
-    position: absolute;
-    bottom: 60px;
-    z-index: 1000;
-    color: #FFF;
-    font-size: 40px;
-    font-weight: bold;
-    left: 30px;
+    padding: 40px 40px 20px 40px;
+    select{
+        width: 100%;
+    }
 }
 
 

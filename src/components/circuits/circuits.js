@@ -30,12 +30,12 @@ export default class App extends Component {
 
         return (
             <div>
-                <div className={'navigation'}>
+                <div className={'list-circuits'}>
                     <ul>
                     {yearsCircuits.map((yearsCircuits) => {
                         return (
                             <li>
-                                <span>{ yearsCircuits.raceName }</span>
+                                <a href="#">{ yearsCircuits.raceName }</a>
                             </li>                        
                         )
                         })
