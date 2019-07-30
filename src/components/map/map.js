@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Map, TileLayer, Marker, CircleMarker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Map Styles
@@ -70,11 +70,6 @@ export default class App extends Component {
 
                 {resultados.map((resultados) => {
                     return (
-                        // <CircleMarker 
-                        //     center={[resultados.Location.lat, resultados.Location.long]}
-                        //     fillOpacity={0.5}
-                        //     stroke={false}                            
-                        // />
                         <Marker position={[resultados.Location.lat, resultados.Location.long]}>
                             <Popup>
                                 <ul className={"list-popup"}>
