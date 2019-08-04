@@ -13,7 +13,10 @@ const zoomLevel = 2;
 
 const polyline = [[41.57, 2.26111], [-37.8497, 144.968]];
 
-
+const multiPolyline = [
+    [[41.57, 2.26111], [-37.8497, 144.968]],
+    [[-37.8497, 144.968], [26.0325, 50.5106]],
+];
 
 
 export default class App extends Component {
@@ -92,12 +95,13 @@ export default class App extends Component {
                                 </ul>
                                 
                             </Popup>
-                        </Marker>                        
+                        </Marker>     
+                        
                     )
                     })
-                }
-                
-                <Polyline color="lime" positions={polyline} />
+                }                
+
+                <Polyline color="rgba(255,255,255, .4)" positions={multiPolyline} />
 
                 <Control position="topright">
                     <div>
@@ -126,4 +130,7 @@ render(
 // Recursos
 // https://towardsdatascience.com/creating-a-bubbles-map-using-react-leaflet-e75124ca1cd2
 // Ejemplos de mapas https://leaflet-extras.github.io/leaflet-providers/preview/
-
+// https://github.com/humangeo/leaflet-dvf/wiki/2.-Examples
+// http://www.liedman.net/leaflet-routing-machine/
+// http://rowanwins.github.io/leaflet-easyPrint/
+// https://github.com/dwilhelm89/Leaflet.StyleEditor
