@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Map Styles
@@ -8,8 +8,13 @@ const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy
 // const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
-const mapCenter = [39.9837669, -4.2810849];
-const zoomLevel = 4;
+const mapCenter = [26.9837669, -60.2810849];
+const zoomLevel = 2;
+
+const polyline = [[41.57, 2.26111], [-37.8497, 144.968]];
+
+
+
 
 export default class App extends Component {
     
@@ -91,6 +96,8 @@ export default class App extends Component {
                     )
                     })
                 }
+                
+                <Polyline color="lime" positions={polyline} />
 
                 <Control position="topright">
                     <div>
