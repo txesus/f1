@@ -4,8 +4,8 @@ import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Map Styles
-const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-// const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 const mapCenter = [26.9837669, -60.2810849];
@@ -62,7 +62,9 @@ export default class App extends Component {
         
     render() {
 
-        const { resultados } = this.state;
+        const { resultados} = this.state;
+        console.log(multiPolyline);
+
 
         return (
             <div>
@@ -78,30 +80,36 @@ export default class App extends Component {
 
                 {resultados.map((resultados) => {
                     return (
-                        <Marker 
-                            position={[resultados.Location.lat, resultados.Location.long]}
-                        >
-                            <Popup>
-                                <ul className={"list-popup"}>
-                                    <li className={"title"}><span>{resultados.circuitName}</span></li>
-                                    <li>
-                                        <span>{resultados.Location.locality} </span>
-                                        /
-                                        <span> {resultados.Location.country}</span>
-                                    </li>
-                                    <li>
-                                        <a href={resultados.url} target="_blank">Wikipedia</a>
-                                    </li>
-                                </ul>
-                                
-                            </Popup>
-                        </Marker>     
-                        
+                        <React.Fragment>
+                            <Marker 
+                                position={[resultados.Location.lat, resultados.Location.long]}
+                            >
+                                <Popup>
+                                    <ul className={"list-popup"}>
+                                        <li className={"title"}><span>{resultados.circuitName}</span></li>
+                                        <li>
+                                            <span>{resultados.Location.locality} </span>
+                                            /
+                                            <span> {resultados.Location.country}</span>
+                                        </li>
+                                        <li>
+                                            <a href={resultados.url} target="_blank">Wikipedia</a>
+                                        </li>
+                                    </ul>
+                                    
+                                </Popup>
+                            </Marker>     
+                            <Polyline color="#F1C40F"  weight="1" positions=
+                            {[
+                                [[resultados.Location.lat, resultados.Location.long], [-37.8497, 144.968]],
+                                [[-37.8497, 144.968], [26.0325, 50.5106]]
+                            ]} 
+                            />
+                        </React.Fragment>                        
                     )
                     })
                 }                
 
-                <Polyline color="rgba(255,255,255, .4)" positions={multiPolyline} />
 
                 <Control position="topright">
                     <div>

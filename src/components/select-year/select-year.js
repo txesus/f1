@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+import logo from '../../images/logo-w.png';
 
 export default class App extends Component {
 
@@ -31,6 +31,7 @@ export default class App extends Component {
         return (
             <div>
                 <div className={"select-year"}>
+                    <img src={logo} alt="Logo" />
                     <select>
                     {yearsCircuits.map((yearsCircuits) => {
                         return (
