@@ -5,7 +5,7 @@ import Circuits from '../circuits/circuits';
 
 
 
-export default class App extends Component {
+export default class Content extends Component {
 
 
 
@@ -14,9 +14,9 @@ export default class App extends Component {
         return (
             <div className={"content"}>
                 
-                <SelectYear />
+                <SelectYear year={this.props.year} handleYearChange={this.props.handleYearChange}/>
                 
-                <Circuits />
+                <Circuits year={this.props.year} circuitsYears={this.props.circuitsYears}/>
                 
             </div>
         );

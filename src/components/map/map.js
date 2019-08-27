@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
@@ -9,7 +8,7 @@ const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf
 // const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 const mapCenter = [26.9837669, -60.2810849];
-const zoomLevel = 2;
+const zoomLevel = 2.5;
 
 const polyline = [[41.57, 2.26111], [-37.8497, 144.968]];
 
@@ -19,13 +18,13 @@ const multiPolyline = [
 ];
 
 
-export default class App extends Component {
+export default class CircuitMap extends Component {
     
     constructor(props) {
         super(props);
         this.state = { 
             currentZoomLevel: zoomLevel,
-            resultados: []
+            circuits: []
         };
         this.handleResetZoom = this.handleResetZoom.bind(this);
     }
@@ -39,16 +38,6 @@ export default class App extends Component {
         });     
     }
 
-    componentWillMount() {
-        fetch('http://ergast.com/api/f1/' + '2019' + '/circuits.json?limit=100')
-          .then((response) => {
-            return response.json()
-          })
-          .then((resultados) => {
-            this.setState({ resultados: resultados.MRData.CircuitTable.Circuits})
-          })
-      }   
-
 
     handleZoomLevelChange(newZoomLevel) {
         this.setState({ currentZoomLevel: newZoomLevel });
@@ -59,10 +48,18 @@ export default class App extends Component {
     }
 
 
+    getPolyLineArray() {
+        const circuitsCoordinates = this.props.circuits.map(circuit => {
+            return [circuit.Location.lat, circuit.Location.long];
+        });
+
+        return circuitsCoordinates;
+    }
+
         
     render() {
 
-        const { resultados} = this.state;
+        const { circuits} = this.props;
         console.log(multiPolyline);
 
 
@@ -78,37 +75,35 @@ export default class App extends Component {
                     url={stamenTonerTiles}
                     />
 
-                {resultados.map((resultados) => {
+                {circuits.map((circuit) => {
                     return (
                         <React.Fragment>
                             <Marker 
-                                position={[resultados.Location.lat, resultados.Location.long]}
+                                position={[circuit.Location.lat, circuit.Location.long]}
                             >
                                 <Popup>
                                     <ul className={"list-popup"}>
-                                        <li className={"title"}><span>{resultados.circuitName}</span></li>
+                                        <li className={"title"}><span>{circuit.circuitName}</span></li>
                                         <li>
-                                            <span>{resultados.Location.locality} </span>
+                                            <span>{circuit.Location.locality} </span>
                                             /
-                                            <span> {resultados.Location.country}</span>
+                                            <span> {circuit.Location.country}</span>
                                         </li>
                                         <li>
-                                            <a href={resultados.url} target="_blank">Wikipedia</a>
+                                            <a href={circuit.url} target="_blank">Wikipedia</a>
                                         </li>
                                     </ul>
                                     
                                 </Popup>
                             </Marker>     
-                            <Polyline color="#F1C40F"  weight="1" positions=
-                            {[
-                                [[resultados.Location.lat, resultados.Location.long], [-37.8497, 144.968]],
-                                [[-37.8497, 144.968], [26.0325, 50.5106]]
-                            ]} 
-                            />
                         </React.Fragment>                        
                     )
                     })
                 }                
+
+                <Polyline color="#F1C40F"  weight="1" positions={this.getPolyLineArray()}/>
+
+
 
 
                 <Control position="topright">
@@ -126,10 +121,7 @@ export default class App extends Component {
     }
 }
 
-render(
-    <App />,
-    document.getElementById('mount')
-);
+
 
 
 

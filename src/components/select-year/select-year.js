@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import logo from '../../images/logo-w.png';
 
-export default class App extends Component {
+export default class SelectYear extends Component {
 
     constructor(props) {
         super(props);
@@ -32,10 +32,10 @@ export default class App extends Component {
             <div>
                 <div className={"select-year"}>
                     <img src={logo} alt="Logo" />
-                    <select>
+                    <select value={this.props.year} onChange={value=> this.props.handleYearChange(value)}>
                     {yearsCircuits.map((yearsCircuits) => {
                         return (
-                            <option> { yearsCircuits.season } </option>                        
+                            <option key={yearsCircuits.season} value={yearsCircuits.season}> { yearsCircuits.season } </option>                        
                         )
                         })
                     }
