@@ -7,15 +7,6 @@ import Control from 'react-leaflet-control';
 const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // const stamenTonerTiles = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
-const mapCenter = [26.9837669, -60.2810849];
-const zoomLevel = 2.5;
-
-const polyline = [[41.57, 2.26111], [-37.8497, 144.968]];
-
-const multiPolyline = [
-    [[41.57, 2.26111], [-37.8497, 144.968]],
-    [[-37.8497, 144.968], [26.0325, 50.5106]],
-];
 
 
 export default class CircuitMap extends Component {
@@ -23,28 +14,37 @@ export default class CircuitMap extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            currentZoomLevel: zoomLevel,
+            zoomLevel: 2.5,
+            mapCenter: [26.9837669, -60.2810849],
             circuits: []
         };
+        this.handleClickMarker = this.handleClickMarker.bind(this)
         this.handleResetZoom = this.handleResetZoom.bind(this);
     }
 
 
     componentDidMount() {
-        const leafletMap = this.leafletMap.leafletElement;
-        leafletMap.on('zoomend', () => {
-            const updatedZoomLevel = leafletMap.getZoom();
-            this.handleZoomLevelChange(updatedZoomLevel);
-        });     
+        // const leafletMap = this.leafletMap.leafletElement;
+        // leafletMap.on('zoomend', () => {
+        //     const updatedZoomLevel = leafletMap.getZoom();
+        //     this.handleZoomLevelChange(updatedZoomLevel);
+        // });     
     }
 
 
-    handleZoomLevelChange(newZoomLevel) {
-        this.setState({ currentZoomLevel: newZoomLevel });
+    handleResetZoom(e) {
+        this.setState({ 
+            zoomLevel: 3 
+        });
     }
-
-    handleResetZoom(newZoomLevel) {
-        this.setState({ newZoomLevel: newZoomLevel });
+    handleClickMarker(e){        
+        const { latlng } = e;
+        const { lat, lng } = latlng;
+        this.setState({ 
+            zoomLevel: 16,
+            mapCenter: [lat,lng]
+         });
+         console.log(e);
     }
 
 
@@ -52,21 +52,20 @@ export default class CircuitMap extends Component {
         const circuitsCoordinates = this.props.circuits.map(circuit => {
             return [circuit.Location.lat, circuit.Location.long];
         });
-
         return circuitsCoordinates;
     }
 
         
     render() {
 
-        const { circuits} = this.props;
-        console.log(multiPolyline);
-
+        const { circuits } = this.props;
+        const { zoomLevel, mapCenter } = this.state;
+        
 
         return (
             <div>
                 <Map
-                    ref={m => { this.leafletMap = m; }}
+                    ref={(ref) => { this.map = ref; }}
                     center={mapCenter}
                     zoom={zoomLevel}
                     >
@@ -80,8 +79,9 @@ export default class CircuitMap extends Component {
                         <React.Fragment>
                             <Marker 
                                 position={[circuit.Location.lat, circuit.Location.long]}
+                                onClick={ e=> this.handleClickMarker(e)}   
                             >
-                                <Popup>
+                                {/* <Popup>
                                     <ul className={"list-popup"}>
                                         <li className={"title"}><span>{circuit.circuitName}</span></li>
                                         <li>
@@ -94,7 +94,7 @@ export default class CircuitMap extends Component {
                                         </li>
                                     </ul>
                                     
-                                </Popup>
+                                </Popup> */}
                             </Marker>     
                         </React.Fragment>                        
                     )

@@ -12,7 +12,8 @@ class App extends React.Component {
       year: '2019',
       circuits: [],
       circuitsYears: [],
-      results: []
+      results: [],
+      clickCircuit: undefined
     }
   }
 
