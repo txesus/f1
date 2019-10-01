@@ -2,13 +2,13 @@
 
 
 .content{
-    background: #17202A;
-    border-right: 10px solid #F1C40F;
+    background: rgba(00,00,00,.5);
+    // border-right: 10px solid #F1C40F;
     // height: 100vh;
-    left: 0;
+    left: 40px;
     position: absolute;
     text-align: center;
-    top: 0;
+    top: 90px;
     // width: 30%;
     z-index: 1000;
 }
@@ -18,6 +18,9 @@
     border-bottom: 2px solid #F1C40F;    
     text-align: center;
     padding: 20px 0 10px 0;
+    img{
+        width: 120px;
+    }
     .select-box{
         position: absolute;
         right: 20px;

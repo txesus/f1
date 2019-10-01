@@ -3,8 +3,8 @@ import './App.scss';
 
 import Map from './components/map/map';
 import Content from './components/content/content';
+import Header from './components/header/header';
 
-import logo from './images/logo-w.png';
 
 
 
@@ -73,9 +73,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div className="header">
-            <img src={logo} alt="Logo" />
-          </div>
+          <Header handleYearChange={this.handleYearChange} />
           <Map year={year} circuits={circuits}/> 
           <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} />
         </header>      

@@ -2,7 +2,25 @@
 
 
 .select-year {    
-    padding: 40px 40px 20px 40px;
+    width: 150px;
+    position: absolute;
+    right: 30px;
+    top: 30px;    
+    img{
+        margin-bottom: 20px;
+        width: 50%;
+    }
+    select{
+        width: 100%;
+    }
+}
+
+
+.select-circuit {    
+    width: 150px;
+    position: absolute;
+    right: 30px;
+    top: 30px;    
     img{
         margin-bottom: 20px;
         width: 50%;
