@@ -4,6 +4,10 @@ import './App.scss';
 import Map from './components/map/map';
 import Content from './components/content/content';
 
+import logo from './images/logo-w.png';
+
+
+
 class App extends React.Component {
 
   constructor(){
@@ -69,6 +73,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
+          <div className="header">
+            <img src={logo} alt="Logo" />
+          </div>
           <Map year={year} circuits={circuits}/> 
           <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} />
         </header>      

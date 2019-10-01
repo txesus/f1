@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import logo from '../../images/logo-w.png';
 
 export default class SelectYear extends Component {
 
@@ -31,7 +30,6 @@ export default class SelectYear extends Component {
         return (
             <div>
                 <div className={"select-year"}>
-                    <img src={logo} alt="Logo" />
                     <select value={this.props.year} onChange={value=> this.props.handleYearChange(value)}>
                     {yearsCircuits.map((yearsCircuits) => {
                         return (

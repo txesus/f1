@@ -4,11 +4,24 @@
 .content{
     background: #17202A;
     border-right: 10px solid #F1C40F;
-    height: 100vh;
+    // height: 100vh;
     left: 0;
     position: absolute;
     text-align: center;
     top: 0;
-    width: 30%;
+    // width: 30%;
     z-index: 1000;
+}
+
+.header{
+    background: #17202A;
+    border-bottom: 2px solid #F1C40F;    
+    text-align: center;
+    padding: 20px 0 10px 0;
+    .select-box{
+        position: absolute;
+        right: 20px;
+        top: 0;
+        width: 180px;
+    }
 }
