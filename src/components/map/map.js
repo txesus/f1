@@ -15,8 +15,8 @@ export default class CircuitMap extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            zoomLevel: 2.5,
-            mapCenter: [26.9837669, -60.2810849],
+            zoomLevel: 2.2,
+            mapCenter: [22.9837669, -10.2810849],
             circuits: []
         };
         this.handleClickMarker = this.handleClickMarker.bind(this)
@@ -35,14 +35,15 @@ export default class CircuitMap extends Component {
 
     handleResetZoom(e) {
         this.setState({ 
-            zoomLevel: 3 
+            zoomLevel: 2.2,
+            mapCenter: [22.9837669, -10.2810849]
         });
     }
     handleClickMarker(e){        
         const { latlng } = e;
         const { lat, lng } = latlng;
         this.setState({ 
-            zoomLevel: 16,
+            zoomLevel: 15,
             mapCenter: [lat,lng]
          });
          console.log(e);
@@ -102,7 +103,7 @@ export default class CircuitMap extends Component {
                     })
                 }                
 
-                <Polyline color="#F1C40F"  weight="1" positions={this.getPolyLineArray()}/>
+                {/* <Polyline color="#F1C40F"  weight="1" positions={this.getPolyLineArray()}/> */}
 
 
 

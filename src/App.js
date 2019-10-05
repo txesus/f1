@@ -75,7 +75,7 @@ class App extends React.Component {
         <header className="App-header">
           <Header handleYearChange={this.handleYearChange} />
           <Map year={year} circuits={circuits}/> 
-          <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} />
+          {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
         </header>      
       </div>
     );
