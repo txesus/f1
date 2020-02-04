@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   getListCircuits() {
-    fetch('http://ergast.com/api/f1/' + this.state.year + '.json?limit=100')
+    fetch('https://ergast.com/api/f1/' + this.state.year + '.json?limit=100')
       .then((response) => {
         return response.json()
       })
@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   getYearCircuits () {
-    fetch('http://ergast.com/api/f1/' + this.state.year + '/circuits.json?limit=100')
+    fetch('https://ergast.com/api/f1/' + this.state.year + '/circuits.json?limit=100')
         .then((response) => {
         return response.json()
         })
