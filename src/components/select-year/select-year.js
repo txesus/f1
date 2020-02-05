@@ -8,7 +8,6 @@ export default class SelectYear extends Component {
         this.state = { 
             yearsCircuits: []
         };
-        this.options = {}
     }
 
     
@@ -43,8 +42,10 @@ export default class SelectYear extends Component {
                     <Select 
                         options={options}     
                         onChange={e => {
-                            this.props.handleYearChange({target:{value: e.value}})}                   
-                        }                            
+                            this.props.handleYearChange({target:{value: e.value}});
+                            this.props.handleResetZoom();
+                        }
+                        }      
                     />
 
 

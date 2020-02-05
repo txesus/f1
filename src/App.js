@@ -17,7 +17,9 @@ class App extends React.Component {
       circuits: [],
       circuitsYears: [],
       results: [],
-      clickCircuit: undefined
+      clickCircuit: undefined,
+      zoomLevel: 2.2,
+      mapCenter: [22.9837669, -10.2810849]
     }
   }
 
@@ -59,22 +61,33 @@ class App extends React.Component {
 
 
 
+handleYearChange = event => {
+  const year = event.target.value;
+  this.setState({ year });
+}
 
-  handleYearChange = event => {
-    const year = event.target.value;
-    this.setState({ year });
-  }
+setMapCenter = (zoomLevel, mapCenter) => {
+  this.setState({
+    zoomLevel, 
+    mapCenter
+  })
+}
 
+handleResetZoom = () => {
+  this.setState({ 
+      zoomLevel: 2.2,
+      mapCenter: [22.9837669, -10.2810849]
+  });
+}
 
   render (){
-
-    const { year, circuits, circuitsYears } = this.state;
+    const { year, circuits, zoomLevel, mapCenter } = this.state;
 
     return (
       <div className="App">
         <header className="App-header">
-          <Header handleYearChange={this.handleYearChange} />
-          <Map year={year} circuits={circuits}/> 
+          <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
+          <Map year={year} circuits={circuits} handleResetZoom={this.handleResetZoom} zoomLevel={ zoomLevel} mapCenter={ mapCenter } setMapCenter={this.setMapCenter}/> 
           {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
         </header>      
       </div>

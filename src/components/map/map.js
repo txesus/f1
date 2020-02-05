@@ -15,12 +15,10 @@ export default class CircuitMap extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            zoomLevel: 2.2,
-            mapCenter: [22.9837669, -10.2810849],
             circuits: []
         };
-        this.handleClickMarker = this.handleClickMarker.bind(this)
-        this.handleResetZoom = this.handleResetZoom.bind(this);
+        this.handleClickMarker = this.handleClickMarker.bind(this);
+        this.props.handleResetZoom();
     }
 
 
@@ -33,20 +31,11 @@ export default class CircuitMap extends Component {
     }
 
 
-    handleResetZoom(e) {
-        this.setState({ 
-            zoomLevel: 2.2,
-            mapCenter: [22.9837669, -10.2810849]
-        });
-    }
+
     handleClickMarker(e){        
         const { latlng } = e;
         const { lat, lng } = latlng;
-        this.setState({ 
-            zoomLevel: 15,
-            mapCenter: [lat,lng]
-         });
-         console.log(e);
+        this.props.setMapCenter(15, [lat, lng]);
     }
 
 
@@ -59,11 +48,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-
-        const { circuits } = this.props;
-        const { zoomLevel, mapCenter } = this.state;
-        
-
+        const { circuits, zoomLevel, mapCenter, handleResetZoom } = this.props;
         return (
             <div>
                 <Map
@@ -111,7 +96,7 @@ export default class CircuitMap extends Component {
                 <Control position="topright">
                     <div>
                         <div style={{ marginLeft: '37px' }}>
-                            <button onClick={this.handleResetZoom}>
+                            <button onClick={() => handleResetZoom()}>
                                 Reset Zoom
                             </button>
                         </div>
