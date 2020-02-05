@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Select from 'react-select'
 
 export default class SelectYear extends Component {
 
@@ -8,6 +8,7 @@ export default class SelectYear extends Component {
         this.state = { 
             yearsCircuits: []
         };
+        this.options = {}
     }
 
     
@@ -17,20 +18,38 @@ export default class SelectYear extends Component {
             return response.json()
           })
           .then((yearsCircuits) => {
-            this.setState({ yearsCircuits: yearsCircuits.MRData.SeasonTable.Seasons})
-          })
-      }   
-
-
-
-    render() {
-
-        const { yearsCircuits } = this.state;
-
+              this.setState({ yearsCircuits: yearsCircuits.MRData.SeasonTable.Seasons})
+            })
+        }   
+        
+        
+        
+        
+        getOptions = () => {
+            const options = [...this.state.yearsCircuits].map((field) => {
+                return ({
+                    value: field.season, 
+                    label: field.season
+                })
+            });
+            return options;
+        }
+        
+        render() {
+            const options = this.getOptions();
         return (
             <div>
                 <div className={"select-year"}>
-                    <select value={this.props.year} onChange={value=> this.props.handleYearChange(value)}>
+                    <Select 
+                        options={options}     
+                        onChange={e => {
+                            this.props.handleYearChange({target:{value: e.value}})}                   
+                        }                            
+                    />
+
+
+
+                    {/* <select value={this.props.year} onChange={value=> this.props.handleYearChange(value)}>
                     {yearsCircuits.map((yearsCircuits) => {
                         return (
                             <option key={yearsCircuits.season} value={yearsCircuits.season}> { yearsCircuits.season } </option>                        
@@ -38,7 +57,7 @@ export default class SelectYear extends Component {
                         })
                     }
 
-                    </select>
+                    </select> */}
                 </div>
             </div>
         );
