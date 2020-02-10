@@ -34,9 +34,12 @@ export default class SelectYear extends Component {
             return options;
         }
         
+        
+        
+        
         render() {
             const options = this.getOptions();
-        return (
+            return (
             <div>
                 <div className={"select-year"}>
                     <Select 
