@@ -159,7 +159,11 @@ export default class CircuitMap extends Component {
 
                 <Control position="topright">
                     <div>
+<<<<<<< HEAD
                         <div style={{ marginLeft: '37px', marginTop: '110px', zIndex: '0' }}>
+=======
+                        <div style={{ marginLeft: '37px', marginTop: '37px' }}>
+>>>>>>> 66f2306d (fix header)
                             <button onClick={() => handleResetZoom()}>
                                 Reset
                             </button>                            

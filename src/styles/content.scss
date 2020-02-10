@@ -119,9 +119,9 @@ table.results{
     height: 60px;
     text-align: center;
     padding: 20px 0 10px 0;
-    position: fixed;
+    position: absolute;
     width: 100%;
-    z-index: 10000;    
+    z-index: 1000;    
 
     img{
         width: 120px;
