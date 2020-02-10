@@ -96,7 +96,7 @@ export default class CircuitMap extends Component {
 
                 <Control position="topright">
                     <div>
-                        <div style={{ marginLeft: '37px' }}>
+                        <div style={{ marginLeft: '37px', marginTop: '37px' }}>
                             <button onClick={() => handleResetZoom()}>
                                 Reset Zoom
                             </button>
