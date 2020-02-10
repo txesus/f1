@@ -40,6 +40,7 @@ export default class SelectYear extends Component {
             <div>
                 <div className={"select-year"}>
                     <Select 
+                        isSearchable={false}
                         options={options}     
                         onChange={e => {
                             this.props.handleYearChange({target:{value: e.value}});
