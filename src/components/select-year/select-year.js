@@ -19,18 +19,6 @@ export default class SelectYear extends Component {
           .then((yearsCircuits) => {
             console.log('test');
             const sortedYears = yearsCircuits.MRData.SeasonTable.Seasons.reverse();
-
-            /*
-            (a,b) => {
-                if (a > b) {
-                    return -1;
-                }
-                if (a < b) {
-                    return 1;
-                  }
-                  // a must be equal to b
-                  return 0;
-            */
             this.setState({ yearsCircuits: sortedYears})
             })
         }   
@@ -58,7 +46,6 @@ export default class SelectYear extends Component {
             <div>
                 <div className={"select-year"}>
                     <Select 
-                        isSearchable={false}
                         options={options}     
                         onChange={e => {
                             this.props.handleYearChange({target:{value: e.value}});
