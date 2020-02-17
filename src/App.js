@@ -4,6 +4,7 @@ import './App.scss';
 import Map from './components/map/map';
 import Content from './components/content/content';
 import Header from './components/header/header';
+import Carousel from './components/carousel/carousel';
 
 
 
@@ -241,30 +242,9 @@ setActiveRound = (round) => {
       <div className="App">
         <header className="App-header">
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
-          <Map 
-            circuits={circuits} 
-            getCountryFlagFromName={this.getCountryFlagFromName}
-            handleClickCarousel={this.handleClickCarousel}
-            handleClickMarker={this.handleClickMarker}
-            handleClickRaceResults={this.handleClickRaceResults}
-            handleResetZoom={this.handleResetZoom} 
-            mapCenter={ mapCenter } 
-            races={races}
-            round={round}
-            setActiveRound={this.setActiveRound}
-            setMapCenter={this.setMapCenter}
-            year={year} 
-            zoomLevel={ zoomLevel} 
-          /> 
-          <Content 
-            // getCountryFlagFromName={this.getCountryFlagFromName}
-            getCountryFlagFromDemonym={this.getCountryFlagFromDemonym}
-            handleResetZoom={this.handleResetZoom} 
-            pilots={pilots} 
-            qualifyings={qualifyings} 
-            races={races}
-            round={round}
-          />           
+          <Map year={year} circuits={circuits} handleResetZoom={this.handleResetZoom} zoomLevel={ zoomLevel} mapCenter={ mapCenter } setMapCenter={this.setMapCenter}/> 
+          {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
+          <Carousel></Carousel>
         </header>      
       </div>
     );
