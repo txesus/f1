@@ -1,0 +1,31 @@
+@import './variables/colors.scss';
+
+
+.carousel{
+    position: absolute;
+    z-index: 1000;
+    bottom: 20px;
+    width: 100%;
+    left: 0;
+    ul{
+        padding-left: 0;
+        margin: 0 auto;
+        text-align: center;
+        li{
+            margin: 0 10px;
+            width: auto;
+            display: inline-block;
+            a{
+                background: transparent;
+                border: 1px solid #FFF;;
+                border-radius: 50%;
+                display: inline-block;
+                height: 10px;
+                width: 10px;
+                &.active{
+                    background: #FFF;
+                }
+            }
+        }
+    }
+}

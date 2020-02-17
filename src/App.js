@@ -4,6 +4,7 @@ import './App.scss';
 import Map from './components/map/map';
 import Content from './components/content/content';
 import Header from './components/header/header';
+import Carousel from './components/carousel/carousel';
 
 
 
@@ -89,6 +90,7 @@ handleResetZoom = () => {
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
           <Map year={year} circuits={circuits} handleResetZoom={this.handleResetZoom} zoomLevel={ zoomLevel} mapCenter={ mapCenter } setMapCenter={this.setMapCenter}/> 
           {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
+          <Carousel></Carousel>
         </header>      
       </div>
     );

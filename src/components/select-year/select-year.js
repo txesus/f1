@@ -17,7 +17,6 @@ export default class SelectYear extends Component {
             return response.json()
           })
           .then((yearsCircuits) => {
-            console.log('test');
             const sortedYears = yearsCircuits.MRData.SeasonTable.Seasons.reverse();
             this.setState({ yearsCircuits: sortedYears})
             })
