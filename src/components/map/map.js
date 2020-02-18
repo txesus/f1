@@ -15,10 +15,10 @@ export default class CircuitMap extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            circuits: []
+            races: []
         };
-        this.handleClickMarker = this.handleClickMarker.bind(this);
         this.props.handleResetZoom();
+        this.handleClickMarker = this.props.handleClickMarker.bind(this);
     }
 
 
@@ -32,23 +32,23 @@ export default class CircuitMap extends Component {
 
 
 
-    handleClickMarker(e){        
-        const { latlng } = e;
-        const { lat, lng } = latlng;
-        this.props.setMapCenter(15, [lat, lng]);
-    }
+    // handleClickMarker(e){        
+    //     const { latlng } = e;
+    //     const { lat, lng } = latlng;
+    //     this.props.setMapCenter(15, [lat, lng]);
+    // }
 
 
-    getPolyLineArray() {
-        const circuitsCoordinates = this.props.circuits.map(circuit => {
-            return [circuit.Location.lat, circuit.Location.long];
-        });
-        return circuitsCoordinates;
-    }
+    // getPolyLineArray() {
+    //     const circuitsCoordinates = this.props.circuits.map(circuit => {
+    //         return [circuit.Location.lat, circuit.Location.long];
+    //     });
+    //     return circuitsCoordinates;
+    // }
 
         
     render() {
-        const { circuits, zoomLevel, mapCenter, handleResetZoom } = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, setActive } = this.props;
         return (
             <div>
                 <Map
@@ -61,24 +61,28 @@ export default class CircuitMap extends Component {
                     url={mapStyled}
                     />
 
-                {circuits.map((circuit) => {
+                {races.map((race) => {
                     return (
                         <React.Fragment>
                             <Marker 
-                                position={[circuit.Location.lat, circuit.Location.long]}
-                                onClick={ e=> this.handleClickMarker(e)}   
-                                // icon=
+                                position={[race.Circuit.Location.lat, race.Circuit.Location.long]}
+                                onClick={ e=> 
+                                    {
+                                        this.handleClickMarker(e);
+                                        setActive(race.round)
+                                    }
+                                }   
                             >
                                 <Popup>
                                     <ul className={"list-popup"}>
-                                        <li className={"title"}><span>{circuit.circuitName}</span></li>
+                                        <li className={"title"}><span>{race.raceName}</span></li>
                                         <li>
-                                            <span>{circuit.Location.locality} </span>
+                                            <span>{race.Circuit.Location.locality} </span>
                                             /
-                                            <span> {circuit.Location.country}</span>
+                                            <span> {race.Circuit.Location.country}</span>
                                         </li>
                                         <li>
-                                            <a href={circuit.url} target="_blank">Wikipedia</a>
+                                            <a href={race.Circuit.url} target="_blank">Wikipedia</a>
                                         </li>
                                     </ul>
                                     

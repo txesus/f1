@@ -41,30 +41,24 @@ export default class SelectYear extends Component {
         
         render() {
             const options = this.getOptions();
+
+            console.log(options[0]);
             return (
             <div>
-                <div className={"select-year"}>
-                    <Select 
-                        options={options}     
-                        onChange={e => {
-                            this.props.handleYearChange({target:{value: e.value}});
-                            this.props.handleResetZoom();
-                        }
-                        }      
-                    />
+                {!!options[0] &&
+                    <div className={"select-year"}>
+                        <Select 
+                            options={options}     
+                            defaultValue={options[0]}
+                            onChange={e => {
+                                this.props.handleYearChange({target:{value: e.value}});
+                                this.props.handleResetZoom();
+                            }
+                            }      
+                        />
+                    </div>
 
-
-
-                    {/* <select value={this.props.year} onChange={value=> this.props.handleYearChange(value)}>
-                    {yearsCircuits.map((yearsCircuits) => {
-                        return (
-                            <option key={yearsCircuits.season} value={yearsCircuits.season}> { yearsCircuits.season } </option>                        
-                        )
-                        })
-                    }
-
-                    </select> */}
-                </div>
+                }
             </div>
         );
     }

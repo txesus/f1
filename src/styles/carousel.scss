@@ -15,10 +15,11 @@
             margin: 0 10px;
             width: auto;
             display: inline-block;
-            a{
+            span{
                 background: transparent;
                 border: 1px solid #FFF;;
                 border-radius: 50%;
+                cursor: pointer;
                 display: inline-block;
                 height: 10px;
                 text-indent: -9999px;

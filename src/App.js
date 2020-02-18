@@ -15,13 +15,17 @@ class App extends React.Component {
     super()
     this.state = {
       year: '2019',
+      races: [],
       circuits: [],
       circuitsYears: [],
       results: [],
       clickCircuit: undefined,
       zoomLevel: 2.2,
-      mapCenter: [22.9837669, -10.2810849]
+      mapCenter: [22.9837669, -10.2810849],
+      active: 0
     }
+    this.handleClickCarousel = this.handleClickCarousel.bind(this);
+    this.handleClickMarker = this.handleClickMarker.bind(this);
   }
 
   componentDidMount(){
@@ -38,6 +42,7 @@ class App extends React.Component {
   getData(){
     this.getListCircuits();
     this.getYearCircuits();
+    this.getRaces();
   }
 
   getListCircuits() {
@@ -60,6 +65,16 @@ class App extends React.Component {
     })
 }
 
+  getRaces () {
+    fetch('https://ergast.com/api/f1/' + this.state.year + '.json?limit=100')
+        .then((response) => {
+        return response.json()
+        })
+        .then((resultados) => {
+        this.setState({ races: resultados.MRData.RaceTable.Races})
+    })
+
+  }
 
 
 handleYearChange = event => {
@@ -77,20 +92,54 @@ setMapCenter = (zoomLevel, mapCenter) => {
 handleResetZoom = () => {
   this.setState({ 
       zoomLevel: 2.2,
-      mapCenter: [22.9837669, -10.2810849]
+      mapCenter: [22.9837669, -10.2810849],
+      active: 0
   });
 }
 
+handleClickMarker(e){        
+  const { latlng } = e;
+  const { lat, lng } = latlng;
+  this.setMapCenter(15, [lat, lng]);
+}
+
+handleClickCarousel({lat, long}){        
+  this.setMapCenter(15, [lat, long]);
+}
+
+
+setActive = (active) => {
+  this.setState({active});
+}
+
+
   render (){
-    const { year, circuits, zoomLevel, mapCenter } = this.state;
+    const { year, circuits, races, zoomLevel, mapCenter, active } = this.state;    
 
     return (
       <div className="App">
         <header className="App-header">
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
-          <Map year={year} circuits={circuits} handleResetZoom={this.handleResetZoom} zoomLevel={ zoomLevel} mapCenter={ mapCenter } setMapCenter={this.setMapCenter}/> 
+          <Map 
+            year={year} 
+            circuits={circuits} 
+            races={races}
+            handleResetZoom={this.handleResetZoom} 
+            zoomLevel={ zoomLevel} 
+            mapCenter={ mapCenter } 
+            setMapCenter={this.setMapCenter}
+            handleClickMarker={this.handleClickMarker}
+            active={active}
+            setActive={this.setActive}
+          /> 
           {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
-          <Carousel year={year} circuits={circuits}></Carousel>
+          <Carousel 
+            races={races}
+            handleClickMarker={this.handleClickMarker}
+            handleClickCarousel={this.handleClickCarousel}
+            active={active}
+            setActive={this.setActive}
+          />
         </header>      
       </div>
     );

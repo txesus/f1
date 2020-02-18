@@ -4,22 +4,31 @@ import React, { Component } from 'react';
 export default class Carousel extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            circuits: []
-        };
+        this.handleClickCarousel = this.props.handleClickCarousel.bind(this);
     }
+    
 
 
     render() {
-        const { circuits } = this.props;
+        const { races, active, setActive } = this.props;
+
         return (
             <div>
                 <div className={"carousel"}>
                     <ul>
-                        {circuits.map((circuit) => {
+                        {races.map((race, index) => {
                             return (
-                                <li ><a>{circuit.circuitName}</a></li>
-                                    
+                                <li key={index}>
+                                    <span 
+                                    className={active === race.round ? "active" : ""}
+                                    onClick={(e) => {
+                                        this.handleClickCarousel(race.Circuit.Location)
+                                        setActive(race.round)
+                                    }
+                                        }>
+                                        {race.round}
+                                    </span>
+                                </li>                                     
                             )
                         })
                         }                          
