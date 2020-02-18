@@ -90,7 +90,7 @@ handleResetZoom = () => {
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
           <Map year={year} circuits={circuits} handleResetZoom={this.handleResetZoom} zoomLevel={ zoomLevel} mapCenter={ mapCenter } setMapCenter={this.setMapCenter}/> 
           {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
-          <Carousel></Carousel>
+          <Carousel year={year} circuits={circuits}></Carousel>
         </header>      
       </div>
     );

@@ -2,23 +2,27 @@ import React, { Component } from 'react';
 
 
 export default class Carousel extends Component {
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
+        this.state = { 
+            circuits: []
+        };
     }
 
 
     render() {
+        const { circuits } = this.props;
         return (
             <div>
                 <div className={"carousel"}>
                     <ul>
-                        <li><a className={"active"}></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
+                        {circuits.map((circuit) => {
+                            return (
+                                <li ><a>{circuit.circuitName}</a></li>
+                                    
+                            )
+                        })
+                        }                          
                     </ul>
                 </div>
                 
