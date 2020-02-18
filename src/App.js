@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      year: '2023',
+      year: '2020',
       races: [],
       pilots: [],
       qualifyings: [],
@@ -196,7 +196,7 @@ handleResetZoom = () => {
   this.setState({ 
       zoomLevel: 2.2,
       mapCenter: [36.9837669, -10.2810849],
-      round: 0
+      active: 0
   });
 }
 
