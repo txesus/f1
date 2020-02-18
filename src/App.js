@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      year: '2019',
+      year: '2020',
       races: [],
       circuits: [],
       circuitsYears: [],
@@ -92,7 +92,7 @@ setMapCenter = (zoomLevel, mapCenter) => {
 handleResetZoom = () => {
   this.setState({ 
       zoomLevel: 2.2,
-      mapCenter: [22.9837669, -10.2810849],
+      mapCenter: [36.9837669, -10.2810849],
       active: 0
   });
 }
