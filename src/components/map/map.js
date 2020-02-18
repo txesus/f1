@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
-import L from 'leaflet';
+// Map Styles
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6gzx8x604xk1ipgqkwomp1g/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck17yr99g3bx21coh6z6t0mz0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+//const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
-import Carousel from '../carousel/carousel'
-
+// BLACK
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg0gp31a0f1imgchb0znld/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 // MAP STYLES
 
@@ -159,11 +164,7 @@ export default class CircuitMap extends Component {
 
                 <Control position="topright">
                     <div>
-<<<<<<< HEAD
-                        <div style={{ marginLeft: '37px', marginTop: '110px', zIndex: '0' }}>
-=======
                         <div style={{ marginLeft: '37px', marginTop: '37px' }}>
->>>>>>> 66f2306d (fix header)
                             <button onClick={() => handleResetZoom()}>
                                 Reset
                             </button>                            
@@ -179,7 +180,6 @@ export default class CircuitMap extends Component {
                     getCountryFlagFromName={getCountryFlagFromName}
                 />
                 </Map>
-                
                 <img src={wiki} alt="wiki" className="img-wiki"/>
                 
             </div>
