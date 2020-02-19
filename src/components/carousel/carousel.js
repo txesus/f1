@@ -8,17 +8,28 @@ export default class Carousel extends Component {
 
 
     render() {
+        const { races, active, setActive } = this.props;
+            console.log(races);
         return (
             <div>
                 <div className={"carousel"}>
                     <ul>
-                        <li><a className={"active"}></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
+                        {races.map((race, index) => {
+                            return (
+                                <li key={index}>
+                                    <span 
+                                    className={active === race.round ? "active" : ""}
+                                    onClick={(e) => {
+                                        this.handleClickCarousel(race.Circuit.Location)
+                                        setActive(race.round)
+                                    }
+                                        }>
+                                        {race.round}- {race.raceName}
+                                    </span>
+                                </li>                                     
+                            )
+                        })
+                        }                          
                     </ul>
                 </div>
                 
