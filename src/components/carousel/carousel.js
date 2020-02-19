@@ -11,7 +11,7 @@ export default class Carousel extends Component {
 
     render() {
         const { races, active, setActive } = this.props;
-
+            console.log(races);
         return (
             <div>
                 <div className={"carousel"}>
@@ -26,7 +26,7 @@ export default class Carousel extends Component {
                                         setActive(race.round)
                                     }
                                         }>
-                                        {race.round}
+                                        {race.round}- {race.raceName}
                                     </span>
                                 </li>                                     
                             )
