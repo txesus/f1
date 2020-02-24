@@ -5,27 +5,39 @@ import 'react-tabs/style/react-tabs.css';
 export default class Content extends Component {
 
     render() {
-        const { pilots, races, qualifyings } = this.props;
+        const { pilots, races, qualifyings, mapCenter } = this.props;
         
         return (
             <div className={"content"}>
                 <div className={"content-box"}>
 
-                {/* {races.map((race) => {
+                    <div >
+                            <h2>
+                                Nombre de carrera
+                            </h2>
+                            <span>Localidad </span>
+                            /
+                            <span> Pais</span>
+                            <a href="#">Wikipedia</a>
+                        </div>
+
+
+                {/* {races.map((race, index) => {
                     return (
-                        <div>
+                        <div key={index}>
                             <h2>
                                 {race.raceName}
                             </h2>
                             <span>{race.Circuit.Location.locality} </span>
                             /
                             <span> {race.Circuit.Location.country}</span>
+                            <a href={race.Circuit.url} target={"_blank"}>Wikipedia</a>
                         </div>
                   
                     )
                     })
-                }                          */}
-
+                }                         
+ */}
                     <Tabs>
                         <TabList>
                             <Tab>Race Result</Tab>
@@ -43,14 +55,14 @@ export default class Content extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {pilots.map((pilot, index) => {
-                                        // console.log("S", pilots);
+                                    {pilots.map((pilot, index) => {                                        
                                         return (
                                             <tr key={index}>
                                                 <td className={'center'}>{pilot.position}. </td>                                    
                                                 <td>
                                                     <a href={pilot.Driver.url} target={"_blank"}>
-                                                        {pilot.Driver.givenName} {pilot.Driver.familyName}
+                                                        {pilot.Driver.code}
+                                                        {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}
                                                     </a>                                                    
                                                 </td>
 
@@ -84,13 +96,13 @@ export default class Content extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {qualifyings.map((qualifying, index) => {
-                                        // console.log("S", pilots);
+                                    {qualifyings.map((qualifying, index) => {                                        
                                         return (
                                             <tr key={index}>
                                                 <td className={'center'}>{qualifying.position}. </td>                                    
                                                 <td>
-                                                    {qualifying.Driver.givenName} {qualifying.Driver.familyName}
+                                                    {qualifying.Driver.code}
+                                                    {/* {qualifying.Driver.givenName} {qualifying.Driver.familyName} */}
                                                 </td>
 
                                                 <td> {qualifying.Q1}</td>
