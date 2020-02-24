@@ -17,6 +17,7 @@ class App extends React.Component {
       year: '2019',
       races: [],
       pilots: [],
+      qualifyings: [],
       circuits: [],
       circuitsYears: [],
       results: [],
@@ -89,6 +90,17 @@ class App extends React.Component {
   }
 
 
+  getQualifyings () {
+    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/qualifying.json')
+        .then((response) => {
+        return response.json()
+        })
+        .then((resultados) => {
+        this.setState({ qualifyings: resultados.MRData.RaceTable.Races[0].QualifyingResults})
+    })
+  }  
+
+
 
 
 
@@ -117,6 +129,7 @@ handleClickMarker(e){
   const { lat, lng } = latlng;
   this.setMapCenter(15, [lat, lng]);
   this.getPilots();
+  this.getQualifyings();
 }
 
 handleClickRaceResults(e, round){        
@@ -133,6 +146,7 @@ handleClickRaceResults(e, round){
 handleClickCarousel({lat, long}){        
   this.setMapCenter(15, [lat, long]);
   this.getPilots();
+  this.getQualifyings();
 }
 
 
@@ -142,7 +156,7 @@ setActiveRound = (round) => {
 
 
   render (){
-    const { year, round, circuits, races, pilots, zoomLevel, mapCenter } = this.state;    
+    const { year, round, circuits, races, pilots, qualifyings, zoomLevel, mapCenter } = this.state;    
 
     return (
       <div className="App">
@@ -161,7 +175,11 @@ setActiveRound = (round) => {
             setActiveRound={this.setActiveRound}
           /> 
           { round !==0 &&
-              <Content pilots={pilots} /> 
+              <Content 
+                pilots={pilots} 
+                qualifyings={qualifyings} 
+                races={races}
+              /> 
           }
           <Carousel 
             races={races}
