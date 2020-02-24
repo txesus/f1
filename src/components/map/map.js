@@ -103,7 +103,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, setActiveRound } = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, setActiveRound, round } = this.props;
         return (
             <div>
                 <Map

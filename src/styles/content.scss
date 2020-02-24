@@ -3,37 +3,19 @@
 
 .content{
     background: #FFF;
-    height: calc(100vh - 130px);
-    padding: 40px 30px 0px 30px;
     position: absolute;
     right: 0;
     top: 190px;
-    width: 50vh;
+    width: 30%;
     z-index: 1000;
-    transform: translate(100%, 0);
-    @media only screen and (max-width: 768px) {
-        display: none;
-    }    
     &.show-content{
-        -webkit-transition: all .5s ease-in-out;
-        -moz-transition: all .5s ease-in-out;
-        -o-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out;    
-        transform: translate(0%, 0);
-        @media only screen and (max-width: 768px) {
-            display: block;
-            transform: translate(0%, 0);
-            width: 100%;
-        }    
+        -webkit-transition: all 1s ease-in-out;
+        -moz-transition: all 1s ease-in-out;
+        -o-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;    
     }
     .content-box{
-        height: 580px;
-        overflow-y: hidden;        
-        padding: 10px 30px 0px 30px;
-        @media only screen and (max-width: 768px){
-            height: 100vh;            
-            padding: 10px 5px 0px 5px;
-        }
+        padding: 40px 30px 0px 30px;
     }
 }
 
