@@ -14,15 +14,16 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      year: '2020',
+      year: '2019',
       races: [],
+      pilots: [],
       circuits: [],
       circuitsYears: [],
       results: [],
       clickCircuit: undefined,
       zoomLevel: 2.2,
       mapCenter: [22.9837669, -10.2810849],
-      active: 0
+      round: 0
     }
     this.handleClickCarousel = this.handleClickCarousel.bind(this);
     this.handleClickMarker = this.handleClickMarker.bind(this);
@@ -42,7 +43,7 @@ class App extends React.Component {
   getData(){
     this.getListCircuits();
     this.getYearCircuits();
-    this.getRaces();
+    this.getRaces();    
   }
 
   getListCircuits() {
@@ -63,7 +64,7 @@ class App extends React.Component {
         .then((resultados) => {
         this.setState({ circuits: resultados.MRData.CircuitTable.Circuits})
     })
-}
+  }
 
   getRaces () {
     fetch('https://ergast.com/api/f1/' + this.state.year + '.json?limit=100')
@@ -73,8 +74,18 @@ class App extends React.Component {
         .then((resultados) => {
         this.setState({ races: resultados.MRData.RaceTable.Races})
     })
-
   }
+
+  getPilots () {
+    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/' + 'results' + '.json')
+        .then((response) => {
+        return response.json()
+        })
+        .then((resultados) => {
+        this.setState({ pilots: resultados.MRData.RaceTable.Races[0].Results})
+    })
+  }
+
 
 
 handleYearChange = event => {
@@ -93,7 +104,7 @@ handleResetZoom = () => {
   this.setState({ 
       zoomLevel: 2.2,
       mapCenter: [36.9837669, -10.2810849],
-      active: 0
+      round: 0
   });
 }
 
@@ -101,20 +112,22 @@ handleClickMarker(e){
   const { latlng } = e;
   const { lat, lng } = latlng;
   this.setMapCenter(15, [lat, lng]);
+  this.getPilots();
 }
 
 handleClickCarousel({lat, long}){        
   this.setMapCenter(15, [lat, long]);
+  this.getPilots();
 }
 
 
-setActive = (active) => {
-  this.setState({active});
+setActiveRound = (round) => {
+  this.setState({round});
 }
 
 
   render (){
-    const { year, circuits, races, zoomLevel, mapCenter, active } = this.state;    
+    const { year, round, circuits, races, pilots, zoomLevel, mapCenter } = this.state;    
 
     return (
       <div className="App">
@@ -129,16 +142,18 @@ setActive = (active) => {
             mapCenter={ mapCenter } 
             setMapCenter={this.setMapCenter}
             handleClickMarker={this.handleClickMarker}
-            active={active}
-            setActive={this.setActive}
+            round={round}
+            setActiveRound={this.setActiveRound}
           /> 
-          {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
+          { round !==0 &&
+              <Content pilots={pilots} /> 
+          }
           <Carousel 
             races={races}
             handleClickMarker={this.handleClickMarker}
             handleClickCarousel={this.handleClickCarousel}
-            active={active}
-            setActive={this.setActive}
+            round={round}
+            setActiveRound={this.setActiveRound}
           />
         </header>      
       </div>

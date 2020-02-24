@@ -2,14 +2,13 @@
 
 
 .content{
-    background: rgba(00,00,00,.5);
-    // border-right: 10px solid #F1C40F;
-    // height: 100vh;
-    left: 40px;
+    background: #FFF;
+    height: calc(100vh - 130px);
+    padding: 40px 30px 0px 30px;
     position: absolute;
-    text-align: center;
-    top: 90px;
-    // width: 30%;
+    right: 0;
+    top: 190px;
+    width: 50vh;
     z-index: 1000;
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 // Map Styles
@@ -55,7 +55,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, setActive } = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, setActiveRound } = this.props;
         return (
             <div>
                 <Map
@@ -76,7 +76,7 @@ export default class CircuitMap extends Component {
                                 onClick={ e=> 
                                     {
                                         this.handleClickMarker(e);
-                                        setActive(race.round)
+                                        setActiveRound(race.round)
                                     }
                                 }   
                             >
@@ -89,7 +89,7 @@ export default class CircuitMap extends Component {
                                             <span> {race.Circuit.Location.country}</span>
                                         </li>
                                         <li>
-                                            <a href={race.Circuit.url} target="_blank">Wikipedia</a>
+                                            <a href={race.Circuit.url} target={"_blank"}>Wikipedia</a>
                                         </li>
                                     </ul>
                                     
@@ -109,7 +109,7 @@ export default class CircuitMap extends Component {
                     <div>
                         <div style={{ marginLeft: '37px', marginTop: '110px', zIndex: '0' }}>
                             <button onClick={() => handleResetZoom()}>
-                                Reset Zoom
+                                Reset
                             </button>
                         </div>
                     </div>

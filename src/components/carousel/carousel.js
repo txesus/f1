@@ -10,8 +10,7 @@ export default class Carousel extends Component {
 
 
     render() {
-        const { races, active, setActive } = this.props;
-            console.log(races);
+        const { races, round, setActiveRound } = this.props;
         return (
             <div>
                 <div className={"carousel"}>
@@ -20,10 +19,10 @@ export default class Carousel extends Component {
                             return (
                                 <li key={index}>
                                     <span 
-                                    className={active === race.round ? "active" : ""}
+                                    className={round === race.round ? "active" : ""}
                                     onClick={(e) => {
                                         this.handleClickCarousel(race.Circuit.Location)
-                                        setActive(race.round)
+                                        setActiveRound(race.round)
                                     }
                                         }>
                                         {race.round}- {race.raceName}

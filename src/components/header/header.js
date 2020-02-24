@@ -4,9 +4,6 @@ import SelectYear from '../select-year/select-year';
 import logo from '../../images/logo-w.png';
 
 export default class Content extends Component {
-    constructor(props){
-        super(props)
-    }
 
 
     render() {
