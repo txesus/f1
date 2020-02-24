@@ -55,13 +55,14 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, setActiveRound } = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, setActiveRound, round } = this.props;
         return (
             <div>
                 <Map
                     ref={(ref) => { this.map = ref; }}
                     center={mapCenter}
                     zoom={zoomLevel}
+                    className={round === 0 ? "" : "show-content"}
                     >
                 <TileLayer
                     attribution={"Jesús Esteban"}

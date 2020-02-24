@@ -77,7 +77,7 @@ class App extends React.Component {
   }
 
   getPilots () {
-    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/' + 'results' + '.json')
+    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/results.json')
         .then((response) => {
         return response.json()
         })

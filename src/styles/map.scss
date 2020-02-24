@@ -3,10 +3,14 @@
 
 .leaflet-container {    
     height: 100vh;
+    left: 0;
     position: absolute!important;
     right: 0;
     top: 0%;
-    width: 100vw;
+    width: 100%;
+    &.show-content{
+        width: 70%;
+    }
 }
 
 

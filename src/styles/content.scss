@@ -3,13 +3,20 @@
 
 .content{
     background: #FFF;
-    height: calc(100vh - 130px);
-    padding: 40px 30px 0px 30px;
     position: absolute;
     right: 0;
     top: 190px;
-    width: 50vh;
+    width: 30%;
     z-index: 1000;
+    &.show-content{
+        -webkit-transition: all 1s ease-in-out;
+        -moz-transition: all 1s ease-in-out;
+        -o-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;    
+    }
+    .content-box{
+        padding: 40px 30px 0px 30px;
+    }
 }
 
 .header{
