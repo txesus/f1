@@ -125,11 +125,11 @@ handleResetZoom = () => {
 }
 
 handleClickMarker(e){        
-  const { latlng } = e;
-  const { lat, lng } = latlng;
-  this.setMapCenter(15, [lat, lng]);
-  this.getPilots();
-  this.getQualifyings();
+    const { latlng } = e;
+    const { lat, lng } = latlng;
+    this.setMapCenter(15, [lat, lng] );
+    this.getPilots();
+    this.getQualifyings();
 }
 
 handleClickRaceResults(e, round){        
@@ -179,6 +179,7 @@ setActiveRound = (round) => {
                 pilots={pilots} 
                 qualifyings={qualifyings} 
                 races={races}
+                mapCenter={ mapCenter } 
               /> 
           }
           <Carousel 
@@ -187,6 +188,7 @@ setActiveRound = (round) => {
             handleClickCarousel={this.handleClickCarousel}
             round={round}
             setActiveRound={this.setActiveRound}
+            mapCenter={ mapCenter } 
           />
         </header>      
       </div>

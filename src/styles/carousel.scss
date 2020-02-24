@@ -2,13 +2,14 @@
 
 
 .carousel{
+    display: none;
     position: absolute;
     z-index: 1000;
     bottom: 20px;
     width: 100%;
     left: 0;
     @media only screen and (max-width: 768px) {
-        // display: none;
+        display: none;
     }
     ul{
         padding-left: 0;
@@ -19,16 +20,19 @@
             width: auto;
             display: inline-block;
             span{
-                // border: 1px solid #FFF;
-                // border-radius: 50%;
+                background: transparent;
+                border: 1px solid #FFF;
+                border-radius: 50%;
                 cursor: pointer;
                 display: inline-block;
-                // height: 24px;
-                // width: 24px;
-                color: #FFF;
+                height: 12px;
+                width: 12px;
+                // color: #FFF;
+                text-indent: -9999px;
                 &.active{
-                    // border: 1px solid red;
-                    color: red;
+                    background: red;
+                    border: 1px solid red;
+                    // color: red;
                 }
             }
         }
