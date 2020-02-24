@@ -14,18 +14,16 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      year: '2020',
+      year: '2019',
       races: [],
       pilots: [],
-      qualifyings: [],
       circuits: [],
       circuitsYears: [],
       results: [],
       clickCircuit: undefined,
       zoomLevel: 2.2,
       mapCenter: [22.9837669, -10.2810849],
-      round: 0,
-      countries: []
+      round: 0
     }
     this.handleClickCarousel = this.handleClickCarousel.bind(this);
     this.handleClickMarker = this.handleClickMarker.bind(this);
@@ -47,10 +45,7 @@ class App extends React.Component {
   getData(){
     this.getListCircuits();
     this.getYearCircuits();
-    this.getRaces();  
-    this.getPilots();
-    this.getQualifyings();   
-    this.getCountries();
+    this.getRaces();    
   }
 
   getListCircuits() {
@@ -83,11 +78,8 @@ class App extends React.Component {
     })
   }
 
-  
-
   getPilots () {
-    // console.log("getPilots", this.state.year, this.state.round);
-    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/results.json')
+    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/' + 'results' + '.json')
         .then((response) => {
         return response.json()
         })
@@ -96,86 +88,6 @@ class App extends React.Component {
     })
   }
 
-
-  getQualifyings () {
-    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/qualifying.json')
-        .then((response) => {
-        return response.json()
-        })
-        .then((resultados) => {
-          const isQualifyingResults = !!resultados.MRData.RaceTable.Races[0];
-          this.setState({ qualifyings: isQualifyingResults ? resultados.MRData.RaceTable.Races[0].QualifyingResults : ""})
-    })
-  }  
-
-
-  getCountries () {
-    fetch('https://restcountries.eu/rest/v2')
-        .then((response) => {
-          return response.json()
-        })
-        .then((resultados) => {
-          const countries = resultados.map( (country) => {
-            return (
-              {
-                demonym: country.demonym,
-                flag: country.flag,
-                name: country.name,
-                altSpellings: country.altSpellings
-              }
-            )
-          })
-          console.log("COUNTRIES", countries)
-          this.setState({ countries})
-    })
-  }    
-
-  getCountryFlagFromDemonym = (demonym) => {
-    const matchCountry = this.state.countries.find((country) => {
-        if(country.demonym.toLowerCase() === "argentinean"){
-          return demonym.toLowerCase() === "argentine";  
-        }
-        return demonym.toLowerCase() === country.demonym.toLowerCase();
-    })
-    return matchCountry ? matchCountry.flag : "src/images/marker.png";
-  }
-  
-  getCountryFlagFromName = (name) => {
-    // const matchCountry = this.state.countries.find((country) => {
-    //   if(country.name.toLowerCase() === "united kingdom of great britain and northern ireland"){
-    //     return name.toLowerCase() === "uk";  
-    //   }
-    //   const recoverySpelling = country.altSpellings.find((spelling) => {
-    //     console.log("SEPELLING", spelling)
-    //     return name.toLowerCase() === spelling.toLowerCase()
-    //   });
-    //   return name.toLowerCase() === (recoverySpelling ? recoverySpelling.toLowerCase() : "");
-    // })
-    // return matchCountry ? matchCountry.flag : name;
-    const matchCountry = this.state.countries.find((country) => {
-      
-      switch (country.name.toLowerCase()) {
-        case "united kingdom of great britain and northern ireland":
-          return name.toLowerCase() === "uk";
-        case "russian federation":
-          return name.toLowerCase() === "russia";
-        case "united states of america":
-          return name.toLowerCase() === "usa";
-        case "united arab emirates":
-          return name.toLowerCase() === "uae";
-        case "korea (republic of)":
-          return name.toLowerCase() === "korea";
-        
-        default:
-          return name.toLowerCase() === country.name.toLowerCase();
-      }
-      
-  })
-  return matchCountry ? matchCountry.flag : name;
-
-
-
-  }
 
 
 
@@ -196,20 +108,15 @@ handleResetZoom = () => {
   this.setState({ 
       zoomLevel: 2.2,
       mapCenter: [36.9837669, -10.2810849],
-      active: 0
+      round: 0
   });
 }
 
-handleClickMarker(e, round){        
-    const { latlng } = e;
-    const { lat, lng } = latlng;
-    this.setMapCenter(15, [lat, lng] );
-    // this.setState({
-    //   round
-    // }, () => {
-    //   this.getPilots();
-    //   this.getQualifyings();
-    // })
+handleClickMarker(e){        
+  const { latlng } = e;
+  const { lat, lng } = latlng;
+  this.setMapCenter(15, [lat, lng]);
+  this.getPilots();
 }
 
 handleClickRaceResults(e, round){        
@@ -225,8 +132,7 @@ handleClickRaceResults(e, round){
 
 handleClickCarousel({lat, long}){        
   this.setMapCenter(15, [lat, long]);
-  // this.getPilots();
-  // this.getQualifyings();
+  this.getPilots();
 }
 
 
@@ -236,15 +142,34 @@ setActiveRound = (round) => {
 
 
   render (){
-    const { year, round, circuits, races, pilots, qualifyings, zoomLevel, mapCenter } = this.state;    
+    const { year, round, circuits, races, pilots, zoomLevel, mapCenter } = this.state;    
 
     return (
       <div className="App">
         <header className="App-header">
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
-          <Map year={year} circuits={circuits} handleResetZoom={this.handleResetZoom} zoomLevel={ zoomLevel} mapCenter={ mapCenter } setMapCenter={this.setMapCenter}/> 
-          {/* <Content year={year} circuitsYears={circuitsYears} handleYearChange={this.handleYearChange} /> */}
-          <Carousel></Carousel>
+          <Map 
+            year={year} 
+            circuits={circuits} 
+            races={races}
+            handleResetZoom={this.handleResetZoom} 
+            zoomLevel={ zoomLevel} 
+            mapCenter={ mapCenter } 
+            setMapCenter={this.setMapCenter}
+            handleClickMarker={this.handleClickMarker}
+            round={round}
+            setActiveRound={this.setActiveRound}
+          /> 
+          { round !==0 &&
+              <Content pilots={pilots} /> 
+          }
+          <Carousel 
+            races={races}
+            handleClickMarker={this.handleClickMarker}
+            handleClickCarousel={this.handleClickCarousel}
+            round={round}
+            setActiveRound={this.setActiveRound}
+          />
         </header>      
       </div>
     );

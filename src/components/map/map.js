@@ -103,7 +103,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickRaceResults, handleClickCarousel, getCountryFlagFromName} = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, setActiveRound } = this.props;
         return (
             <div>
                 <Map
@@ -124,8 +124,11 @@ export default class CircuitMap extends Component {
                             <Marker 
                                 icon={text}
                                 position={[race.Circuit.Location.lat, race.Circuit.Location.long]}
-                                onClick={ e=>                                     
-                                    this.handleClickMarker(e, race.round)
+                                onClick={ e=> 
+                                    {
+                                        this.handleClickMarker(e);
+                                        setActiveRound(race.round)
+                                    }
                                 }   
                             >
                                 <Popup>
@@ -136,10 +139,8 @@ export default class CircuitMap extends Component {
                                             /
                                             <span> {race.Circuit.Location.country}</span>
                                         </li>
-                                        <li className={'show-results'}>
-                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)} role={"img"} aria-label={"checkered flag"}>
-                                                🏁 Click to Race results 🏁
-                                            </span>
+                                        <li>
+                                            <a href={race.Circuit.url} target={"_blank"}>Wikipedia</a>
                                         </li>
                                         <li><a href={race.Circuit.url} target={"_blank"}>Wikipedia</a></li>
                                     </ul>
@@ -167,7 +168,7 @@ export default class CircuitMap extends Component {
                         <div style={{ marginLeft: '37px', marginTop: '37px' }}>
                             <button onClick={() => handleResetZoom()}>
                                 Reset
-                            </button>                            
+                            </button>
                         </div>
                     </div>
                 </Control>
