@@ -24,6 +24,15 @@
 }
 
 
+.title-content{
+    margin-bottom: 20px;
+    text-align: center;
+    span{
+        display: inline-block;
+        width: 100%;
+    }
+}
+
 
 table.results{
     border-collapse: collapse;
@@ -61,6 +70,24 @@ table.results{
         }
     }
 }
+
+.arrows{
+    position: relative;
+    width: 100%;
+    span{        
+        cursor: pointer;
+        position: absolute;
+        top: 28px;
+        &:first-child{
+            left: 0;
+        }
+        &:last-child{
+            right: 0;
+        }
+    }    
+}
+
+
 .header{
     background: #17202A;
     border-bottom: 2px solid #F1C40F;    

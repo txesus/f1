@@ -11,15 +11,14 @@ export default class Content extends Component {
             <div className={"content"}>
                 <div className={"content-box"}>
 
-                    <div >
-                            <h2>
-                                Nombre de carrera
-                            </h2>
-                            <span>Localidad </span>
-                            /
-                            <span> Pais</span>
-                            <a href="#">Wikipedia</a>
-                        </div>
+                    <div className={"arrows"}>
+                        <span>Prev</span>
+                        <span>Next</span>
+                    </div>                            
+
+                    <div className={"title-content"}>
+                        <h2>Nombre de carrera</h2>
+                    </div>
 
 
                 {/* {races.map((race, index) => {
@@ -42,6 +41,7 @@ export default class Content extends Component {
                         <TabList>
                             <Tab>Race Result</Tab>
                             <Tab>Qualifying Results</Tab>
+                            <Tab>Circuit info</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -52,6 +52,7 @@ export default class Content extends Component {
                                         <th>Name</th>
                                         <th>Constructor</th>
                                         <th>Time</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,7 +75,8 @@ export default class Content extends Component {
                                                         :
                                                         ""
                                                     }
-                                                </td>                                                
+                                                </td>                             
+                                                <td> {pilot.status}</td>                   
                                             </tr>                                     
                                         )
                                     })
@@ -88,7 +90,7 @@ export default class Content extends Component {
                         <table className={'results'}>
                                 <thead>
                                     <tr>
-                                        <th className={'center'}>Position</th>
+                                        <th className={'center'}>Pos.</th>
                                         <th>Name</th>
                                         <th>Q1</th>
                                         <th>Q2</th>
@@ -96,13 +98,15 @@ export default class Content extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {qualifyings.map((qualifying, index) => {                                        
+                                    {qualifyings.map((qualifying, index) => {          
+                                        console.log(qualifying)                              
                                         return (
                                             <tr key={index}>
                                                 <td className={'center'}>{qualifying.position}. </td>                                    
                                                 <td>
-                                                    {qualifying.Driver.code}
-                                                    {/* {qualifying.Driver.givenName} {qualifying.Driver.familyName} */}
+                                                    <a href={qualifying.Driver.url} target={"_blank"}>
+                                                        {qualifying.Driver.code}
+                                                    </a>                                                    
                                                 </td>
 
                                                 <td> {qualifying.Q1}</td>
@@ -124,6 +128,38 @@ export default class Content extends Component {
                             </table>                          
                             
                         </TabPanel>
+                        <TabPanel>
+                        <table className={'results'}>
+                                <thead>
+                                    <tr>
+                                        <th>Locality</th>
+                                        <th>Country</th>
+                                        <th>Date</th>
+                                        <th>More info</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {races.map((race, index) => {          
+                                        console.log(race)                              
+                                        return (
+                                            <tr key={index}>
+                                                <td>{race.Circuit.Location.locality}</td>
+                                                <td>{race.Circuit.Location.country}</td>
+                                                <td>{race.date}</td>
+                                                <td> 
+                                                    <a href={race.Circuit.url} target={"_blank"}>
+                                                        Wikipedia
+                                                    </a>                                                    
+                                                </td>
+                                            </tr>                                     
+                                        )
+                                    })
+                                    }                          
+
+                                </tbody>
+                            </table>                          
+                            
+                        </TabPanel>                        
                     </Tabs>
 
 
