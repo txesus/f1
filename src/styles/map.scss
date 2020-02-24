@@ -7,9 +7,14 @@
     position: absolute!important;
     right: 0;
     top: 0%;
-    width: 100%;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;    
+    transform: translate(0, 0);
+
     &.show-content{
-        width: 70%;
+        transform: translate(-50%, 0);
     }
 }
 
