@@ -8,7 +8,7 @@ export default class Carousel extends Component {
 
 
     render() {
-        const { races, round, setActiveRound, mapCenter } = this.props;
+        const { races, round, setActiveRound } = this.props;
         return (
             <div>
                 <div className={"carousel"}>
