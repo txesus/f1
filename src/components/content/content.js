@@ -5,7 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 export default class Content extends Component {
 
     render() {
-        const { pilots, races, qualifyings, mapCenter } = this.props;
+        const { pilots, races, qualifyings } = this.props;
         
         return (
             <div className={"content"}>
@@ -45,120 +45,115 @@ export default class Content extends Component {
                         </TabList>
 
                         <TabPanel>
-                            <table className={'results'}>
-                                <thead>
-                                    <tr>
-                                        <th className={'center'}>Pos.</th>
-                                        <th>Name</th>
-                                        <th>Constructor</th>
-                                        <th>Time</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {pilots.map((pilot, index) => {                                        
-                                        return (
-                                            <tr key={index}>
-                                                <td className={'center'}>{pilot.position}. </td>                                    
-                                                <td>
-                                                    <a href={pilot.Driver.url} target={"_blank"}>
-                                                        {pilot.Driver.code}
-                                                        {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}
-                                                    </a>                                                    
-                                                </td>
+                            <div className={'st_viewport'}>
+                                <div className={'st_wrap_table'}>
+                                    <header className={'st_table_header'}>
+                                        <div className="st_row">
+                                            <div className={'st_column'}><span>Pos.</span></div>
+                                            <div className={'st_column'}><span>Name</span></div>
+                                            <div className={'st_column'}><span>Constructor</span></div>
+                                            <div className={'st_column'}><span>Time</span></div>
+                                            <div className={'st_column'}><span>Status</span></div>
+                                        </div>
+                                    </header>
+                                    <div className="st_table">
+                                        {pilots.map((pilot, index) => {                                        
+                                            return (
+                                                <div className="st_row" key={index}>
+                                                    <div className={'st_column'}><span>{pilot.position}.</span></div>                                    
+                                                    <div className={'st_column'}>
+                                                        <a href={pilot.Driver.url} target={"_blank"}>
+                                                            {pilot.Driver.code}
+                                                            {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}
+                                                        </a>                                                    
+                                                    </div>
 
-                                                <td> {pilot.Constructor.name}</td>
+                                                    <div className={'st_column'}><span>{pilot.Constructor.name}</span></div>
 
-                                                <td>
-                                                    { !!pilot.Time ?
-                                                        <span >{pilot.Time.time}</span>
-                                                        :
-                                                        ""
-                                                    }
-                                                </td>                             
-                                                <td> {pilot.status}</td>                   
-                                            </tr>                                     
-                                        )
-                                    })
-                                    }                          
-
-                                </tbody>
-                            </table>
-
-                        </TabPanel>
-                        <TabPanel>
-                        <table className={'results'}>
-                                <thead>
-                                    <tr>
-                                        <th className={'center'}>Pos.</th>
-                                        <th>Name</th>
-                                        <th>Q1</th>
-                                        <th>Q2</th>
-                                        <th>Q3</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {qualifyings.map((qualifying, index) => {          
-                                        console.log(qualifying)                              
-                                        return (
-                                            <tr key={index}>
-                                                <td className={'center'}>{qualifying.position}. </td>                                    
-                                                <td>
-                                                    <a href={qualifying.Driver.url} target={"_blank"}>
-                                                        {qualifying.Driver.code}
-                                                    </a>                                                    
-                                                </td>
-
-                                                <td> {qualifying.Q1}</td>
-                                                <td> {qualifying.Q2}</td>
-                                                <td> {qualifying.Q3}</td>
-
-                                                
-                                                {/* { !!pilot.Time ?
-                                                    <span > Time: {pilot.Time.time}</span>
-                                                    :
-                                                    <span > OUT</span>
-                                                } */}
-                                            </tr>                                     
-                                        )
-                                    })
-                                    }                          
-
-                                </tbody>
-                            </table>                          
+                                                    <div className={'st_column'}>
+                                                        { !!pilot.Time ?
+                                                            <span>{pilot.Time.time}</span>
+                                                            :
+                                                            ""
+                                                        }
+                                                    </div>                             
+                                                    <div className={'st_column'}><span>{pilot.status}</span></div>                   
+                                                </div>                                     
+                                            )
+                                        })
+                                        }       
+                                    </div>
+                                </div>
+                            </div>
                             
                         </TabPanel>
                         <TabPanel>
-                        <table className={'results'}>
-                                <thead>
-                                    <tr>
-                                        <th>Locality</th>
-                                        <th>Country</th>
-                                        <th>Date</th>
-                                        <th>More info</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {races.map((race, index) => {          
-                                        console.log(race)                              
-                                        return (
-                                            <tr key={index}>
-                                                <td>{race.Circuit.Location.locality}</td>
-                                                <td>{race.Circuit.Location.country}</td>
-                                                <td>{race.date}</td>
-                                                <td> 
-                                                    <a href={race.Circuit.url} target={"_blank"}>
-                                                        Wikipedia
-                                                    </a>                                                    
-                                                </td>
-                                            </tr>                                     
-                                        )
-                                    })
-                                    }                          
+                            <div className={'st_viewport'}>
+                                <div className={'st_wrap_table'}>
+                                    <header className={'st_table_header'}>
+                                        <div className="st_row">
+                                            <div className={'st_column'}><span>Pos.</span></div>
+                                            <div className={'st_column'}><span>Name</span></div>
+                                            <div className={'st_column'}><span>Q1</span></div>
+                                            <div className={'st_column'}><span>Q2</span></div>
+                                            <div className={'st_column'}><span>Q3</span></div>
+                                        </div>
+                                    </header>
+                                    <div className="st_table">
+                                        {qualifyings.map((qualifying, index) => {                                        
+                                            return (
+                                                <div className="st_row" key={index}>
+                                                    <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
+                                                    <div className={'st_column'}>
+                                                        <a href={qualifying.Driver.url} target={"_blank"}>
+                                                            {qualifying.Driver.code}
+                                                        </a>                                                  
+                                                    </div>
 
-                                </tbody>
-                            </table>                          
-                            
+                                                    <div className={'st_column'}><span>{qualifying.Q1}</span></div>
+                                                    <div className={'st_column'}><span>{qualifying.Q2}</span></div>
+                                                    <div className={'st_column'}><span>{qualifying.Q3}</span></div>
+                                                </div>                                     
+                                            )
+                                        })
+                                        }       
+                                    </div>
+                                </div>
+                            </div>                            
+                        </TabPanel>
+                        <TabPanel>
+                        <div className={'st_viewport'}>
+                                <div className={'st_wrap_table'}>
+                                    <header className={'st_table_header'}>
+                                        <div className="st_row">
+                                            <div className={'st_column'}><span>Locality</span></div>
+                                            <div className={'st_column'}><span>Country</span></div>
+                                            <div className={'st_column'}><span>Date</span></div>
+                                            <div className={'st_column'}><span>Hour</span></div>
+                                            <div className={'st_column'}><span>More info</span></div>
+                                        </div>
+                                    </header>
+                                    <div className="st_table">
+                                        {races.map((race, index) => {        
+                                            console.log(races);
+                                            return (
+                                                <div className="st_row" key={index}>
+                                                    <div className={'st_column'}><span>{race.Circuit.Location.locality}</span></div>                                    
+                                                    <div className={'st_column'}><span>{race.Circuit.Location.country}</span></div>
+                                                    <div className={'st_column'}><span>{race.date}</span></div>
+                                                    <div className={'st_column'}><span>{race.time}</span></div>
+                                                    <div className={'st_column'}>
+                                                        <a href={race.Circuit.url} target={"_blank"}>
+                                                            Wikipedia
+                                                        </a>
+                                                    </div>
+                                                </div>                                     
+                                            )
+                                        })
+                                        }       
+                                    </div>
+                                </div>
+                            </div>                                                                             
                         </TabPanel>                        
                     </Tabs>
 

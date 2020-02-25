@@ -164,7 +164,6 @@ setActiveRound = (round) => {
                 pilots={pilots} 
                 qualifyings={qualifyings} 
                 races={races}
-                mapCenter={ mapCenter } 
               /> 
           }
           <Carousel 
@@ -173,7 +172,6 @@ setActiveRound = (round) => {
             handleClickCarousel={this.handleClickCarousel}
             round={round}
             setActiveRound={this.setActiveRound}
-            mapCenter={ mapCenter } 
           />
         </header>      
       </div>
