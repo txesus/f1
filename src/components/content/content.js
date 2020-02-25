@@ -5,10 +5,10 @@ import 'react-tabs/style/react-tabs.css';
 export default class Content extends Component {
 
     render() {
-        const { pilots, races, qualifyings } = this.props;
+        const { pilots, races, qualifyings, round } = this.props;
         
         return (
-            <div className={"content"}>
+            <div className={!round ? "content" : "content show-content"}>
                 <div className={"content-box"}>
 
                     <div className={"arrows"}>
@@ -20,23 +20,6 @@ export default class Content extends Component {
                         <h2>Nombre de carrera</h2>
                     </div>
 
-
-                {/* {races.map((race, index) => {
-                    return (
-                        <div key={index}>
-                            <h2>
-                                {race.raceName}
-                            </h2>
-                            <span>{race.Circuit.Location.locality} </span>
-                            /
-                            <span> {race.Circuit.Location.country}</span>
-                            <a href={race.Circuit.url} target={"_blank"}>Wikipedia</a>
-                        </div>
-                  
-                    )
-                    })
-                }                         
- */}
                     <Tabs>
                         <TabList>
                             <Tab>Race Result</Tab>

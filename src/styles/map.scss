@@ -12,9 +12,10 @@
     -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;    
     transform: translate(0, 0);
-
+    width: 100%;
     &.show-content{
-        transform: translate(-50%, 0);
+        transform: translate(-40%, 0);
+        width: 60%;
     }
 }
 

@@ -159,13 +159,19 @@ setActiveRound = (round) => {
             round={round}
             setActiveRound={this.setActiveRound}
           /> 
-          { round !==0 &&
+          {/* { round !==0 &&
               <Content 
                 pilots={pilots} 
                 qualifyings={qualifyings} 
                 races={races}
               /> 
-          }
+          } */}
+          <Content 
+            round={round !==0}
+            pilots={pilots} 
+            qualifyings={qualifyings} 
+            races={races}
+          />           
           <Carousel 
             races={races}
             handleClickMarker={this.handleClickMarker}

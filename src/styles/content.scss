@@ -6,15 +6,15 @@
     position: absolute;
     right: 0;
     top: 90px;
-    width: 50%;
+    width: 40%;
     z-index: 1000;
-    transform: translate(0, 0);
+    transform: translate(100%, 0);
     &.show-content{
         -webkit-transition: all .5s ease-in-out;
         -moz-transition: all .5s ease-in-out;
         -o-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;    
-        transform: translate(-50%, 0);
+        transform: translate(0%, 0);
     }
     .content-box{
         height: 580px;
@@ -119,7 +119,8 @@ table.results{
 
 
 .st_viewport{
-    max-height: 800px;
+    font-size: 12px;
+    max-height: 400px;
     overflow: auto;
   }
   
