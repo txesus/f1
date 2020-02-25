@@ -63,7 +63,7 @@ export default class Content extends Component {
                                                     <div className={'st_column'}><span>{pilot.position}.</span></div>                                    
                                                     <div className={'st_column'}>
                                                         <a href={pilot.Driver.url} target={"_blank"}>
-                                                            {pilot.Driver.code}
+                                                            {pilot.Driver.familyName}
                                                             {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}
                                                         </a>                                                    
                                                     </div>
@@ -106,7 +106,7 @@ export default class Content extends Component {
                                                     <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
                                                     <div className={'st_column'}>
                                                         <a href={qualifying.Driver.url} target={"_blank"}>
-                                                            {qualifying.Driver.code}
+                                                            {qualifying.Driver.familyName}
                                                         </a>                                                  
                                                     </div>
 
