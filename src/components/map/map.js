@@ -11,7 +11,7 @@ import wiki from '../../images/wiki.png';
 // 1950
 const fiftyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // 1960
-const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck17yr99g3bx21coh6z6t0mz0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73hu64d07dj1iqszhwf0pit/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // 1990
 const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg0gp31a0f1imgchb0znld/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
@@ -171,3 +171,12 @@ export default class CircuitMap extends Component {
 // http://www.liedman.net/leaflet-routing-machine/
 // http://rowanwins.github.io/leaflet-easyPrint/
 // https://github.com/dwilhelm89/Leaflet.StyleEditor
+// COLORES POR DECADA https://juiceboxinteractive.com/blog/color/
+
+// 1960
+// 207 73 23
+// 249 176 61
+// 117 140 51
+// 152 89 20
+// 208 178 133
+// 45 117 140
