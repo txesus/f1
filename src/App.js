@@ -29,7 +29,7 @@ class App extends React.Component {
     this.handleClickCarousel = this.handleClickCarousel.bind(this);
     this.handleClickMarker = this.handleClickMarker.bind(this);
   }
-
+  
   componentDidMount(){
     this.getData();
   }
@@ -41,10 +41,13 @@ class App extends React.Component {
   }
   
   
+
   getData(){
     this.getListCircuits();
     this.getYearCircuits();
-    this.getRaces();    
+    this.getRaces();  
+    this.getPilots();
+    this.getQualifyings();      
   }
 
   getListCircuits() {
@@ -77,7 +80,10 @@ class App extends React.Component {
     })
   }
 
+  
+
   getPilots () {
+    console.log("getPilots", this.state.year, this.state.round);
     fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/results.json')
         .then((response) => {
         return response.json()
@@ -94,7 +100,8 @@ class App extends React.Component {
         return response.json()
         })
         .then((resultados) => {
-        this.setState({ qualifyings: resultados.MRData.RaceTable.Races[0].QualifyingResults})
+          const isQualifyingResults = !!resultados.MRData.RaceTable.Races[0];
+          this.setState({ qualifyings: isQualifyingResults ? resultados.MRData.RaceTable.Races[0].QualifyingResults : ""})
     })
   }  
 
@@ -120,18 +127,22 @@ handleResetZoom = () => {
   });
 }
 
-handleClickMarker(e){        
+handleClickMarker(e, round){        
     const { latlng } = e;
     const { lat, lng } = latlng;
     this.setMapCenter(15, [lat, lng] );
-    this.getPilots();
-    this.getQualifyings();
+    this.setState({
+      round
+    }, () => {
+      this.getPilots();
+      this.getQualifyings();
+    })
 }
 
 handleClickCarousel({lat, long}){        
   this.setMapCenter(15, [lat, long]);
-  this.getPilots();
-  this.getQualifyings();
+  // this.getPilots();
+  // this.getQualifyings();
 }
 
 
@@ -159,15 +170,8 @@ setActiveRound = (round) => {
             round={round}
             setActiveRound={this.setActiveRound}
           /> 
-          {/* { round !==0 &&
-              <Content 
-                pilots={pilots} 
-                qualifyings={qualifyings} 
-                races={races}
-              /> 
-          } */}
           <Content 
-            round={round !==0}
+            round={round}
             pilots={pilots} 
             qualifyings={qualifyings} 
             races={races}

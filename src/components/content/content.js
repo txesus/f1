@@ -6,9 +6,20 @@ export default class Content extends Component {
 
     render() {
         const { pilots, races, qualifyings, round } = this.props;
-        
+        // console.log("RACES", races);
+        // console.log("round", round);
+        console.log("pilots", pilots);
+
+
+        const selectedRace = () => {
+            const raceRound = races.filter((race, index) => {
+                return race.round === round;
+            });
+            return raceRound[0];
+        }
+
         return (
-            <div className={!round ? "content" : "content show-content"}>
+            <div className={round === 0 ? "content" : "content show-content"}>
                 <div className={"content-box"}>
 
                     <div className={"arrows"}>
@@ -17,8 +28,11 @@ export default class Content extends Component {
                     </div>                            
 
                     <div className={"title-content"}>
-                        <h2>Nombre de carrera</h2>
+                        { selectedRace() &&
+                            <h2>{selectedRace().raceName}</h2>
+                        }
                     </div>
+
 
                     <Tabs>
                         <TabList>
@@ -70,40 +84,45 @@ export default class Content extends Component {
                             </div>
                             
                         </TabPanel>
-                        <TabPanel>
-                            <div className={'st_viewport'}>
-                                <div className={'st_wrap_table'}>
-                                    <header className={'st_table_header'}>
-                                        <div className="st_row">
-                                            <div className={'st_column'}><span>Pos.</span></div>
-                                            <div className={'st_column'}><span>Name</span></div>
-                                            <div className={'st_column'}><span>Q1</span></div>
-                                            <div className={'st_column'}><span>Q2</span></div>
-                                            <div className={'st_column'}><span>Q3</span></div>
-                                        </div>
-                                    </header>
-                                    <div className="st_table">
-                                        {qualifyings.map((qualifying, index) => {                                        
-                                            return (
-                                                <div className="st_row" key={index}>
-                                                    <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
-                                                    <div className={'st_column'}>
-                                                        <a href={qualifying.Driver.url} target={"_blank"}>
-                                                            {qualifying.Driver.familyName}
-                                                        </a>                                                  
-                                                    </div>
+                            <TabPanel>
+                        { qualifyings ?
+                                <div className={'st_viewport'}>
+                                    <div className={'st_wrap_table'}>
+                                        <header className={'st_table_header'}>
+                                            <div className="st_row">
+                                                <div className={'st_column'}><span>Pos.</span></div>
+                                                <div className={'st_column'}><span>Name</span></div>
+                                                <div className={'st_column'}><span>Q1</span></div>
+                                                <div className={'st_column'}><span>Q2</span></div>
+                                                <div className={'st_column'}><span>Q3</span></div>
+                                            </div>
+                                        </header>
+                                        <div className="st_table">
+                                            {qualifyings.map((qualifying, index) => {                                        
+                                                // console.log("QUA", qualifying);
+                                                return (
+                                                    <div className="st_row" key={index}>
+                                                        <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
+                                                        <div className={'st_column'}>
+                                                            <a href={qualifying.Driver.url} target={"_blank"}>
+                                                                {qualifying.Driver.familyName}
+                                                            </a>                                                  
+                                                        </div>
 
-                                                    <div className={'st_column'}><span>{qualifying.Q1}</span></div>
-                                                    <div className={'st_column'}><span>{qualifying.Q2}</span></div>
-                                                    <div className={'st_column'}><span>{qualifying.Q3}</span></div>
-                                                </div>                                     
-                                            )
-                                        })
-                                        }       
+                                                        <div className={'st_column'}><span>{qualifying.Q1}</span></div>
+                                                        <div className={'st_column'}><span>{qualifying.Q2}</span></div>
+                                                        <div className={'st_column'}><span>{qualifying.Q3}</span></div>
+                                                    </div>                                     
+                                                )
+                                            })
+                                            }       
+                                        </div>
                                     </div>
-                                </div>
-                            </div>                            
-                        </TabPanel>
+                                </div>                            
+                                :
+                                <div>No data results</div>
+                        }
+                            </TabPanel>
                         <TabPanel>
                         <div className={'st_viewport'}>
                                 <div className={'st_wrap_table'}>
@@ -117,23 +136,22 @@ export default class Content extends Component {
                                         </div>
                                     </header>
                                     <div className="st_table">
-                                        {races.map((race, index) => {        
-                                            console.log(races);
-                                            return (
-                                                <div className="st_row" key={index}>
-                                                    <div className={'st_column'}><span>{race.Circuit.Location.locality}</span></div>                                    
-                                                    <div className={'st_column'}><span>{race.Circuit.Location.country}</span></div>
-                                                    <div className={'st_column'}><span>{race.date}</span></div>
-                                                    <div className={'st_column'}><span>{race.time}</span></div>
-                                                    <div className={'st_column'}>
-                                                        <a href={race.Circuit.url} target={"_blank"}>
-                                                            Wikipedia
-                                                        </a>
-                                                    </div>
-                                                </div>                                     
-                                            )
-                                        })
-                                        }       
+                                        {
+                                            selectedRace() &&
+                                            <div className="st_row">
+                                                <div className={'st_column'}><span>{selectedRace().Circuit.Location.locality}</span></div>                                    
+                                                <div className={'st_column'}><span>{selectedRace().Circuit.Location.country}</span></div>
+                                                <div className={'st_column'}><span>{selectedRace().date}</span></div>
+                                                <div className={'st_column'}>
+                                                        <span>{selectedRace().time ? selectedRace().time : "No data"} </span>
+                                                </div>
+                                                <div className={'st_column'}>
+                                                    <a href={selectedRace().Circuit.url} target={"_blank"}>
+                                                        Wikipedia
+                                                    </a>
+                                                </div>
+                                            </div>                                     
+                                        }
                                     </div>
                                 </div>
                             </div>                                                                             
