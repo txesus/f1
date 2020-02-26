@@ -11,10 +11,15 @@ import wiki from '../../images/wiki.png';
 // 1950
 const fiftyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // 1960
-const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73hu64d07dj1iqszhwf0pit/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73izmsr2bkh1inhs7yrxrv6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// 1970
+const seventyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jms8z2c6p1inh6yu5krp1/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+//1980
+const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb01iqwmgk74gw9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // 1990
-const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg0gp31a0f1imgchb0znld/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-
+const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// 2000
+const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 
 //BLUE
@@ -23,7 +28,7 @@ const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg0gp31a0
 
 // BLACK
 
-const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 
 export default class CircuitMap extends Component {
@@ -48,26 +53,24 @@ export default class CircuitMap extends Component {
 
     getMapStyles = (year) =>{
         let style = "";
-        console.log(year <= 1959);
         switch (true){
             case year <= 1959:
                 style = fiftyStyled;
-                console.log("MIERDA");
             break;
             case year >= 1960 && year <= 1969:
                 style = sixtyStyled;
             break;
             case year >= 1970 && year <= 1979:
-                style = mapStyled;
+                style = seventyStyled;
             break;
             case year >= 1980 && year <= 1989:
-                style = mapStyled;
+                style = eightyStyled;
             break;
             case year >= 1990 && year <= 1999:
                 style = ninetyStyled;
             break;
             case year >= 2000 && year <= 2009:
-                style = mapStyled;
+                style = thousandStyled;
             break;
             case year >= 2010 && year <= 2019:
                 style = mapStyled;
@@ -79,8 +82,6 @@ export default class CircuitMap extends Component {
                 style = mapStyled;
             break;
         }
-        console.log("fjlksdjflkdsjflksdjf", year);
-
         return style;
     }
 
