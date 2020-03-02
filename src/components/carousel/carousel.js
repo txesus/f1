@@ -32,25 +32,30 @@ export default class Carousel extends Component {
                         })
                         }                          
                     </ul> */}
-                    <ol>
+                    <ul id='timeline'>
                         {races.map((race, index) => {
                             return (
                                 <li key={index}>
-                                    <p>{race.raceName}</p>
-                                    <span 
-                                    className={round === race.round ? "details active" : "details"}
-                                    onClick={(e) => {
-                                        this.handleClickCarousel(race.Circuit.Location)
-                                        setActiveRound(race.round)
-                                    }
-                                        }>
-                                        {race.round}- {race.raceName}
-                                    </span>
+                                    <input class='radio' type='radio' checked={round === race.round ? 'checked' : ""}></input>
+                                    <div class="relative">
+                                        <span 
+                                            className={round === race.round ? "details active" : "details"}
+                                            onClick={(e) => {
+                                                this.handleClickCarousel(race.Circuit.Location)
+                                                setActiveRound(race.round)
+                                            }
+                                                }>
+                                                {race.round} - {race.raceName}
+                                            </span>
+
+                                        <span class='circle'></span>
+                                    </div>
+
                                 </li>                                     
                             )
                         })
                         }                          
-                    </ol>                    
+                    </ul>                    
                 </div>
                 
                             

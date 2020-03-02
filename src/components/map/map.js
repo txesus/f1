@@ -135,13 +135,13 @@ export default class CircuitMap extends Component {
 
                 {/* <Polyline color="#F1C40F"  weight="1" positions={this.getPolyLineArray()}/> */}
 
-                <Control position="topleft">
+                {/* <Control position="topleft">
                     <div>
                         <div style={{ marginLeft: '0px', marginTop: '20px', zIndex: '0' }}>
                             <input className={'switch'} type="checkbox" id="switch" /><label for="switch">Toggle</label>
                         </div>
                     </div>
-                </Control>
+                </Control> */}
 
 
                 <Control position="topright">
