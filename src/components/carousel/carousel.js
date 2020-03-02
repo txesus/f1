@@ -14,7 +14,7 @@ export default class Carousel extends Component {
         return (
             <div>
                 <div className={"carousel"}>
-                    <ul>
+                    {/* <ul>
                         {races.map((race, index) => {
                             return (
                                 <li key={index}>
@@ -31,7 +31,26 @@ export default class Carousel extends Component {
                             )
                         })
                         }                          
-                    </ul>
+                    </ul> */}
+                    <ol>
+                        {races.map((race, index) => {
+                            return (
+                                <li key={index}>
+                                    <p>{race.raceName}</p>
+                                    <span 
+                                    className={round === race.round ? "details active" : "details"}
+                                    onClick={(e) => {
+                                        this.handleClickCarousel(race.Circuit.Location)
+                                        setActiveRound(race.round)
+                                    }
+                                        }>
+                                        {race.round}- {race.raceName}
+                                    </span>
+                                </li>                                     
+                            )
+                        })
+                        }                          
+                    </ol>                    
                 </div>
                 
                             
