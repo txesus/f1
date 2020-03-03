@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
-// Map Styles
+import L from 'leaflet';
+
+// MAP STYLES
 
 // 1950
 // const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
@@ -39,9 +41,6 @@ const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86
 // DEFAULT
 
 const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 export default class CircuitMap extends Component {
     
@@ -109,8 +108,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, round } = this.props;
-        // console.log(races);
+        const { races, zoomLevel, mapCenter, handleResetZoom, round, year } = this.props;
         return (
             <div>
                 <Map
