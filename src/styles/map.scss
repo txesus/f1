@@ -1,6 +1,5 @@
 @import './variables/colors.scss';
 
-
 .leaflet-container {    
     height: 100vh;
     left: 0;
@@ -70,6 +69,16 @@
     }
 }
 
+// .leaflet-marker-icon{
+//     background: #96281b !important;
+//     border-radius: 100% !important;
+//     border: 1px solid #96281b !important;
+//     color: #FFF !important;
+//     font-size: 12px !important;
+//     height: 20px !important;
+//     text-align: center !important;
+//     width: 20px !important;
+// }
 
 .list-popup{
     list-style: none;
