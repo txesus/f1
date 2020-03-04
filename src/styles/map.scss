@@ -80,6 +80,22 @@
 //     width: 20px !important;
 // }
 
+.leaflet-marker-icon{
+    background: url('./images/marker.png') no-repeat;
+    background-size: contain;
+    border: 0 none;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    height: 35px !important;
+    line-height: 21px;
+    text-align: center;
+    width: 25px !important;
+    left: -7px;
+    top: -26px;
+}
+
+
 .list-popup{
     list-style: none;
     padding-left: 0;
