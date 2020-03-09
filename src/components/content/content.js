@@ -5,7 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 export default class Content extends Component {
 
     render() {
-        const { pilots, races, qualifyings, round } = this.props;
+        const { pilots, races, qualifyings, round, getCountryFlagFromDemonym, getCountryFlagFromName } = this.props;
         // console.log("RACES", races);
         // console.log("round", round);
         console.log("pilots", pilots);
@@ -18,6 +18,7 @@ export default class Content extends Component {
             return raceRound[0];
         }
 
+        console.log("RACESSSS", races)
         return (
             <div className={round === 0 ? "content" : "content show-content"}>
                 <div className={"content-box"}>
@@ -55,10 +56,12 @@ export default class Content extends Component {
                                     </header>
                                     <div className="st_table">
                                         {pilots.map((pilot, index) => {                                        
+                                            // console.log("FLAGGGG", getCountryFlagFromDemonym(pilot.Driver.nationality))
                                             return (
                                                 <div className="st_row" key={index}>
                                                     <div className={'st_column'}><span>{pilot.position}.</span></div>                                    
                                                     <div className={'st_column'}>
+                                                        <img src={getCountryFlagFromDemonym(pilot.Driver.nationality)} />
                                                         <a href={pilot.Driver.url} target={"_blank"}>
                                                             {pilot.Driver.familyName}
                                                             {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}

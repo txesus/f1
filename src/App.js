@@ -24,7 +24,8 @@ class App extends React.Component {
       clickCircuit: undefined,
       zoomLevel: 2.2,
       mapCenter: [22.9837669, -10.2810849],
-      round: 0
+      round: 0,
+      countries: []
     }
     this.handleClickCarousel = this.handleClickCarousel.bind(this);
     this.handleClickMarker = this.handleClickMarker.bind(this);
@@ -47,7 +48,8 @@ class App extends React.Component {
     this.getYearCircuits();
     this.getRaces();  
     this.getPilots();
-    this.getQualifyings();      
+    this.getQualifyings();   
+    this.getCountries();
   }
 
   getListCircuits() {
@@ -83,7 +85,7 @@ class App extends React.Component {
   
 
   getPilots () {
-    console.log("getPilots", this.state.year, this.state.round);
+    // console.log("getPilots", this.state.year, this.state.round);
     fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/results.json')
         .then((response) => {
         return response.json()
@@ -104,6 +106,53 @@ class App extends React.Component {
           this.setState({ qualifyings: isQualifyingResults ? resultados.MRData.RaceTable.Races[0].QualifyingResults : ""})
     })
   }  
+
+
+  getCountries () {
+    fetch('https://restcountries.eu/rest/v2')
+        .then((response) => {
+          return response.json()
+        })
+        .then((resultados) => {
+          const countries = resultados.map( (country) => {
+            return (
+              {
+                demonym: country.demonym,
+                flag: country.flag,
+                name: country.name,
+                altSpellings: country.altSpellings
+              }
+            )
+          })
+          console.log("COUNTRIES", countries)
+          this.setState({ countries})
+    })
+  }    
+
+  getCountryFlagFromDemonym = (demonym) => {
+    const matchCountry = this.state.countries.find((country) => {
+        if(country.demonym.toLowerCase() === "argentinean"){
+          return demonym.toLowerCase() === "argentine";  
+        }
+        return demonym.toLowerCase() === country.demonym.toLowerCase();
+    })
+    return matchCountry ? matchCountry.flag : "src/images/marker.png";
+  }
+  
+  // getCountryFlagFromName = (name) => {
+  //   const matchCountry = this.state.countries.find((country) => {
+  //     if(country.name.toLowerCase() === "united kingdom of great britain and northern ireland"){
+  //       return name.toLowerCase() === "uk";  
+  //     }
+  //     const recoverySpelling = country.altSpellings.find((spelling) => {
+  //       console.log("SEPELLING", spelling)
+  //       return name.toLowerCase() === spelling.toLowerCase()
+  //     });
+  //     return name.toLowerCase() === (recoverySpelling ? recoverySpelling.toLowerCase() : "");
+  //   })
+  //   return matchCountry ? matchCountry.flag : name;
+  // }
+
 
 
 
@@ -175,6 +224,8 @@ setActiveRound = (round) => {
             pilots={pilots} 
             qualifyings={qualifyings} 
             races={races}
+            getCountryFlagFromDemonym={this.getCountryFlagFromDemonym}
+            // getCountryFlagFromName={this.getCountryFlagFromName}
           />           
           <Carousel 
             races={races}
