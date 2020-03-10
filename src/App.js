@@ -140,19 +140,42 @@ class App extends React.Component {
     return matchCountry ? matchCountry.flag : "src/images/marker.png";
   }
   
-  // getCountryFlagFromName = (name) => {
-  //   const matchCountry = this.state.countries.find((country) => {
-  //     if(country.name.toLowerCase() === "united kingdom of great britain and northern ireland"){
-  //       return name.toLowerCase() === "uk";  
-  //     }
-  //     const recoverySpelling = country.altSpellings.find((spelling) => {
-  //       console.log("SEPELLING", spelling)
-  //       return name.toLowerCase() === spelling.toLowerCase()
-  //     });
-  //     return name.toLowerCase() === (recoverySpelling ? recoverySpelling.toLowerCase() : "");
-  //   })
-  //   return matchCountry ? matchCountry.flag : name;
-  // }
+  getCountryFlagFromName = (name) => {
+    // const matchCountry = this.state.countries.find((country) => {
+    //   if(country.name.toLowerCase() === "united kingdom of great britain and northern ireland"){
+    //     return name.toLowerCase() === "uk";  
+    //   }
+    //   const recoverySpelling = country.altSpellings.find((spelling) => {
+    //     console.log("SEPELLING", spelling)
+    //     return name.toLowerCase() === spelling.toLowerCase()
+    //   });
+    //   return name.toLowerCase() === (recoverySpelling ? recoverySpelling.toLowerCase() : "");
+    // })
+    // return matchCountry ? matchCountry.flag : name;
+    const matchCountry = this.state.countries.find((country) => {
+      
+      switch (country.name.toLowerCase()) {
+        case "united kingdom of great britain and northern ireland":
+          return name.toLowerCase() === "uk";
+        case "russian federation":
+          return name.toLowerCase() === "russia";
+        case "united states of america":
+          return name.toLowerCase() === "usa";
+        case "united arab emirates":
+          return name.toLowerCase() === "uae";
+        case "korea (republic of)":
+          return name.toLowerCase() === "korea";
+        
+        default:
+          return name.toLowerCase() === country.name.toLowerCase();
+      }
+      
+  })
+  return matchCountry ? matchCountry.flag : name;
+
+
+
+  }
 
 
 
@@ -232,6 +255,8 @@ setActiveRound = (round) => {
             handleClickMarker={this.handleClickMarker}
             round={round}
             setActiveRound={this.setActiveRound}
+            handleClickCarousel={this.handleClickCarousel}
+            getCountryFlagFromName={this.getCountryFlagFromName}
           /> 
           <Content 
             round={round}

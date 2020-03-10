@@ -72,13 +72,65 @@
       border-radius: 3px;
     }
     
-    /* ---- Timeline elements ---- */
-    p{
-        left: 0px;
+    .progress li {
+      width: 20%;
+      float: left;
+      white-space: nowrap;
+      background-color: #89807A;
+      text-align: center;
+      font-family: sans-serif;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      font-size: 1em;
+      line-height: 1.5em;
+      overflow: hidden;
+      .box-image{
+        display: inline-block;
+        height: 33px;
         position: relative;
-        top: -10px;
-        white-space: nowrap;
-        width: 10px;
+        top: 6px;
+        width: 40px;
+          img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+      }
+  }
+    
+    .progress li:before {
+      content: "";
+      width: 1.06em;
+      height: 1.06em;
+      border: 1px solid #584D4B;
+      box-shadow: 0 0 0 1px white;
+      transform: rotate(45deg);
+      position: absolute;
+      left: -.5em;
+      top: .22em;
+    }
+    
+    .progress li:first-child:before {
+      display: none;
+    }
+    
+    .progress li.active {
+      background-color: #584D4B;
+      color: white;
+    }
+    
+    .progress li.active:before {
+      background-color: #89807A
+    }
+    
+    .progress li.active ~ li {
+      background-color: #E5E0D1; 
+      color: #584D4B;
+    }
+    
+    .progress li.active + li:before {
+      background-color: #584D4B
     }
 
     li {
