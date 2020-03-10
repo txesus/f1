@@ -96,7 +96,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel} = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel, getCountryFlagFromName} = this.props;
         return (
             <div>
                 <Map
@@ -165,6 +165,7 @@ export default class CircuitMap extends Component {
                     handleClickCarousel={handleClickCarousel}
                     round={round}
                     setActiveRound={setActiveRound}
+                    getCountryFlagFromName={getCountryFlagFromName}
                 />
                 </Map>
                 

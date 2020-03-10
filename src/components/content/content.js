@@ -5,7 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 export default class Content extends Component {
 
     render() {
-        const { pilots, races, qualifyings, round, getCountryFlagFromDemonym, getCountryFlagFromName } = this.props;
+        const { pilots, races, qualifyings, round, getCountryFlagFromDemonym } = this.props;
         // console.log("RACES", races);
         // console.log("round", round);
         console.log("pilots", pilots);

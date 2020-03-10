@@ -10,7 +10,7 @@ export default class Carousel extends Component {
 
 
     render() {
-        const { races, round, setActiveRound } = this.props;
+        const { races, round, setActiveRound, getCountryFlagFromName } = this.props;
         return (
             <div>
                 <div className={"carousel"}>
@@ -28,6 +28,9 @@ export default class Carousel extends Component {
                                     >
                                     {/* <input class='radio' type='radio' checked={round === race.round ? 'checked' : ""}></input> */}
                                     <div class="relative">
+                                        {/* <div className={'box-image'}>
+                                            <img src={getCountryFlagFromName(race.Circuit.Location.country)} />
+                                        </div> */}
                                         <span 
                                             className={round === race.round ? "details active" : "details"}>
                                                 {/* {race.round} - {race.raceName} */}
