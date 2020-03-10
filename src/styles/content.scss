@@ -35,6 +35,7 @@
         max-width: 30px;
         padding-right: 10px;        
     }
+   
 }
 
 
@@ -172,14 +173,22 @@ table.results{
     flex-basis: 0;
     flex-grow: 1;
     padding: 10px 0;
+    position: relative;
     img{
-        padding-right: 10px;        
-        max-width: 20px;
+        padding-right: 10px;
+        max-height: 25px;
+        -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        clip-path: polygon(25% 0%, 50% 0%, 25% 100%, 0% 100%);
+        position: absolute;
+        left: -10px;
+        top: 4px;
     }
+     
     a{
         color: #96281b;
         text-decoration: none;
-        text-align: lef;;
+        text-align: left;
+        padding-left: 20px;
         &:hover{
             color: #96281b;
         }
