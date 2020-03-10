@@ -4,6 +4,9 @@ import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 import L from 'leaflet';
 
+import Carousel from '../carousel/carousel'
+
+
 // MAP STYLES
 
 // 1950
@@ -37,6 +40,7 @@ export default class CircuitMap extends Component {
         };
         this.props.handleResetZoom();
         this.handleClickMarker = this.props.handleClickMarker.bind(this);
+        this.handleClickCarousel = this.props.handleClickCarousel.bind(this);
     }
 
 
@@ -92,7 +96,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, round, year } = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel} = this.props;
         return (
             <div>
                 <Map
@@ -155,7 +159,15 @@ export default class CircuitMap extends Component {
                         </div>
                     </div>
                 </Control>
+                <Carousel 
+                    races={races}
+                    handleClickMarker={handleClickMarker}
+                    handleClickCarousel={handleClickCarousel}
+                    round={round}
+                    setActiveRound={setActiveRound}
+                />
                 </Map>
+                
                 <img src={wiki} alt="wiki" className="img-wiki"/>
                 
             </div>

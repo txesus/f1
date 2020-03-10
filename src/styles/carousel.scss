@@ -2,15 +2,15 @@
 
 
 .carousel{
-    align-items: center;
-    display: flex;
-    display: none;
-    height: 100%;
-    justify-content: center;
-    left: 20px;
-    position: absolute;
-    top: 0px;
-    z-index: 1000;
+  align-items: center;
+  display: flex;
+  height: 31px;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 90px;
+  z-index: 1000;
+  width: 100%;
     @media only screen and (max-width: 768px) {
         display: none;
     }
@@ -153,69 +153,130 @@
 
 
 
-    #timeline {
-        list-style: none;
-        padding-left: 30px;
-        border-left: 8px solid #eee9dc;
-        color: #FFF;
-      }
-      #timeline li {
-        margin: 10px 0;
-        position: relative;
-        span.details{
-            cursor: pointer;
-            opacity: .5;
-            &.active{
-                color: red;
-                opacity: 1;
-            }
-        }
-        &:hover{
-            span.details{
-                opacity: 1;
-            }    
-        }
-      }
+    // #timeline {
+    //     list-style: none;
+    //     padding-left: 30px;
+    //     border-left: 8px solid #eee9dc;
+    //     color: #FFF;
+    //   }
+    //   #timeline li {
+    //     margin: 10px 0;
+    //     position: relative;
+    //     span.details{
+    //         cursor: pointer;
+    //         opacity: .5;
+    //         &.active{
+    //             color: red;
+    //             opacity: 1;
+    //         }
+    //     }
+    //     &:hover{
+    //         span.details{
+    //             opacity: 1;
+    //         }    
+    //     }
+    //   }
             
-      .circle {
-        margin-top: -10px;
-        top: 50%;
-        left: -44px;
-        width: 10px;
-        height: 10px;
-        background: #48b379;
-        border: 5px solid #eee9dc;
-        border-radius: 50%;
-        display: block;
-        position: absolute;
-      }
+    //   .circle {
+    //     margin-top: -10px;
+    //     top: 50%;
+    //     left: -44px;
+    //     width: 10px;
+    //     height: 10px;
+    //     background: #48b379;
+    //     border: 5px solid #eee9dc;
+    //     border-radius: 50%;
+    //     display: block;
+    //     position: absolute;
+    //   }
       
             
-      .radio {
-        display: none;
-      }
+    //   .radio {
+    //     display: none;
+    //   }
       
-      .radio:checked + .relative .circle {
-        background: #0f0b09;
-      }
+    //   .radio:checked + .relative .circle {
+    //     background: #0f0b09;
+    //   }
       
-      /* -------------------------------------
-       * mobile phones (vertical version only)
-       * ------------------------------------- */
-      @media screen and (max-width: 767px) {
-        #timeline {
-          margin-left: 0;
-          padding-left: 0;
-          border-left: none;
-        }
-        #timeline li {
-          margin: 50px 0;
-        }
+    //   /* -------------------------------------
+    //    * mobile phones (vertical version only)
+    //    * ------------------------------------- */
+    //   @media screen and (max-width: 767px) {
+    //     #timeline {
+    //       margin-left: 0;
+    //       padding-left: 0;
+    //       border-left: none;
+    //     }
+    //     #timeline li {
+    //       margin: 50px 0;
+    //     }
       
       
-        .circle{
-          display: none;
-        }
-      }
-      
+    //     .circle{
+    //       display: none;
+    //     }
+    //   }
+ 
+    
+
+    .progress {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-size: 1.5em;
+    }
+    
+    .progress li {
+      width: 20%;
+      float: left;
+      white-space: nowrap;
+      background-color: #89807A;
+      text-align: center;
+      font-family: sans-serif;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      font-size: 1em;
+      line-height: 1.5em;
+      overflow: hidden;
+    }
+    
+    .progress li:before {
+      content: "";
+      width: 1.06em;
+      height: 1.06em;
+      border: 1px solid #584D4B;
+      box-shadow: 0 0 0 1px white;
+      transform: rotate(45deg);
+      position: absolute;
+      left: -.5em;
+      top: .22em;
+    }
+    
+    .progress li:first-child:before {
+      display: none;
+    }
+    
+    .progress li.active {
+      background-color: #584D4B;
+      color: white;
+    }
+    
+    .progress li.active:before {
+      background-color: #89807A
+    }
+    
+    .progress li.active ~ li {
+      background-color: #E5E0D1; 
+      color: #584D4B;
+    }
+    
+    .progress li.active + li:before {
+      background-color: #584D4B
+    }
+
+
 }

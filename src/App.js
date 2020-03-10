@@ -218,6 +218,7 @@ setActiveRound = (round) => {
             handleClickMarker={this.handleClickMarker}
             round={round}
             setActiveRound={this.setActiveRound}
+            handleClickCarousel={this.handleClickCarousel}
           /> 
           <Content 
             round={round}
@@ -227,13 +228,13 @@ setActiveRound = (round) => {
             getCountryFlagFromDemonym={this.getCountryFlagFromDemonym}
             // getCountryFlagFromName={this.getCountryFlagFromName}
           />           
-          <Carousel 
+          {/* <Carousel 
             races={races}
             handleClickMarker={this.handleClickMarker}
             handleClickCarousel={this.handleClickCarousel}
             round={round}
             setActiveRound={this.setActiveRound}
-          />
+          /> */}
         </header>      
       </div>
     );

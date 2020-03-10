@@ -14,41 +14,27 @@ export default class Carousel extends Component {
         return (
             <div>
                 <div className={"carousel"}>
-                    {/* <ul>
+                    <ul className={'progress'}>
                         {races.map((race, index) => {
                             return (
-                                <li key={index}>
-                                    <span 
+                                <li 
+                                    key={index} 
                                     className={round === race.round ? "active" : ""}
                                     onClick={(e) => {
                                         this.handleClickCarousel(race.Circuit.Location)
                                         setActiveRound(race.round)
+                                        }
                                     }
-                                        }>
-                                        {race.round}- {race.raceName}
-                                    </span>
-                                </li>                                     
-                            )
-                        })
-                        }                          
-                    </ul> */}
-                    <ul id='timeline'>
-                        {races.map((race, index) => {
-                            return (
-                                <li key={index}>
-                                    <input class='radio' type='radio' checked={round === race.round ? 'checked' : ""}></input>
+                                    >
+                                    {/* <input class='radio' type='radio' checked={round === race.round ? 'checked' : ""}></input> */}
                                     <div class="relative">
                                         <span 
-                                            className={round === race.round ? "details active" : "details"}
-                                            onClick={(e) => {
-                                                this.handleClickCarousel(race.Circuit.Location)
-                                                setActiveRound(race.round)
-                                            }
-                                                }>
-                                                {race.round} - {race.raceName}
+                                            className={round === race.round ? "details active" : "details"}>
+                                                {/* {race.round} - {race.raceName} */}
+                                                {race.round}
                                             </span>
 
-                                        <span class='circle'></span>
+                                        {/* <span class='circle'></span> */}
                                     </div>
 
                                 </li>                                     
