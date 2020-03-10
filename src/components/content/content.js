@@ -8,7 +8,8 @@ export default class Content extends Component {
         const { pilots, races, qualifyings, round, getCountryFlagFromDemonym } = this.props;
         // console.log("RACES", races);
         // console.log("round", round);
-        console.log("pilots", pilots);
+        // console.log("pilots", pilots);
+        // console.log("qualifyg", qualifyings);
 
 
         const selectedRace = () => {
@@ -52,6 +53,7 @@ export default class Content extends Component {
                                             <div className={'st_column'}><span>Constructor</span></div>
                                             <div className={'st_column'}><span>Time</span></div>
                                             <div className={'st_column'}><span>Status</span></div>
+                                            <div className={'st_column'}><span>Points</span></div>
                                         </div>
                                     </header>
                                     <div className="st_table">
@@ -78,6 +80,7 @@ export default class Content extends Component {
                                                         }
                                                     </div>                             
                                                     <div className={'st_column'}><span>{pilot.status}</span></div>                   
+                                                    <div className={'st_column'}><span>{pilot.points}</span></div>
                                                 </div>                                     
                                             )
                                         })
@@ -107,6 +110,7 @@ export default class Content extends Component {
                                                     <div className="st_row" key={index}>
                                                         <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
                                                         <div className={'st_column'}>
+                                                        <img src={getCountryFlagFromDemonym(qualifying.Driver.nationality)} />
                                                             <a href={qualifying.Driver.url} target={"_blank"}>
                                                                 {qualifying.Driver.familyName}
                                                             </a>                                                  
