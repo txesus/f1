@@ -15,6 +15,10 @@
         -o-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;    
         transform: translate(0%, 0);
+        @media only screen and (max-width: 768px) {
+            transform: translate(100%, 0);
+            width: 100%;
+        }    
     }
     .content-box{
         height: 400px;
@@ -78,6 +82,7 @@ table.results{
 .arrows{
     position: relative;
     width: 100%;
+    display: none;
     span{        
         cursor: pointer;
         position: absolute;
