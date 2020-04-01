@@ -68,9 +68,9 @@ export default class CircuitMap extends Component {
     getMapStyles = (year) =>{
         let style = "";
         switch (true){
-            case year <= 1959:
-                style = fiftyStyled;
-            break;
+            // case year <= 1959:
+            //     style = fiftyStyled;
+            // break;
             // case year >= 1960 && year <= 1969:
             //     style = sixtyStyled;
             // break;
