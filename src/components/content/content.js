@@ -63,7 +63,7 @@ export default class Content extends Component {
                                                 <div className="st_row" key={index}>
                                                     <div className={'st_column'}><span>{pilot.position}.</span></div>                                    
                                                     <div className={'st_column'}>
-                                                        <img src={getCountryFlagFromDemonym(pilot.Driver.nationality)} />
+                                                        <img src={getCountryFlagFromDemonym(pilot.Driver.nationality)} alt={'country'} />
                                                         <a href={pilot.Driver.url} target={"_blank"}>
                                                             {pilot.Driver.familyName}
                                                             {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}
@@ -110,7 +110,7 @@ export default class Content extends Component {
                                                     <div className="st_row" key={index}>
                                                         <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
                                                         <div className={'st_column'}>
-                                                        <img src={getCountryFlagFromDemonym(qualifying.Driver.nationality)} />
+                                                        <img src={getCountryFlagFromDemonym(qualifying.Driver.nationality)} alt={'country'} />
                                                             <a href={qualifying.Driver.url} target={"_blank"}>
                                                                 {qualifying.Driver.familyName}
                                                             </a>                                                  

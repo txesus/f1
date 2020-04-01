@@ -95,7 +95,7 @@ table.results{
 
 .header{
     background: #17202A;
-    border-bottom: 2px solid #F1C40F;    
+    border-bottom: 2px solid #da2327;    
     height: 60px;
     text-align: center;
     padding: 20px 0 10px 0;
@@ -177,20 +177,19 @@ table.results{
     img{
         padding-right: 10px;
         max-height: 25px;
-        -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-        clip-path: polygon(25% 0%, 50% 0%, 25% 100%, 0% 100%);
+        clip-path: polygon(35% 0%, 70% 0%, 35% 100%, 0% 100%);
         position: absolute;
         left: -10px;
         top: 4px;
     }
      
     a{
-        color: #96281b;
+        color: #da2327;
         text-decoration: none;
         text-align: left;
         padding-left: 20px;
         &:hover{
-            color: #96281b;
+            color: #da2327;
         }
     }
     &:first-child{
@@ -201,15 +200,15 @@ table.results{
 
 
   .react-tabs__tab-list{
-    border-bottom: 1px solid #96281b!important;
+    border-bottom: 1px solid #da2327!important;
     font-size: 12px!important;    
     display: flex;  
   }
 
   .react-tabs__tab--selected{
-    border-color: #96281b!important;
+    border-color: #da2327!important;
     border-radius: 5px 5px 0 0!important;
-    background: #96281b!important;
+    background: #da2327!important;
     color: #FFF!important;      
   }
   .react-tabs__tab{

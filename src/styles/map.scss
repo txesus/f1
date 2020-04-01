@@ -18,8 +18,8 @@
     }
     .leaflet-control{
         button{
-            background: #96281b;
-            border: 1px solid #96281b;
+            background: #da2327;
+            border: 1px solid #da2327;
             padding: 10px 20px;
             color: #FFF;
             font-size: 15px;            
@@ -54,7 +54,7 @@
         }
         
         input:checked + label {
-            background: #96281b;
+            background: #da2327;
         }
         
         input:checked + label:after {
@@ -70,9 +70,9 @@
 }
 
 // .leaflet-marker-icon{
-//     background: #96281b !important;
+//     background: #da2327 !important;
 //     border-radius: 100% !important;
-//     border: 1px solid #96281b !important;
+//     border: 1px solid #da2327 !important;
 //     color: #FFF !important;
 //     font-size: 12px !important;
 //     height: 20px !important;
@@ -85,14 +85,15 @@
     background-size: contain;
     border: 0 none;
     color: #FFF;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     height: 35px !important;
+    left: -7px;
     line-height: 21px;
     text-align: center;
-    width: 25px !important;
-    left: -7px;
+    text-indent: -2px;
     top: -26px;
+    width: 25px !important;
 }
 
 

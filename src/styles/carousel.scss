@@ -11,8 +11,9 @@
   top: 90px;
   z-index: 1000;
   width: 100%;
+  display: none;
     @media only screen and (max-width: 768px) {
-        display: none;
+        // display: none;
     }
     // ul{
     //     padding-left: 0;
@@ -42,7 +43,7 @@
     // }
 
     // ol {
-    //     background: #96281b;
+    //     background: #da2327;
     //     display: flex;
     //     height: 4px;
     //     margin: 0 auto;
@@ -58,7 +59,7 @@
     //     width: 0;
     //     height: 0;
     //   border-radius: 10px;
-    //     border: 10px solid #96281b;
+    //     border: 10px solid #da2327;
     // }
     // ol::before {
     //     left: -5px;
@@ -67,7 +68,7 @@
     //     right: -10px;
     //     border: 10px solid transparent;
     //     border-right: 0;
-    //     border-left: 20px solid #96281b;
+    //     border-left: 20px solid #da2327;
     //   border-radius: 3px;
     // }
     
@@ -98,7 +99,7 @@
     //     display: block;
     //     width: 6px;
     //     height: 6px;
-    //     border: 4px solid #96281b;
+    //     border: 4px solid #da2327;
     //     border-radius: 10px;
     //     background: #eee;
     // }
@@ -230,18 +231,25 @@
     }
     
     .progress li {
-      width: 20%;
-      float: left;
-      white-space: nowrap;
-      background-color: #89807A;
-      text-align: center;
-      font-family: sans-serif;
-      font-weight: bold;
+      background-color: white;
+      border-bottom: 1px solid #da2327;
       color: white;
-      position: relative;
+      float: left;
+      font-family: sans-serif;
       font-size: 1em;
+      font-weight: bold;
       line-height: 1.5em;
       overflow: hidden;
+      position: relative;
+      text-align: center;
+      white-space: nowrap;
+      width: 20%;
+      height: 5px;
+      top: -12px;
+      span.details{
+          display: inline-block;
+          text-indent: -9999px;
+      }
       .box-image{
         display: inline-block;
         height: 33px;
@@ -254,18 +262,28 @@
             object-fit: cover;
         }
       }
+      @media only screen and (max-width: 768px) {
+        border-right: 1px solid #FFF;
+        height: 5px;
+        top: -11px;        
+      }          
+
   }
     
     .progress li:before {
       content: "";
       width: 1.06em;
       height: 1.06em;
-      border: 1px solid #584D4B;
+      border: 1px solid white;
       box-shadow: 0 0 0 1px white;
       transform: rotate(45deg);
       position: absolute;
       left: -.5em;
       top: .22em;
+      display: none;
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }          
     }
     
     .progress li:first-child:before {
@@ -273,21 +291,22 @@
     }
     
     .progress li.active {
-      background-color: #584D4B;
+      background-color: #da2327;
       color: white;
     }
-    
+
+
     .progress li.active:before {
-      background-color: #89807A
+      background-color: #da2327;
     }
     
     .progress li.active ~ li {
-      background-color: #E5E0D1; 
+      background-color: white; 
       color: #584D4B;
     }
     
     .progress li.active + li:before {
-      background-color: #584D4B
+      background-color: #da2327;
     }
 
 
