@@ -9,6 +9,9 @@
     width: 40%;
     z-index: 1000;
     transform: translate(100%, 0);
+    @media only screen and (max-width: 768px) {
+        display: none;
+    }    
     &.show-content{
         -webkit-transition: all .5s ease-in-out;
         -moz-transition: all .5s ease-in-out;
@@ -16,6 +19,11 @@
         transition: all .5s ease-in-out;    
         transform: translate(0%, 0);
         @media only screen and (max-width: 768px) {
+            -webkit-transition: initial;
+            -moz-transition: initial;
+            -o-transition: initial;
+            transition: initial;        
+            display: block;
             transform: translate(100%, 0);
             width: 100%;
         }    
