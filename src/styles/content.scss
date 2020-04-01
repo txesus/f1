@@ -94,7 +94,7 @@ table.results{
 
 .header{
     background: #17202A;
-    // border-bottom: 2px solid #da2327;    
+    border-bottom: 2px solid #da2327;    
     height: 60px;
     text-align: center;
     padding: 20px 0 10px 0;
@@ -184,19 +184,41 @@ table.results{
     flex-grow: 1;
     padding: 10px 0;
     img{
-        padding-right: 10px;        
-        max-width: 20px;
+        padding-right: 10px;
+        max-height: 25px;
+        clip-path: polygon(35% 0%, 70% 0%, 35% 100%, 0% 100%);
+        position: absolute;
+        left: -10px;
+        top: 4px;
     }
     a{
-        color: #96281b;
+        color: #da2327;
         text-decoration: none;
         text-align: lef;;
         &:hover{
-            color: #96281b;
+            color: #da2327;
         }
     }
     &:first-child{
         flex-grow: 0;
         padding: 10px 20px;
     }
+  }
+
+
+  .react-tabs__tab-list{
+    border-bottom: 1px solid #da2327!important;
+    font-size: 12px!important;    
+    display: flex;  
+  }
+
+  .react-tabs__tab--selected{
+    border-color: #da2327!important;
+    border-radius: 5px 5px 0 0!important;
+    background: #da2327!important;
+    color: #FFF!important;      
+  }
+  .react-tabs__tab{
+      flex-grow: 1!important;
+      text-align: center!important;
   }
