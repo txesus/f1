@@ -4,7 +4,6 @@ import './App.scss';
 import Map from './components/map/map';
 import Content from './components/content/content';
 import Header from './components/header/header';
-import Carousel from './components/carousel/carousel';
 
 
 
@@ -266,13 +265,6 @@ setActiveRound = (round) => {
             races={races}
             round={round}
           />           
-          {/* <Carousel 
-            races={races}
-            handleClickMarker={this.handleClickMarker}
-            handleClickCarousel={this.handleClickCarousel}
-            round={round}
-            setActiveRound={this.setActiveRound}
-          /> */}
         </header>      
       </div>
     );

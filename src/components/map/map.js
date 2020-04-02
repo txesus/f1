@@ -4,7 +4,6 @@ import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 import L from 'leaflet';
 
-import { Line } from 'rc-progress';
 import Carousel from '../carousel/carousel'
 
 
@@ -133,7 +132,7 @@ export default class CircuitMap extends Component {
                                             <span> {race.Circuit.Location.country}</span>
                                         </li>
                                         <li className={'show-results'}>
-                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)}>
+                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)} role={"img"} aria-label={"checkered flag"}>
                                                 🏁 Click to Race results 🏁
                                             </span>
                                         </li>

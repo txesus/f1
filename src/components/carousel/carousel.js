@@ -10,7 +10,7 @@ export default class Carousel extends Component {
 
 
     render() {
-        const { races, round, setActiveRound, getCountryFlagFromName } = this.props;
+        const { races, round, setActiveRound } = this.props;
         return (
             <div>
                 <div className={round === 0 ? "carousel" : "carousel show-content"}>
