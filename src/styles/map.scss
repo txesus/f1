@@ -12,12 +12,6 @@
     transition: all .5s ease-in-out;    
     transform: translate(0, 0);
     width: 100%;
-    @media only screen and (max-width: 768px) {
-        -webkit-transition: initial;
-        -moz-transition: initial;
-        -o-transition: initial;
-        transition: initial;                    
-    }    
 
     &.show-content{
         transform: translate(00%, 0);

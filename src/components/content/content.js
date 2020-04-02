@@ -31,7 +31,7 @@ export default class Content extends Component {
                 <div className={"content-box"}>
 
                     <div className={"close-content"}>
-                        <span onClick={() => handleResetZoom()}>Close X</span>
+                        <span onClick={() => handleResetZoom()}>← Back</span>
                     </div>                            
 
                     <div className={"arrows"}>
