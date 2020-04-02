@@ -204,12 +204,12 @@ handleClickMarker(e, round){
     const { latlng } = e;
     const { lat, lng } = latlng;
     this.setMapCenter(15, [lat, lng] );
-    this.setState({
-      round
-    }, () => {
-      this.getPilots();
-      this.getQualifyings();
-    })
+    // this.setState({
+    //   round
+    // }, () => {
+    //   this.getPilots();
+    //   this.getQualifyings();
+    // })
 }
 
 handleClickRaceResults(e, round){        
