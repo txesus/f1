@@ -19,13 +19,8 @@
         transition: all .5s ease-in-out;    
         transform: translate(0%, 0);
         @media only screen and (max-width: 768px) {
-            -webkit-transition: initial;
-            -moz-transition: initial;
-            -o-transition: initial;
-            transition: initial;        
             display: block;
-            transform: translate(100%, 0);
-            // transform: translate(0%, 0);
+            transform: translate(0%, 0);
             width: 100%;
         }    
     }
@@ -92,6 +87,11 @@ table.results{
     }
 }
 
+.close-content{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
 .arrows{
     position: relative;
     width: 100%;
@@ -155,6 +155,9 @@ table.results{
     position: sticky;
     top: 0px;
     z-index: 1;
+    .st_row{
+        background-color: rgb(27,30,36);
+    }
   }
   .st_table{
     -ms-flex-direction: column;
@@ -181,9 +184,11 @@ table.results{
     display: -webkit-flex;
     display: flex;
     margin: 0;
+    border-bottom: 1px solid #1b1e24;
+    background-color: #fafafa;
   }
   .st_table .st_row:nth-child(even){
-    background-color: rgba(0,0,0, .1)
+    background-color: rgba(0,0,0, .1);
   }
   .st_column{
     -ms-flex-positive: 1;
@@ -249,7 +254,7 @@ table.results{
 
   .react-tabs__tab--selected{
     border-color: #da2327!important;
-    border-radius: 5px 5px 0 0!important;
+    border-radius: 0!important;
     background: #da2327!important;
     color: #FFF!important;      
   }

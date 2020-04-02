@@ -41,6 +41,7 @@ export default class CircuitMap extends Component {
         };
         this.props.handleResetZoom();
         this.handleClickMarker = this.props.handleClickMarker.bind(this);
+        this.handleClickRaceResults = this.props.handleClickRaceResults.bind(this);
         this.handleClickCarousel = this.props.handleClickCarousel.bind(this);
     }
 
@@ -97,7 +98,7 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel, getCountryFlagFromName} = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickRaceResults, handleClickCarousel, getCountryFlagFromName} = this.props;
         return (
             <div>
                 <Map
@@ -129,6 +130,11 @@ export default class CircuitMap extends Component {
                                             <span>{race.Circuit.Location.locality} </span>
                                             /
                                             <span> {race.Circuit.Location.country}</span>
+                                        </li>
+                                        <li className={'show-results'}>
+                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)}>
+                                                🏁 Click to Race results 🏁
+                                            </span>
                                         </li>
                                         <li><a href={race.Circuit.url} target={"_blank"}>Wikipedia</a></li>
                                     </ul>

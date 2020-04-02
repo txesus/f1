@@ -4,8 +4,14 @@ import 'react-tabs/style/react-tabs.css';
 
 export default class Content extends Component {
 
+    constructor(props) {
+        super(props);
+        this.props.handleResetZoom();
+    }
+
+
     render() {
-        const { pilots, races, qualifyings, round, getCountryFlagFromDemonym } = this.props;
+        const { pilots, races, qualifyings, round, getCountryFlagFromDemonym, handleResetZoom } = this.props;
         // console.log("RACES", races);
         // console.log("round", round);
         // console.log("pilots", pilots);
@@ -23,6 +29,10 @@ export default class Content extends Component {
         return (
             <div className={round === 0 ? "content" : "content show-content"}>
                 <div className={"content-box"}>
+
+                    <div className={"close-content"}>
+                        <span onClick={() => handleResetZoom()}>Close X</span>
+                    </div>                            
 
                     <div className={"arrows"}>
                         <span>Prev</span>

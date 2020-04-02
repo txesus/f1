@@ -118,6 +118,19 @@
             font-size: 18px;
             font-weight: bold;
         }
+        &.show-results{
+            span{
+                background: #da2327;
+                color: #FFF;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 14px;
+                font-weight: bold;
+                margin: 20px 0;
+                padding: 5px 0;
+                width: 100%;
+            }
+        }
     }
 }
 
