@@ -4,6 +4,7 @@ import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 import L from 'leaflet';
 
+import { Line } from 'rc-progress';
 import Carousel from '../carousel/carousel'
 
 
@@ -108,7 +109,7 @@ export default class CircuitMap extends Component {
                     className={round === 0 ? "" : "show-content"}
                     >
                 <TileLayer
-                    attribution={"Jesús Esteban"}
+                    // attribution={"Jesús Esteban"}
                     url={this.getMapStyles(parseInt(year))}
                     />
 

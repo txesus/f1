@@ -13,7 +13,7 @@ export default class Carousel extends Component {
         const { races, round, setActiveRound, getCountryFlagFromName } = this.props;
         return (
             <div>
-                <div className={"carousel"}>
+                <div className={round === 0 ? "carousel" : "carousel show-content"}>
                     <ul className={'progress'}>
                         {races.map((race, index) => {
                             return (
