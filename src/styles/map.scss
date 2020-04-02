@@ -1,0 +1,150 @@
+@import './variables/colors.scss';
+
+.leaflet-container {    
+    height: 100vh;
+    left: 0;
+    position: absolute!important;
+    right: 0;
+    top: 0%;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;    
+    transform: translate(0, 0);
+    width: 100%;
+    @media only screen and (max-width: 768px) {
+        -webkit-transition: initial;
+        -moz-transition: initial;
+        -o-transition: initial;
+        transition: initial;                    
+    }    
+
+    &.show-content{
+        transform: translate(00%, 0);
+        width: 60%;
+        @media only screen and (max-width: 768px) {
+            width: 100%;
+        }    
+    }
+    .leaflet-control{
+        button{
+            background: #da2327;
+            border: 1px solid #da2327;
+            padding: 10px 20px;
+            color: #FFF;
+            font-size: 15px;            
+        }
+        input[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+        
+        label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 60px;
+            height: 30px;
+            background: grey;
+            display: block;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        label:after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 23px;
+            height: 23px;
+            background: #fff;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+        
+        input:checked + label {
+            background: #da2327;
+        }
+        
+        input:checked + label:after {
+            left: calc(100% - 5px);
+            transform: translateX(-100%);
+        }
+        
+        label:active:after {
+            width: 23px;
+        }
+
+    }
+}
+
+// .leaflet-marker-icon{
+//     background: #da2327 !important;
+//     border-radius: 100% !important;
+//     border: 1px solid #da2327 !important;
+//     color: #FFF !important;
+//     font-size: 12px !important;
+//     height: 20px !important;
+//     text-align: center !important;
+//     width: 20px !important;
+// }
+
+.leaflet-marker-icon{
+    background: url('./images/marker.png') no-repeat;
+    background-size: contain;
+    border: 0 none;
+    color: #FFF;
+    font-size: 10px;
+    font-weight: bold;
+    height: 35px !important;
+    left: -7px;
+    line-height: 21px;
+    text-align: center;
+    text-indent: -2px;
+    top: -26px;
+    width: 25px !important;
+}
+
+
+.list-popup{
+    list-style: none;
+    padding-left: 0;
+    li{
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        &.title{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        &.show-results{
+            span{
+                background: #da2327;
+                color: #FFF;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 14px;
+                font-weight: bold;
+                margin: 20px 0;
+                padding: 5px 0;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.img-wiki{
+    position: absolute;
+    z-index: 1000;
+    width: 110px;
+    bottom: 30px;
+    left: 30px;    
+}
+
+
+
+// https://codepen.io/andreasstorm/pen/peCbd
+//https://codepen.io/abhisharma2/pen/vEKWVo
+// https://codepen.io/clintabrown/pen/yoFcC
+// https://codepen.io/cenda/pen/YZQVLG

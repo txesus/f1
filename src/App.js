@@ -206,12 +206,12 @@ handleClickMarker(e, round){
     const { latlng } = e;
     const { lat, lng } = latlng;
     this.setMapCenter(15, [lat, lng] );
-    this.setState({
-      round
-    }, () => {
-      this.getPilots();
-      this.getQualifyings();
-    })
+    // this.setState({
+    //   round
+    // }, () => {
+    //   this.getPilots();
+    //   this.getQualifyings();
+    // })
 }
 
 handleClickRaceResults(e, round){        
@@ -245,26 +245,28 @@ setActiveRound = (round) => {
         <header className="App-header">
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
           <Map 
-            year={year} 
             circuits={circuits} 
-            races={races}
-            handleResetZoom={this.handleResetZoom} 
-            zoomLevel={ zoomLevel} 
-            mapCenter={ mapCenter } 
-            setMapCenter={this.setMapCenter}
+            getCountryFlagFromName={this.getCountryFlagFromName}
+            handleClickCarousel={this.handleClickCarousel}
             handleClickMarker={this.handleClickMarker}
+            handleClickRaceResults={this.handleClickRaceResults}
+            handleResetZoom={this.handleResetZoom} 
+            mapCenter={ mapCenter } 
+            races={races}
             round={round}
             setActiveRound={this.setActiveRound}
-            handleClickCarousel={this.handleClickCarousel}
-            getCountryFlagFromName={this.getCountryFlagFromName}
+            setMapCenter={this.setMapCenter}
+            year={year} 
+            zoomLevel={ zoomLevel} 
           /> 
           <Content 
-            round={round}
+            // getCountryFlagFromName={this.getCountryFlagFromName}
+            getCountryFlagFromDemonym={this.getCountryFlagFromDemonym}
+            handleResetZoom={this.handleResetZoom} 
             pilots={pilots} 
             qualifyings={qualifyings} 
             races={races}
-            getCountryFlagFromDemonym={this.getCountryFlagFromDemonym}
-            // getCountryFlagFromName={this.getCountryFlagFromName}
+            round={round}
           />           
           <Carousel 
             races={races}
