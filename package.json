@@ -19,7 +19,7 @@
     "react-tabs": "^3.1.0",
     "reactstrap": "^8.0.1",
     "rmc-picker": "^5.0.10",
-    "swiper": "^5.3.1",
+    "swiper": "^6.5.1",
     "wrld.js": "^0.1.2164"
   },
   "scripts": {
