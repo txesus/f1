@@ -5,16 +5,22 @@
   "homepage": "https://txesus.github.io/f1",
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "leaflet": "^1.5.1",
+    "countryjs": "^1.8.0",
+    "leaflet": "^1.6.0",
     "leaflet-plugins": "^3.3.0",
     "node-sass": "^7.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-id-swiper": "^2.4.0",
     "react-leaflet": "^2.4.0",
     "react-leaflet-control": "^2.1.1",
     "react-scripts": "5.0.1",
     "react-select": "^3.0.8",
-    "reactstrap": "^8.0.1"
+    "react-tabs": "^3.1.0",
+    "reactstrap": "^8.0.1",
+    "rmc-picker": "^5.0.10",
+    "swiper": "^5.3.1",
+    "wrld.js": "^0.1.2164"
   },
   "scripts": {
     "predeploy": "npm run build",

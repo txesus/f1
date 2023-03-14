@@ -17,7 +17,8 @@ export default class SelectYear extends Component {
             return response.json()
           })
           .then((yearsCircuits) => {
-              this.setState({ yearsCircuits: yearsCircuits.MRData.SeasonTable.Seasons})
+            const sortedYears = yearsCircuits.MRData.SeasonTable.Seasons.reverse();
+            this.setState({ yearsCircuits: sortedYears})
             })
         }   
         
@@ -25,6 +26,7 @@ export default class SelectYear extends Component {
         
         
         getOptions = () => {
+
             const options = [...this.state.yearsCircuits].map((field) => {
                 return ({
                     value: field.season, 
@@ -34,32 +36,27 @@ export default class SelectYear extends Component {
             return options;
         }
         
+        
+        
+        
         render() {
             const options = this.getOptions();
-        return (
+            return (
             <div>
-                <div className={"select-year"}>
-                    <Select 
-                        options={options}     
-                        onChange={e => {
-                            this.props.handleYearChange({target:{value: e.value}});
-                            this.props.handleResetZoom();
-                        }
-                        }      
-                    />
+                {!!options[0] &&
+                    <div className={"select-year"}>
+                        <Select 
+                            options={options}     
+                            defaultValue={options[0]}
+                            onChange={e => {
+                                this.props.handleYearChange({target:{value: e.value}});
+                                this.props.handleResetZoom();
+                            }
+                            }      
+                        />
+                    </div>
 
-
-
-                    {/* <select value={this.props.year} onChange={value=> this.props.handleYearChange(value)}>
-                    {yearsCircuits.map((yearsCircuits) => {
-                        return (
-                            <option key={yearsCircuits.season} value={yearsCircuits.season}> { yearsCircuits.season } </option>                        
-                        )
-                        })
-                    }
-
-                    </select> */}
-                </div>
+                }
             </div>
         );
     }

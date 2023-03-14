@@ -1,24 +1,48 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Control from 'react-leaflet-control';
+import wiki from '../../images/wiki.png';
+import L from 'leaflet';
 
-// Map Styles
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck17xq26f05nr1cqgeafvjwxs/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck17yr99g3bx21coh6z6t0mz0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-//const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjyn1qsf100x61cpk2cjvnvij/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-//const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+import Carousel from '../carousel/carousel'
 
 
+// MAP STYLES
+
+// 1950
+const fiftyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// 1960
+const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73izmsr2bkh1inhs7yrxrv6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// 1970
+const seventyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jms8z2c6p1inh6yu5krp1/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+//1980
+const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb01iqwmgk74gw9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// 1990
+const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// 2000
+const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+
+
+//BLUE
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+
+
+// DEFAULT
+
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 export default class CircuitMap extends Component {
     
     constructor(props) {
         super(props);
         this.state = { 
-            circuits: []
+            races: []
         };
-        this.handleClickMarker = this.handleClickMarker.bind(this);
         this.props.handleResetZoom();
+        this.handleClickMarker = this.props.handleClickMarker.bind(this);
+        this.handleClickRaceResults = this.props.handleClickRaceResults.bind(this);
+        this.handleClickCarousel = this.props.handleClickCarousel.bind(this);
     }
 
 
@@ -30,58 +54,92 @@ export default class CircuitMap extends Component {
         // });     
     }
 
-
-
-    handleClickMarker(e){        
-        const { latlng } = e;
-        const { lat, lng } = latlng;
-        this.props.setMapCenter(15, [lat, lng]);
+    getMapStyles = (year) =>{
+        let style = "";
+        switch (true){
+            case year <= 1959:
+                style = fiftyStyled;
+            break;
+            // case year >= 1960 && year <= 1969:
+            //     style = sixtyStyled;
+            // break;
+            // case year >= 1970 && year <= 1979:
+            //     style = seventyStyled;
+            // break;
+            // case year >= 1980 && year <= 1989:
+            //     style = eightyStyled;
+            // break;
+            // case year >= 1990 && year <= 1999:
+            //     style = ninetyStyled;
+            // break;
+            // case year >= 2000 && year <= 2009:
+            //     style = thousandStyled;
+            // break;
+            // case year >= 2010 && year <= 2019:
+            //     style = mapStyled;
+            // break;
+            // case year >= 2020 && year <= 2029:
+            //     style = mapStyled;
+            // break;
+            default:
+                style = mapStyled;
+            break;
+        }
+        return style;
     }
 
 
-    getPolyLineArray() {
-        const circuitsCoordinates = this.props.circuits.map(circuit => {
-            return [circuit.Location.lat, circuit.Location.long];
-        });
-        return circuitsCoordinates;
-    }
+    // getPolyLineArray() {
+    //     const circuitsCoordinates = this.props.circuits.map(circuit => {
+    //         return [circuit.Location.lat, circuit.Location.long];
+    //     });
+    //     return circuitsCoordinates;
+    // }
 
         
     render() {
-        const { circuits, zoomLevel, mapCenter, handleResetZoom } = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickRaceResults, handleClickCarousel, getCountryFlagFromName} = this.props;
         return (
             <div>
                 <Map
                     ref={(ref) => { this.map = ref; }}
                     center={mapCenter}
                     zoom={zoomLevel}
+                    className={round === 0 ? "" : "show-content"}
                     >
                 <TileLayer
-                    attribution={"Jesús Esteban"}
-                    url={mapStyled}
+                    // attribution={"Jesús Esteban"}
+                    url={this.getMapStyles(parseInt(year))}
                     />
 
-                {circuits.map((circuit) => {
+                {races.map((race) => {
+                    const text = L.divIcon({html: race.round});
                     return (
                         <React.Fragment>
                             <Marker 
-                                position={[circuit.Location.lat, circuit.Location.long]}
-                                onClick={ e=> this.handleClickMarker(e)}   
+                                icon={text}
+                                position={[race.Circuit.Location.lat, race.Circuit.Location.long]}
+                                onClick={ e=>                                     
+                                    this.handleClickMarker(e, race.round)
+                                }   
                             >
-                                {/* <Popup>
+                                <Popup>
                                     <ul className={"list-popup"}>
-                                        <li className={"title"}><span>{circuit.circuitName}</span></li>
+                                        <li className={"title"}><span>{race.raceName}</span></li>
                                         <li>
-                                            <span>{circuit.Location.locality} </span>
+                                            <span>{race.Circuit.Location.locality} </span>
                                             /
-                                            <span> {circuit.Location.country}</span>
+                                            <span> {race.Circuit.Location.country}</span>
                                         </li>
-                                        <li>
-                                            <a href={circuit.url} target="_blank">Wikipedia</a>
+                                        <li className={'show-results'}>
+                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)} role={"img"} aria-label={"checkered flag"}>
+                                                🏁 Click to Race results 🏁
+                                            </span>
                                         </li>
+                                        <li><a href={race.Circuit.url} target={"_blank"}>Wikipedia</a></li>
                                     </ul>
                                     
-                                </Popup> */}
+                                </Popup>
                             </Marker>     
                         </React.Fragment>                        
                     )
@@ -90,19 +148,36 @@ export default class CircuitMap extends Component {
 
                 {/* <Polyline color="#F1C40F"  weight="1" positions={this.getPolyLineArray()}/> */}
 
-
+                {/* <Control position="topleft">
+                    <div>
+                        <div style={{ marginLeft: '0px', marginTop: '20px', zIndex: '0' }}>
+                            <input className={'switch'} type="checkbox" id="switch" /><label for="switch">Toggle</label>
+                        </div>
+                    </div>
+                </Control> */}
 
 
                 <Control position="topright">
                     <div>
-                        <div style={{ marginLeft: '37px' }}>
+                        <div style={{ marginLeft: '37px', marginTop: '110px', zIndex: '0' }}>
                             <button onClick={() => handleResetZoom()}>
-                                Reset Zoom
-                            </button>
+                                Reset
+                            </button>                            
                         </div>
                     </div>
                 </Control>
+                <Carousel 
+                    races={races}
+                    handleClickMarker={handleClickMarker}
+                    handleClickCarousel={handleClickCarousel}
+                    round={round}
+                    setActiveRound={setActiveRound}
+                    getCountryFlagFromName={getCountryFlagFromName}
+                />
                 </Map>
+                
+                <img src={wiki} alt="wiki" className="img-wiki"/>
+                
             </div>
         );
     }
@@ -121,3 +196,18 @@ export default class CircuitMap extends Component {
 // http://www.liedman.net/leaflet-routing-machine/
 // http://rowanwins.github.io/leaflet-easyPrint/
 // https://github.com/dwilhelm89/Leaflet.StyleEditor
+// COLORES POR DECADA https://juiceboxinteractive.com/blog/color/
+
+// 1960
+// 207 73 23
+// 249 176 61
+// 117 140 51
+// 152 89 20
+// 208 178 133
+// 45 117 140
+
+
+// https://jsbin.com/jisuweyaju/edit?html,output
+// https://blog.mapbox.com/map-madness-round-3-f5536000fdbb
+// https://wrld3d.com/wrld.js/latest/docs/examples/embedding-a-3d-map/
+// https://medium.com/@alexandervarlamov/using-mapbox-gl-js-custom-maps-with-tableau-and-powerbi-41c002d4617e
