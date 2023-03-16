@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 import L from 'leaflet';
 
-import Carousel from '../carousel/carousel'
+import Carousel from '../carousel/carousel';
 
+import Wadus from '../geojson/barcelona.json'
 
 // MAP STYLES
 
@@ -21,16 +22,17 @@ const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb
 const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 // 2000
 const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-
-
 //BLUE
 // const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+
 
 
 // DEFAULT
 
 // const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// Satellite
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/wmts?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
 
 export default class CircuitMap extends Component {
     
@@ -52,6 +54,7 @@ export default class CircuitMap extends Component {
         //     const updatedZoomLevel = leafletMap.getZoom();
         //     this.handleZoomLevelChange(updatedZoomLevel);
         // });     
+        console.log("HOLA", Wadus)
     }
 
     getMapStyles = (year) =>{
@@ -111,7 +114,9 @@ export default class CircuitMap extends Component {
                     // attribution={"Jesús Esteban"}
                     url={this.getMapStyles(parseInt(year))}
                     />
+                <GeoJSON data={Wadus.features}>
 
+                </GeoJSON>
                 {races.map((race) => {
                     const text = L.divIcon({html: race.round});
                     return (
