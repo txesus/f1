@@ -74,7 +74,7 @@ export default class Content extends Component {
                                                     <div className={'st_column'}><span>{pilot.position}.</span></div>                                    
                                                     <div className={'st_column'}>
                                                         <img src={getCountryFlagFromDemonym(pilot.Driver.nationality)} alt={'country'} />
-                                                        <a href={pilot.Driver.url} target={"_blank"}>
+                                                        <a href={pilot.Driver.url} target={"_blank"} rel="noopener noreferrer">
                                                             {pilot.Driver.familyName}
                                                             {/* {pilot.Driver.givenName} {pilot.Driver.familyName} */}
                                                         </a>                                                    
@@ -121,7 +121,7 @@ export default class Content extends Component {
                                                         <div className={'st_column'}><span>{qualifying.position}</span></div>                                    
                                                         <div className={'st_column'}>
                                                         <img src={getCountryFlagFromDemonym(qualifying.Driver.nationality)} alt={'country'} />
-                                                            <a href={qualifying.Driver.url} target={"_blank"}>
+                                                            <a href={qualifying.Driver.url} target={"_blank"} rel="noopener noreferrer">
                                                                 {qualifying.Driver.familyName}
                                                             </a>                                                  
                                                         </div>
@@ -163,7 +163,7 @@ export default class Content extends Component {
                                                         <span>{selectedRace().time ? selectedRace().time : "No data"} </span>
                                                 </div>
                                                 <div className={'st_column'}>
-                                                    <a href={selectedRace().Circuit.url} target={"_blank"}>
+                                                    <a href={selectedRace().Circuit.url} target={"_blank"} rel="noopener noreferrer">
                                                         Wikipedia
                                                     </a>
                                                 </div>
