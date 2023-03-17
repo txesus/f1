@@ -2,7 +2,7 @@
   "name": "as",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://txesus.github.io/f1",
+  "homepage": "https://txesus.github.io/f1/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "countryjs": "^1.8.0",
