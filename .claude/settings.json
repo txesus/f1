@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/jesus.esteban/Workspace/f1 restore --staged build/)",
+      "Bash(git -C /Users/jesus.esteban/Workspace/f1 diff HEAD --stat)",
+      "Bash(git -C /Users/jesus.esteban/Workspace/f1 show --stat dea349f1)",
+      "Bash(git -C /Users/jesus.esteban/Workspace/f1 push origin develop)",
+      "Bash(gh api *)",
+      "Bash(npm show *)"
+    ]
+  }
+}

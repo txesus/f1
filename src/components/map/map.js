@@ -7,7 +7,53 @@ import 'leaflet/dist/leaflet.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Carousel from '../carousel/carousel';
-import Wadus from '../geojson/barcelona.json';
+import CircuitsGeoJSON from '../geojson/f1-circuits.json';
+
+// Maps Ergast API circuitId → GeoJSON feature id (bacinger/f1-circuits)
+const CIRCUIT_ID_MAP = {
+    albert_park:      'au-1953',
+    bahrain:          'bh-2002',
+    shanghai:         'cn-2004',
+    baku:             'az-2016',
+    catalunya:        'es-1991',
+    monaco:           'mc-1929',
+    villeneuve:       'ca-1978',
+    ricard:           'fr-1969',
+    red_bull_ring:    'at-1969',
+    silverstone:      'gb-1948',
+    hockenheimring:   'de-1932',
+    hungaroring:      'hu-1986',
+    spa:              'be-1925',
+    monza:            'it-1922',
+    marina_bay:       'sg-2008',
+    sochi:            'ru-2014',
+    suzuka:           'jp-1962',
+    americas:         'us-2012',
+    rodriguez:        'mx-1962',
+    interlagos:       'br-1940',
+    yas_marina:       'ae-2009',
+    imola:            'it-1953',
+    nurburgring:      'de-1927',
+    portimao:         'pt-2008',
+    mugello:          'it-1914',
+    sepang:           'my-1999',
+    istanbul:         'tr-2005',
+    zandvoort:        'nl-1948',
+    magny_cours:      'fr-1960',
+    estoril:          'pt-1972',
+    jacarepagua:      'br-1977',
+    jeddah:           'sa-2021',
+    miami:            'us-2022',
+    losail:           'qa-2004',
+    vegas:            'us-2023',
+    indianapolis:     'us-1909',
+    buenos_aires:     'ar-1952',
+    kyalami:          'za-1961',
+    watkins_glen:     'us-1956',
+    madrid:           'es-2026',
+};
+
+const circuitStyle = { color: '#e10600', weight: 2, opacity: 0.85 };
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow });
@@ -39,12 +85,11 @@ export default class CircuitMap extends Component {
 
 
     componentDidMount() {
-        // const leafletMap = this.leafletMap.leafletElement;
-        // leafletMap.on('zoomend', () => {
-        //     const updatedZoomLevel = leafletMap.getZoom();
-        //     this.handleZoomLevelChange(updatedZoomLevel);
-        // });     
-        console.log("HOLA", Wadus)
+    }
+
+    getCircuitFeatures(races) {
+        const geoIds = new Set(races.map(r => CIRCUIT_ID_MAP[r.Circuit.circuitId]).filter(Boolean));
+        return CircuitsGeoJSON.features.filter(f => geoIds.has(f.properties.id));
     }
 
     getMapStyles = (year) => {
@@ -68,7 +113,7 @@ export default class CircuitMap extends Component {
         
     render() {
         const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel, getCountryFlagFromName} = this.props;
-        const showBarcelona = races.some(r => r.Circuit.circuitId === 'catalunya');
+        const circuitFeatures = this.getCircuitFeatures(races);
         return (
             <div>
                 <Map
@@ -81,7 +126,13 @@ export default class CircuitMap extends Component {
                     // attribution={"Jesús Esteban"}
                     url={this.getMapStyles(parseInt(year))}
                     />
-                {showBarcelona && <GeoJSON data={Wadus.features} />}
+                {circuitFeatures.map(feature => (
+                    <GeoJSON
+                        key={feature.properties.id}
+                        data={feature}
+                        style={circuitStyle}
+                    />
+                ))}
                 {races.map((race) => {
                     const text = L.divIcon({html: race.round, className: '', iconSize: [25, 35], iconAnchor: [12, 35]});
                     return (

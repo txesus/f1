@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "update-circuits": "curl -s https://raw.githubusercontent.com/bacinger/f1-circuits/master/f1-circuits.geojson -o src/components/geojson/f1-circuits.json && echo 'f1-circuits.json updated'"
   },
   "eslintConfig": {
     "extends": "react-app"
