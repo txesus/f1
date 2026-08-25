@@ -4,6 +4,7 @@
 .content{
     background: #FFF;
     position: absolute;
+    height: 100vh;
     right: 0;
     top: 90px;
     width: 40%;
@@ -25,9 +26,13 @@
         }    
     }
     .content-box{
-        height: 400px;
-        overflow-y: scroll;        
+        height: 580px;
+        overflow-y: hidden;        
         padding: 10px 30px 0px 30px;
+        @media only screen and (max-width: 768px){
+            height: 100vh;            
+            padding: 10px 5px 0px 5px;
+        }
     }
 }
 
@@ -43,6 +48,7 @@
         max-width: 30px;
         padding-right: 10px;        
     }
+   
 }
 
 
@@ -109,13 +115,13 @@ table.results{
 
 .header{
     background: #17202A;
-    border-bottom: 2px solid #da2327;    
+    // border-bottom: 2px solid #da2327;    
     height: 60px;
     text-align: center;
     padding: 20px 0 10px 0;
-    position: absolute;
+    position: fixed;
     width: 100%;
-    z-index: 1000;    
+    z-index: 10000;    
 
     img{
         width: 120px;
@@ -138,14 +144,19 @@ table.results{
 
 
 .st_viewport{
-    font-size: 12px;
+    font-size: 10px;
     max-height: 400px;
     overflow: auto;
-  }
+    @media only screen and (max-width: 768px) {
+        max-height: calc(100vh - 240px);
+    }    
+}
   
   
   /* ##   header */
   .st_table_header{
+    background-color: rgb(27,30,36);
+    color: rgb(220,220,220);
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
@@ -154,34 +165,29 @@ table.results{
         background-color: rgb(27,30,36);
     }
   }
-  .st_table_header h2{
-    font-weight: 400;
-    margin: 0 20px;
-    padding: 20px 0 0;
-  }
-  .st_table_header .st_row{
-    // color: rgba(220,220,220, .7);
-  }
-  .st_table_header .st_column{
-    
-  }
-  /* ##  table */
   .st_table{
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
+    -ms-flex-direction: column;
     -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
     -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  /* #   row */
-  .st_row{
+    display: -ms-flexbox;
     display: -webkit-box;
     display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    .st_column{
+        text-align: left;
+        text-indent: 5px;
+        @media only screen and (max-width: 768px) {
+            text-align: center;
+            text-indent: 0;
+        }        
+    }
+  }
+  .st_row{
     display: -ms-flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     margin: 0;
     border-bottom: 1px solid #1b1e24;
@@ -190,17 +196,20 @@ table.results{
   .st_table .st_row:nth-child(even){
     background-color: rgba(0,0,0, .1);
   }
-  /* #   column */
   .st_column{
-    padding: 10px 20px;
-    -webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
+    -ms-flex-preferred-size: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-basis: 0;
+    -webkit-flex-grow: 1;
+    flex-basis: 0;
     flex-grow: 1;
     padding: 10px 0;
+    position: relative;
+    @media only screen and (max-width: 768px) {
+        text-align: center;
+    }    
+
     img{
         padding-right: 10px;
         max-height: 25px;
@@ -208,11 +217,26 @@ table.results{
         position: absolute;
         left: -10px;
         top: 4px;
+        @media only screen and (max-width: 768px){
+            padding-right: 10px;
+            max-height: 15px;
+            left: -5px;
+            top: 9px;
+        }
+
     }
+    span{
+        @media only screen and (max-width: 768px){
+            display: inline-block;
+            width: 100%;
+        }
+
+    }     
     a{
         color: #da2327;
         text-decoration: none;
-        text-align: lef;;
+        text-align: left;
+        padding-left: 20px;
         &:hover{
             color: #da2327;
         }
@@ -220,6 +244,10 @@ table.results{
     &:first-child{
         flex-grow: 0;
         padding: 10px 20px;
+        @media only screen and (max-width: 768px) {
+            padding: 10px;
+        }        
+
     }
   }
 

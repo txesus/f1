@@ -3,39 +3,43 @@ import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 import L from 'leaflet';
-
+import 'leaflet/dist/leaflet.css';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Carousel from '../carousel/carousel';
+import Wadus from '../geojson/barcelona.json';
 
-import Wadus from '../geojson/barcelona.json'
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow });
 
 // MAP STYLES
 
 // 1950
-const fiftyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const fiftyStyled = `https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
 // 1960
-const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73izmsr2bkh1inhs7yrxrv6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73izmsr2bkh1inhs7yrxrv6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 // 1970
-const seventyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jms8z2c6p1inh6yu5krp1/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const seventyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jms8z2c6p1inh6yu5krp1/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 //1980
-const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb01iqwmgk74gw9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb01iqwmgk74gw9/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 // 1990
-const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 // 2000
-const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 //BLUE
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 
 
 
 // DEFAULT
 
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 
-const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+const mapStyled = `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
 
 // Satellite
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/wmts?access_token=pk.eyJ1IjoiamVzdXNlc3RlYmFuIiwiYSI6ImNqc3VlY3EydTAxdDMzeXB2a2NycXJxZTIifQ.6Jxvu3C-J7-XWRjCVdMwdw';
+// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/wmts?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 
 export default class CircuitMap extends Component {
     
@@ -63,9 +67,9 @@ export default class CircuitMap extends Component {
     getMapStyles = (year) =>{
         let style = "";
         switch (true){
-            // case year <= 1959:
-            //     style = fiftyStyled;
-            // break;
+            case year <= 1959:
+                style = fiftyStyled;
+            break;
             // case year >= 1960 && year <= 1969:
             //     style = sixtyStyled;
             // break;
@@ -104,7 +108,8 @@ export default class CircuitMap extends Component {
 
         
     render() {
-        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickRaceResults, handleClickCarousel, getCountryFlagFromName} = this.props;
+        const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel, getCountryFlagFromName} = this.props;
+        const showBarcelona = races.some(r => r.Circuit.circuitId === 'catalunya');
         return (
             <div>
                 <Map
@@ -117,13 +122,11 @@ export default class CircuitMap extends Component {
                     // attribution={"Jesús Esteban"}
                     url={this.getMapStyles(parseInt(year))}
                     />
-                <GeoJSON data={Wadus.features}>
-
-                </GeoJSON>
+                {showBarcelona && <GeoJSON data={Wadus.features} />}
                 {races.map((race) => {
-                    const text = L.divIcon({html: race.round});
+                    const text = L.divIcon({html: race.round, className: '', iconSize: [25, 35], iconAnchor: [12, 35]});
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={race.round}>
                             <Marker 
                                 icon={text}
                                 position={[race.Circuit.Location.lat, race.Circuit.Location.long]}
@@ -140,11 +143,11 @@ export default class CircuitMap extends Component {
                                             <span> {race.Circuit.Location.country}</span>
                                         </li>
                                         <li className={'show-results'}>
-                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)}>
+                                            <span onClick={ e=> this.handleClickRaceResults(e, race.round)} role={"img"} aria-label={"checkered flag"}>
                                                 🏁 Click to Race results 🏁
                                             </span>
                                         </li>
-                                        <li><a href={race.Circuit.url} target={"_blank"}>Wikipedia</a></li>
+                                        <li><a href={race.Circuit.url} target={"_blank"} rel="noopener noreferrer">Wikipedia</a></li>
                                     </ul>
                                     
                                 </Popup>
@@ -156,18 +159,18 @@ export default class CircuitMap extends Component {
 
                 {/* <Polyline color="#F1C40F"  weight="1" positions={this.getPolyLineArray()}/> */}
 
-                <Control position="topleft">
+                {/* <Control position="topleft">
                     <div>
                         <div style={{ marginLeft: '0px', marginTop: '20px', zIndex: '0' }}>
                             <input className={'switch'} type="checkbox" id="switch" /><label for="switch">Toggle</label>
                         </div>
                     </div>
-                </Control>
+                </Control> */}
 
 
                 <Control position="topright">
                     <div>
-                        <div style={{ marginLeft: '37px', marginTop: '37px' }}>
+                        <div style={{ marginLeft: '37px', marginTop: '110px', zIndex: '0' }}>
                             <button onClick={() => handleResetZoom()}>
                                 Reset
                             </button>                            
@@ -183,6 +186,7 @@ export default class CircuitMap extends Component {
                     getCountryFlagFromName={getCountryFlagFromName}
                 />
                 </Map>
+                
                 <img src={wiki} alt="wiki" className="img-wiki"/>
                 
             </div>

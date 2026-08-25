@@ -25,36 +25,37 @@ class App extends React.Component {
       zoomLevel: 2.2,
       mapCenter: [22.9837669, -10.2810849],
       round: 0,
-      countries: []
     }
     this.handleClickCarousel = this.handleClickCarousel.bind(this);
     this.handleClickMarker = this.handleClickMarker.bind(this);
     this.handleClickRaceResults = this.handleClickRaceResults.bind(this);
   }
-  
+
   componentDidMount(){
     this.getData();
   }
-  
+
   componentDidUpdate(prevProps, prevState){
     if(this.state.year !== prevState.year){
+      this.setState({ races: [], circuits: [], circuitsYears: [], pilots: [], qualifyings: [] });
       this.getData();
     }
   }
-  
-  
+
+
 
   getData(){
     this.getListCircuits();
     this.getYearCircuits();
-    this.getRaces();  
-    this.getPilots();
-    this.getQualifyings();   
-    this.getCountries();
+    this.getRaces();
+    if (this.state.round > 0) {
+      this.getPilots();
+      this.getQualifyings();
+    }
   }
 
   getListCircuits() {
-    fetch('https://ergast.com/api/f1/' + this.state.year + '.json?limit=100')
+    fetch('https://api.jolpi.ca/ergast/f1/' + this.state.year + '.json?limit=100')
       .then((response) => {
         return response.json()
       })
@@ -64,7 +65,7 @@ class App extends React.Component {
   }
 
   getYearCircuits () {
-    fetch('https://ergast.com/api/f1/' + this.state.year + '/circuits.json?limit=100')
+    fetch('https://api.jolpi.ca/ergast/f1/' + this.state.year + '/circuits.json?limit=100')
         .then((response) => {
         return response.json()
         })
@@ -74,7 +75,7 @@ class App extends React.Component {
   }
 
   getRaces () {
-    fetch('https://ergast.com/api/f1/' + this.state.year + '.json?limit=100')
+    fetch('https://api.jolpi.ca/ergast/f1/' + this.state.year + '.json?limit=100')
         .then((response) => {
         return response.json()
         })
@@ -83,11 +84,10 @@ class App extends React.Component {
     })
   }
 
-  
+
 
   getPilots () {
-    // console.log("getPilots", this.state.year, this.state.round);
-    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/results.json')
+    fetch('https://api.jolpi.ca/ergast/f1/' + this.state.year + '/' + this.state.round + '/results.json')
         .then((response) => {
         return response.json()
         })
@@ -98,7 +98,7 @@ class App extends React.Component {
 
 
   getQualifyings () {
-    fetch('https://ergast.com/api/f1/' + this.state.year + '/' + this.state.round + '/qualifying.json')
+    fetch('https://api.jolpi.ca/ergast/f1/' + this.state.year + '/' + this.state.round + '/qualifying.json')
         .then((response) => {
         return response.json()
         })
@@ -106,80 +106,49 @@ class App extends React.Component {
           const isQualifyingResults = !!resultados.MRData.RaceTable.Races[0];
           this.setState({ qualifyings: isQualifyingResults ? resultados.MRData.RaceTable.Races[0].QualifyingResults : ""})
     })
-  }  
+  }
 
 
-  getCountries () {
-    fetch('https://restcountries.eu/rest/v2')
-        .then((response) => {
-          return response.json()
-        })
-        .then((resultados) => {
-          const countries = resultados.map( (country) => {
-            return (
-              {
-                demonym: country.demonym,
-                flag: country.flag,
-                name: country.name,
-                altSpellings: country.altSpellings
-              }
-            )
-          })
-          console.log("COUNTRIES", countries)
-          this.setState({ countries})
-    })
-  }    
+  // ISO 3166-1 alpha-2 codes keyed by F1 driver nationality (demonym)
+  NATIONALITY_TO_ISO = {
+    american: 'us', argentine: 'ar', australian: 'au', austrian: 'at',
+    azerbaijani: 'az', bahraini: 'bh', belgian: 'be', brazilian: 'br',
+    british: 'gb', canadian: 'ca', chinese: 'cn', colombian: 'co',
+    czech: 'cz', danish: 'dk', dutch: 'nl', estonian: 'ee',
+    finnish: 'fi', french: 'fr', german: 'de', hungarian: 'hu',
+    indian: 'in', indonesian: 'id', irish: 'ie', italian: 'it',
+    japanese: 'jp', mexican: 'mx', monegasque: 'mc', moroccan: 'ma',
+    'new zealander': 'nz', polish: 'pl', portuguese: 'pt', russian: 'ru',
+    saudi: 'sa', spanish: 'es', swedish: 'se', swiss: 'ch',
+    thai: 'th', venezuelan: 've',
+  };
+
+  // ISO codes keyed by F1 circuit country name
+  COUNTRY_NAME_TO_ISO = {
+    australia: 'au', austria: 'at', azerbaijan: 'az', bahrain: 'bh',
+    belgium: 'be', brazil: 'br', canada: 'ca', china: 'cn',
+    france: 'fr', germany: 'de', hungary: 'hu', italy: 'it',
+    japan: 'jp', korea: 'kr', malaysia: 'my', mexico: 'mx',
+    monaco: 'mc', netherlands: 'nl', portugal: 'pt', qatar: 'qa',
+    russia: 'ru', 'saudi arabia': 'sa', singapore: 'sg', spain: 'es',
+    sweden: 'se', switzerland: 'ch', uk: 'gb', uae: 'ae',
+    usa: 'us', 'united states': 'us', 'united kingdom': 'gb',
+    'united arab emirates': 'ae',
+  };
+
+  flagUrl = (iso) => iso
+    ? `https://flagcdn.com/w20/${iso}.png`
+    : 'src/images/marker.png';
 
   getCountryFlagFromDemonym = (demonym) => {
-    const matchCountry = this.state.countries.find((country) => {
-        if(country.demonym.toLowerCase() === "argentinean"){
-          return demonym.toLowerCase() === "argentine";  
-        }
-        return demonym.toLowerCase() === country.demonym.toLowerCase();
-    })
-    return matchCountry ? matchCountry.flag : "src/images/marker.png";
+    const iso = this.NATIONALITY_TO_ISO[demonym?.toLowerCase()];
+    return this.flagUrl(iso);
   }
-  
+
   getCountryFlagFromName = (name) => {
-    // const matchCountry = this.state.countries.find((country) => {
-    //   if(country.name.toLowerCase() === "united kingdom of great britain and northern ireland"){
-    //     return name.toLowerCase() === "uk";  
-    //   }
-    //   const recoverySpelling = country.altSpellings.find((spelling) => {
-    //     console.log("SEPELLING", spelling)
-    //     return name.toLowerCase() === spelling.toLowerCase()
-    //   });
-    //   return name.toLowerCase() === (recoverySpelling ? recoverySpelling.toLowerCase() : "");
-    // })
-    // return matchCountry ? matchCountry.flag : name;
-    const matchCountry = this.state.countries.find((country) => {
-      
-      switch (country.name.toLowerCase()) {
-        case "united kingdom of great britain and northern ireland":
-          return name.toLowerCase() === "uk";
-        case "russian federation":
-          return name.toLowerCase() === "russia";
-        case "united states of america":
-          return name.toLowerCase() === "usa";
-        case "united arab emirates":
-          return name.toLowerCase() === "uae";
-        case "korea (republic of)":
-          return name.toLowerCase() === "korea";
-        
-        default:
-          return name.toLowerCase() === country.name.toLowerCase();
-      }
-      
-  })
-  return matchCountry ? matchCountry.flag : name;
-
-
-
+    const iso = this.COUNTRY_NAME_TO_ISO[name?.toLowerCase()];
+    return iso ? this.flagUrl(iso) : name;
   }
-
-
-
-
 
 
 handleYearChange = event => {
@@ -189,32 +158,26 @@ handleYearChange = event => {
 
 setMapCenter = (zoomLevel, mapCenter) => {
   this.setState({
-    zoomLevel, 
+    zoomLevel,
     mapCenter
   })
 }
 
 handleResetZoom = () => {
-  this.setState({ 
+  this.setState({
       zoomLevel: 2.2,
       mapCenter: [36.9837669, -10.2810849],
       round: 0
   });
 }
 
-handleClickMarker(e, round){        
+handleClickMarker(e, round){
     const { latlng } = e;
     const { lat, lng } = latlng;
     this.setMapCenter(15, [lat, lng] );
-    // this.setState({
-    //   round
-    // }, () => {
-    //   this.getPilots();
-    //   this.getQualifyings();
-    // })
 }
 
-handleClickRaceResults(e, round){        
+handleClickRaceResults(e, round){
   this.setState({
     round
   }, () => {
@@ -225,10 +188,8 @@ handleClickRaceResults(e, round){
 
 
 
-handleClickCarousel({lat, long}){        
+handleClickCarousel({lat, long}){
   this.setMapCenter(15, [lat, long]);
-  // this.getPilots();
-  // this.getQualifyings();
 }
 
 
@@ -238,44 +199,44 @@ setActiveRound = (round) => {
 
 
   render (){
-    const { year, round, circuits, races, pilots, qualifyings, zoomLevel, mapCenter } = this.state;    
+    const { year, round, circuits, races, pilots, qualifyings, zoomLevel, mapCenter } = this.state;
 
     return (
       <div className="App">
         <header className="App-header">
           <Header handleYearChange={this.handleYearChange} handleResetZoom={this.handleResetZoom} />
-          <Map 
-            circuits={circuits} 
+          <Map
+            circuits={circuits}
             getCountryFlagFromName={this.getCountryFlagFromName}
             handleClickCarousel={this.handleClickCarousel}
             handleClickMarker={this.handleClickMarker}
             handleClickRaceResults={this.handleClickRaceResults}
-            handleResetZoom={this.handleResetZoom} 
-            mapCenter={ mapCenter } 
+            handleResetZoom={this.handleResetZoom}
+            mapCenter={ mapCenter }
             races={races}
             round={round}
             setActiveRound={this.setActiveRound}
             setMapCenter={this.setMapCenter}
-            year={year} 
-            zoomLevel={ zoomLevel} 
-          /> 
-          <Content 
+            year={year}
+            zoomLevel={ zoomLevel}
+          />
+          <Content
             // getCountryFlagFromName={this.getCountryFlagFromName}
             getCountryFlagFromDemonym={this.getCountryFlagFromDemonym}
-            handleResetZoom={this.handleResetZoom} 
-            pilots={pilots} 
-            qualifyings={qualifyings} 
+            handleResetZoom={this.handleResetZoom}
+            pilots={pilots}
+            qualifyings={qualifyings}
             races={races}
             round={round}
-          />           
-          <Carousel 
+          />
+          <Carousel
             races={races}
             handleClickMarker={this.handleClickMarker}
             handleClickCarousel={this.handleClickCarousel}
             round={round}
             setActiveRound={this.setActiveRound}
           />
-        </header>      
+        </header>
       </div>
     );
   }
