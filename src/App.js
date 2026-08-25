@@ -48,8 +48,10 @@ class App extends React.Component {
     this.getListCircuits();
     this.getYearCircuits();
     this.getRaces();
-    this.getPilots();
-    this.getQualifyings();
+    if (this.state.round > 0) {
+      this.getPilots();
+      this.getQualifyings();
+    }
   }
 
   getListCircuits() {

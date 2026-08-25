@@ -3,10 +3,14 @@ import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import wiki from '../../images/wiki.png';
 import L from 'leaflet';
-
+import 'leaflet/dist/leaflet.css';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Carousel from '../carousel/carousel';
+import Wadus from '../geojson/barcelona.json';
 
-import Wadus from '../geojson/barcelona.json'
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow });
 
 // MAP STYLES
 
@@ -120,9 +124,9 @@ export default class CircuitMap extends Component {
                     />
                 {showBarcelona && <GeoJSON data={Wadus.features} />}
                 {races.map((race) => {
-                    const text = L.divIcon({html: race.round});
+                    const text = L.divIcon({html: race.round, className: '', iconSize: [25, 35], iconAnchor: [12, 35]});
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={race.round}>
                             <Marker 
                                 icon={text}
                                 position={[race.Circuit.Location.lat, race.Circuit.Location.long]}
