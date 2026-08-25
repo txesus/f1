@@ -36,7 +36,7 @@ const fiftyStyled = `https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik
 // const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 // const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
 
-const mapStyled = `https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
+const mapStyled = `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
 
 // Satellite
 // const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/wmts?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
