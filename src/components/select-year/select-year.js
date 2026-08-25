@@ -12,7 +12,7 @@ export default class SelectYear extends Component {
 
     
     componentWillMount() {
-        fetch('https://ergast.com/api/f1/seasons.json?limit=100')
+        fetch('https://api.jolpi.ca/ergast/f1/seasons.json?limit=100')
           .then((response) => {
             return response.json()
           })
@@ -43,15 +43,18 @@ export default class SelectYear extends Component {
             const options = this.getOptions();
             return (
             <div>
-                <div className={"select-year"}>
-                    <Select 
-                        options={options}     
-                        onChange={e => {
-                            this.props.handleYearChange({target:{value: e.value}});
-                            this.props.handleResetZoom();
-                        }
-                        }      
-                    />
+                {!!options[0] &&
+                    <div className={"select-year"}>
+                        <Select 
+                            options={options}     
+                            defaultValue={options[0]}
+                            onChange={e => {
+                                this.props.handleYearChange({target:{value: e.value}});
+                                this.props.handleResetZoom();
+                            }
+                            }      
+                        />
+                    </div>
 
                 }
             </div>
