@@ -7,41 +7,68 @@ import 'leaflet/dist/leaflet.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Carousel from '../carousel/carousel';
-import Wadus from '../geojson/barcelona.json';
+import CircuitsGeoJSON from '../geojson/f1-circuits.json';
+
+// Maps Ergast API circuitId → GeoJSON feature id (bacinger/f1-circuits)
+const CIRCUIT_ID_MAP = {
+    albert_park:      'au-1953',
+    bahrain:          'bh-2002',
+    shanghai:         'cn-2004',
+    baku:             'az-2016',
+    catalunya:        'es-1991',
+    monaco:           'mc-1929',
+    villeneuve:       'ca-1978',
+    ricard:           'fr-1969',
+    red_bull_ring:    'at-1969',
+    silverstone:      'gb-1948',
+    hockenheimring:   'de-1932',
+    hungaroring:      'hu-1986',
+    spa:              'be-1925',
+    monza:            'it-1922',
+    marina_bay:       'sg-2008',
+    sochi:            'ru-2014',
+    suzuka:           'jp-1962',
+    americas:         'us-2012',
+    rodriguez:        'mx-1962',
+    interlagos:       'br-1940',
+    yas_marina:       'ae-2009',
+    imola:            'it-1953',
+    nurburgring:      'de-1927',
+    portimao:         'pt-2008',
+    mugello:          'it-1914',
+    sepang:           'my-1999',
+    istanbul:         'tr-2005',
+    zandvoort:        'nl-1948',
+    magny_cours:      'fr-1960',
+    estoril:          'pt-1972',
+    jacarepagua:      'br-1977',
+    jeddah:           'sa-2021',
+    miami:            'us-2022',
+    losail:           'qa-2004',
+    vegas:            'us-2023',
+    indianapolis:     'us-1909',
+    buenos_aires:     'ar-1952',
+    kyalami:          'za-1961',
+    watkins_glen:     'us-1956',
+    madrid:           'es-2026',
+};
+
+const circuitStyle = { color: '#e10600', weight: 2, opacity: 0.85 };
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow });
 
-// MAP STYLES
+// MAP STYLES — one per decade
+const token = process.env.REACT_APP_MAPBOX_TOKEN;
+const tileUrl = (styleId) => `https://api.mapbox.com/styles/v1/${styleId}/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`;
 
-// 1950
-const fiftyStyled = `https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
-// 1960
-// const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73izmsr2bkh1inhs7yrxrv6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 1970
-// const seventyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jms8z2c6p1inh6yu5krp1/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-//1980
-// const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb01iqwmgk74gw9/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 1990
-// const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 2000
-// const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 2010
-// const thousandTenStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-//BLUE
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-
-
-
-// DEFAULT
-
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-
-const mapStyled = `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
-
-// Satellite
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/wmts?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
+const fiftyStyled    = tileUrl('jesusesteban/ck70xfbac03ik1irtiv3q29vp');
+const sixtyStyled    = tileUrl('jesusesteban/ck7mi2u9500ae1ika9hvykbwn');
+const seventyStyled  = tileUrl('jesusesteban/ck73jms8z2c6p1inh6yu5krp1');
+const eightyStyled   = tileUrl('jesusesteban/ck73jp92g2cb01iqwmgk74gw9');
+const ninetyStyled   = tileUrl('jesusesteban/ck73jk5410aoz1imwgf0lx62u');
+const thousandStyled = tileUrl('jesusesteban/ckeo3upc43v3b19n0hfezjhi1');
+const modernStyled   = tileUrl('mapbox/dark-v11');
 
 export default class CircuitMap extends Component {
     
@@ -58,46 +85,21 @@ export default class CircuitMap extends Component {
 
 
     componentDidMount() {
-        // const leafletMap = this.leafletMap.leafletElement;
-        // leafletMap.on('zoomend', () => {
-        //     const updatedZoomLevel = leafletMap.getZoom();
-        //     this.handleZoomLevelChange(updatedZoomLevel);
-        // });     
-        console.log("HOLA", Wadus)
     }
 
-    getMapStyles = (year) =>{
-        let style = "";
-        switch (true){
-            case year <= 1959:
-                style = fiftyStyled;
-            break;
-            // case year >= 1960 && year <= 1969:
-            //     style = sixtyStyled;
-            // break;
-            // case year >= 1970 && year <= 1979:
-            //     style = seventyStyled;
-            // break;
-            // case year >= 1980 && year <= 1989:
-            //     style = eightyStyled;
-            // break;
-            // case year >= 1990 && year <= 1999:
-            //     style = ninetyStyled;
-            // break;
-            // case year >= 2000 && year <= 2009:
-            //     style = thousandStyled;
-            // break;
-            // case year >= 2010 && year <= 2019:
-            //     style = mapStyled;
-            // break;
-            // case year >= 2020 && year <= 2029:
-            //     style = mapStyled;
-            // break;
-            default:
-                style = mapStyled;
-            break;
-        }
-        return style;
+    getCircuitFeatures(races) {
+        const geoIds = new Set(races.map(r => CIRCUIT_ID_MAP[r.Circuit.circuitId]).filter(Boolean));
+        return CircuitsGeoJSON.features.filter(f => geoIds.has(f.properties.id));
+    }
+
+    getMapStyles = (year) => {
+        if (year <= 1959) return fiftyStyled;
+        if (year <= 1969) return sixtyStyled;
+        if (year <= 1979) return seventyStyled;
+        if (year <= 1989) return eightyStyled;
+        if (year <= 1999) return ninetyStyled;
+        if (year <= 2009) return thousandStyled;
+        return modernStyled;
     }
 
 
@@ -111,7 +113,7 @@ export default class CircuitMap extends Component {
         
     render() {
         const { races, zoomLevel, mapCenter, handleResetZoom, round, year, setActiveRound, handleClickMarker, handleClickCarousel, getCountryFlagFromName} = this.props;
-        const showBarcelona = races.some(r => r.Circuit.circuitId === 'catalunya');
+        const circuitFeatures = this.getCircuitFeatures(races);
         return (
             <div>
                 <Map
@@ -124,7 +126,13 @@ export default class CircuitMap extends Component {
                     // attribution={"Jesús Esteban"}
                     url={this.getMapStyles(parseInt(year))}
                     />
-                {showBarcelona && <GeoJSON data={Wadus.features} />}
+                {circuitFeatures.map(feature => (
+                    <GeoJSON
+                        key={feature.properties.id}
+                        data={feature}
+                        style={circuitStyle}
+                    />
+                ))}
                 {races.map((race) => {
                     const text = L.divIcon({html: race.round, className: '', iconSize: [25, 35], iconAnchor: [12, 35]});
                     return (
