@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      year: '2019',
+      year: new Date().getFullYear().toString(),
       races: [],
       pilots: [],
       qualifyings: [],
@@ -92,7 +92,8 @@ class App extends React.Component {
         return response.json()
         })
         .then((resultados) => {
-        this.setState({ pilots: resultados.MRData.RaceTable.Races[0].Results})
+        const race = resultados.MRData.RaceTable.Races[0];
+        this.setState({ pilots: race ? race.Results : [] })
     })
   }
 
@@ -200,6 +201,8 @@ setActiveRound = (round) => {
 
   render (){
     const { year, round, circuits, races, pilots, qualifyings, zoomLevel, mapCenter } = this.state;
+    const today = new Date().toISOString().slice(0, 10);
+    const pastRaces = races.filter(r => r.date <= today);
 
     return (
       <div className="App">
@@ -213,7 +216,7 @@ setActiveRound = (round) => {
             handleClickRaceResults={this.handleClickRaceResults}
             handleResetZoom={this.handleResetZoom}
             mapCenter={ mapCenter }
-            races={races}
+            races={pastRaces}
             round={round}
             setActiveRound={this.setActiveRound}
             setMapCenter={this.setMapCenter}
