@@ -12,34 +12,17 @@ import Wadus from '../geojson/barcelona.json';
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow });
 
-// MAP STYLES
+// MAP STYLES — one per decade
+const token = process.env.REACT_APP_MAPBOX_TOKEN;
+const tileUrl = (styleId) => `https://api.mapbox.com/styles/v1/${styleId}/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`;
 
-// 1950
-const fiftyStyled = `https://api.mapbox.com/styles/v1/jesusesteban/ck70xfbac03ik1irtiv3q29vp/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
-// 1960
-// const sixtyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73izmsr2bkh1inhs7yrxrv6/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 1970
-// const seventyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jms8z2c6p1inh6yu5krp1/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-//1980
-// const eightyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jp92g2cb01iqwmgk74gw9/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 1990
-// const ninetyStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck73jk5410aoz1imwgf0lx62u/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// 2000
-// const thousandStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck6sg2kb86pin1it43e343zsz/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-//BLUE
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-
-
-
-// DEFAULT
-
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjna67hy23vcf2rppfpvoj24q/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/ck8hh5aar057y1ioh7udmpcpo/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
-
-const mapStyled = `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
-
-// Satellite
-// const mapStyled = 'https://api.mapbox.com/styles/v1/jesusesteban/cjynakrxe1jzk1cqco7zdva6j/wmts?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}';
+const fiftyStyled    = tileUrl('jesusesteban/ck70xfbac03ik1irtiv3q29vp');
+const sixtyStyled    = tileUrl('jesusesteban/ck7mi2u9500ae1ika9hvykbwn');
+const seventyStyled  = tileUrl('jesusesteban/ck73jms8z2c6p1inh6yu5krp1');
+const eightyStyled   = tileUrl('jesusesteban/ck73jp92g2cb01iqwmgk74gw9');
+const ninetyStyled   = tileUrl('jesusesteban/ck73jk5410aoz1imwgf0lx62u');
+const thousandStyled = tileUrl('jesusesteban/ck6sg2kb86pin1it43e343zsz');
+const modernStyled   = tileUrl('mapbox/dark-v11');
 
 export default class CircuitMap extends Component {
     
@@ -64,38 +47,14 @@ export default class CircuitMap extends Component {
         console.log("HOLA", Wadus)
     }
 
-    getMapStyles = (year) =>{
-        let style = "";
-        switch (true){
-            case year <= 1959:
-                style = fiftyStyled;
-            break;
-            // case year >= 1960 && year <= 1969:
-            //     style = sixtyStyled;
-            // break;
-            // case year >= 1970 && year <= 1979:
-            //     style = seventyStyled;
-            // break;
-            // case year >= 1980 && year <= 1989:
-            //     style = eightyStyled;
-            // break;
-            // case year >= 1990 && year <= 1999:
-            //     style = ninetyStyled;
-            // break;
-            // case year >= 2000 && year <= 2009:
-            //     style = thousandStyled;
-            // break;
-            // case year >= 2010 && year <= 2019:
-            //     style = mapStyled;
-            // break;
-            // case year >= 2020 && year <= 2029:
-            //     style = mapStyled;
-            // break;
-            default:
-                style = mapStyled;
-            break;
-        }
-        return style;
+    getMapStyles = (year) => {
+        if (year <= 1959) return fiftyStyled;
+        if (year <= 1969) return sixtyStyled;
+        if (year <= 1979) return seventyStyled;
+        if (year <= 1989) return eightyStyled;
+        if (year <= 1999) return ninetyStyled;
+        if (year <= 2009) return thousandStyled;
+        return modernStyled;
     }
 
 
