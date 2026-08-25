@@ -21,7 +21,7 @@ const sixtyStyled    = tileUrl('jesusesteban/ck7mi2u9500ae1ika9hvykbwn');
 const seventyStyled  = tileUrl('jesusesteban/ck73jms8z2c6p1inh6yu5krp1');
 const eightyStyled   = tileUrl('jesusesteban/ck73jp92g2cb01iqwmgk74gw9');
 const ninetyStyled   = tileUrl('jesusesteban/ck73jk5410aoz1imwgf0lx62u');
-const thousandStyled = tileUrl('jesusesteban/ck6sg2kb86pin1it43e343zsz');
+const thousandStyled = tileUrl('jesusesteban/ckeo3upc43v3b19n0hfezjhi1');
 const modernStyled   = tileUrl('mapbox/dark-v11');
 
 export default class CircuitMap extends Component {
